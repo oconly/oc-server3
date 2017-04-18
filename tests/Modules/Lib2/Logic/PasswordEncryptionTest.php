@@ -1,7 +1,6 @@
 <?php
 /****************************************************************************
  * For license information see doc/license.txt
- *
  ****************************************************************************/
 
 namespace OcTest\Modules\Lib2\Logic;
@@ -13,7 +12,7 @@ class PasswordEncryptionTest extends AbstractModuleTest
 {
     /**
      * @group unit-tests
-     * @covers PasswordCrypt::encryptPassword()
+     * @covers \OcLegacy\Util\PasswordCrypt::encryptPassword
      *
      * @return void
      */
