@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
     config.vm.network "forwarded_port", guest: 3306,    host: 3306,    auto_correct: true # mysql
 
     config.vm.synced_folder "./", "/var/www/html", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
-
+    #config.vm.synced_folder "./", "/var/www/html", create: true, type: "smb"
     config.vm.provider :virtualbox do |v|
         v.name = VM_NAME
         v.customize([
@@ -31,7 +31,6 @@ Vagrant.configure(2) do |config|
 
     config.vm.network :private_network, ip: VM_IP
 
-
     # the image is not compatible with latest vbguest additions,
     # if you have vbguest plugin installed and it automatically tries to update
     # it will break the VM
@@ -41,4 +40,5 @@ Vagrant.configure(2) do |config|
 
     config.ssh.insert_key = false
     config.vm.provision "shell", path: "bin/provision.sh"
+    config.vm.provision :shell, run: "always", :inline => "systemctl status httpd || systemctl start httpd"
 end

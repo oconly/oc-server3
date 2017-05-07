@@ -7,14 +7,15 @@ require __DIR__ . '/lib2/web.inc.php';
 $login->verify();
 $env = 'prod';
 $debug = true;
-if (isset($opt['debug']) && $opt['debug'] && $_SERVER['HTTP_HOST'] !== 'test.opencaching.de') {
+
+if (isset($opt['debug']) && $opt['debug']) {
     $env = 'dev';
     $debug = true;
-}
-$loader = require __DIR__ . '/app/autoload.php';
-if ($debug) {
     Debug::enable();
 }
+
+$loader = require __DIR__ . '/app/autoload.php';
+
 $kernel = new AppKernel($env, $debug);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
@@ -22,9 +23,11 @@ $request = Request::createFromGlobals();
 $locale = strtolower($opt['template']['locale']);
 $request->setLocale($locale);
 $response = $kernel->handle($request);
+
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()
     || $request->getRequestFormat() !== 'html'
+    || $request->attributes->get('_route') !== 'field-notes'
     || preg_match('/\/_/', $request->getPathInfo()) === 1 // e.g. /_profiler/
     || ($response->headers->has('Content-Type') && strpos($response->headers->get('Content-Type'), 'html') === false)
 ) {

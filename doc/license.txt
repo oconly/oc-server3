@@ -238,6 +238,13 @@ Other resources
         License : Public Domain
         Author  : G. Wolfgang
 
+    4.  Bootstrap 4.x Framework
+        Path    : CDN Import htdocs/templates2/ocstyle/sys_main.tpl
+        URI     : https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.6/LICENSE
+        License : MIT License
+        Author  : Copyright (c) 2011-2017 Twitter, Inc.
+                  Copyright (c) 2011-2017 The Bootstrap Authors
+
 
 Data content
 ------------
