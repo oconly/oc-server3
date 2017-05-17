@@ -15,13 +15,13 @@
 
 use OcLegacy\Util\PasswordCrypt;
 
-define('LOGIN_UNKNOWN_ERROR', -1);     // unkown error occured
+define('LOGIN_UNKNOWN_ERROR', -1);     // unknown error occurred
 define('LOGIN_OK', 0);                 // login succeeded
 define('LOGIN_BADUSERPW', 1);          // bad username or password
 define('LOGIN_TOOMUCHLOGINS', 2);      // too many logins in short time
-define('LOGIN_USERNOTACTIVE', 3);      // the useraccount locked
+define('LOGIN_USERNOTACTIVE', 3);      // the userAccount locked
 define('LOGIN_EMPTY_USERPASSWORD', 4); // given username/password was empty
-define('LOGIN_LOGOUT_OK', 5);          // logout was successfull
+define('LOGIN_LOGOUT_OK', 5);          // logout was successful
 
 // login times in seconds
 define('LOGIN_TIME', 60 * 60);
@@ -40,9 +40,9 @@ class login
      */
     public $username = '';
     /**
-     * @var int|mixed|string
+     * @var string
      */
-    public $lastlogin = 0;
+    public $lastlogin = '';
     /**
      * @var bool
      */
@@ -419,7 +419,7 @@ class login
     }
 
     /**
-     * @param bool $privilege
+     * @param int|bool $privilege
      * @return bool
      */
     public function hasAdminPriv($privilege = false)
