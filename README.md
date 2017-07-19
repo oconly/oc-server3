@@ -36,6 +36,19 @@ Translation [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/locali
 -----------
 This Project uses crowdin to translate all words and strings in the code. It starts with Version 3.0.19 of this code. We are looking for native speakers who will help to translate. There is a review process wich needs at least two translators to validate the translation of each other. To join the translation team - use this invitation url: (https://crowdin.com/project/opencaching/invite)
 
+Sponsoring Technology Partner
+-------------
+
+* [Atlassian](https://www.atlassian.com/)
+* [BrowserStack](https://www.browserstack.com/) ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
+* [CrowdIn](https://crowdin.com/)
+* [HostEurope](https://www.hosteurope.de/) 
+* [Jetbrains](https://www.jetbrains.com/)
+* [Scrutinizer](https://scrutinizer-ci.com)
+* [Travis-Ci](https://travis-ci.org/)   
+
+We thank our technology partners for their support of our open source project!
+
 Contributions
 -------------
 Contributing code to Opencaching.de is easy:
