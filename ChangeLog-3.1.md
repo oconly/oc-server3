@@ -5,10 +5,15 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ## unreleased [3.1.3...development](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...development)
 
 ### Added
+- notice for unpublished cashes [#1063](https://redmine.opencaching.de/issues/1063)
 
 ### Changed
 - activated error_reporting in vagrant dev environment [#1082](https://redmine.opencaching.de/issues/1082)
 - allow rel attribute in a tags [#1077](https://redmine.opencaching.de/issues/1077)
+- admin report warning [#1047](https://redmine.opencaching.de/issues/1047)
+- increase text line height [#1091](https://redmine.opencaching.de/issues/1091)
+- cache image alignment [#1092](https://redmine.opencaching.de/issues/1092)
+- ask before delete an image [#1028](https://redmine.opencaching.de/issues/1028)
 
 ### Removed
 - removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)
@@ -24,6 +29,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - empty map on zoom level 3 [#1084](https://redmine.opencaching.de/issues/1084)
 - error page [#1088](https://redmine.opencaching.de/issues/1088)
 - language switch on lib pages [#1087](https://redmine.opencaching.de/issues/1087)
+- okapi changelog [#1085](https://redmine.opencaching.de/issues/1085)
+- lib2 SQL debugger [#1093](https://redmine.opencaching.de/issues/1093)
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 

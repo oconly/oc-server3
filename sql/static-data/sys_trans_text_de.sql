@@ -1925,8 +1925,14 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2628', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Caches, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2629', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Logs, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2630', 'DE', 'Der Benutzer <b>%1%2</b> existiert nicht.', '2016-10-17 03:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2631', 'DE', 'Bitte speichere zuerst die geänderten Cacheeigenschaften.', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2632', 'DE', 'Handycap: Blind', '2017-05-02 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2633', 'DE', 'Dieser Cache kann von Menschen mit Sehbehinderung gefunden werden.', '2017-05-02 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2634', 'DE', 'Mehr Informationen', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2635', 'DE', 'Schließen', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2636', 'DE', 'Diese Webseite verwendet Cookies. Wenn Sie auf der Seite weitersurfen, stimmen Sie der Cookie-Nutzung zu.', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2637', 'DE', 'Dieser Cache ist noch nicht veröffentlicht.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2638', 'DE', 'Prüfe bitte, ob die Cachebeschreibung vollständig ist und alle Cacheigenschaften und -attribute gemäß <a %1>Anleitung</a> eingetragen sind. Dann klicke <strong><a href=\"editcache.php?cacheid=%2&publish=now#others\">hier</a></strong> auf &bdquo;Speichern&ldquo;, um deinen Cache zu veröffentlichen.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2639', 'DE', 'Dieser Cache wird am <b>%1</b> um <b>%2 Uhr</b> veröffentlicht.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2640', 'DE', 'Möchtest du das Bild &bdquo;{title}&ldquo; wirklich löschen?', '2017-08-22 18:45:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2641', 'DE', 'Für diesen Cache ist bereits eine Meldung in Arbeit, siehe unten.', '2017-08-23 13:20:00');

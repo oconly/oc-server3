@@ -124,6 +124,7 @@ $rs = sql(
             `caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
             `caches`.`needs_maintenance`,
             `caches`.`listing_outdated`,
+            `caches`.`date_activate`,
             `cache_desc`.`language` AS `desclanguage`,
             `cache_desc`.`short_desc` AS `shortdesc`,
             `cache_desc`.`desc` AS `desc`,
@@ -281,6 +282,11 @@ $rs = sql(
 );
 $tpl->assign_rs('pictures', $rs);
 sql_free_result($rs);
+
+$tpl->assign('pictures_per_row', $opt['logic']['pictures']['listing_thumbs_per_row']);
+// REDISGN TODO:
+// This works fine with a static canvas width. Probably needs dynamic calculation
+// in responsive design.
 
 $tpl->assign('childWaypoints', getChildWaypoints($cacheid));
 
@@ -483,6 +489,7 @@ $tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
 $tpl->assign('listing_admin', $login->listingAdmin());
 $tpl->assign('npahelplink', helppagelink('npa'));
 $tpl->assign('desclang', $desclang);
+$tpl->assign('date_activate', $rCache['date_activate']);
 
 // display the page
 $tpl->display();
