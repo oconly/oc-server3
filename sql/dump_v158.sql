@@ -4871,7 +4871,13 @@ CREATE TABLE `okapi_vars` (
 
 LOCK TABLES `okapi_vars` WRITE;
 /*!40000 ALTER TABLE `okapi_vars` DISABLE KEYS */;
-INSERT INTO `okapi_vars` VALUES ('db_version','95'),('cron_nearest_event','1471953749');
+INSERT INTO `okapi_vars` VALUES
+  ('db_version','95'),
+  ('cron_nearest_event','1471953749'),
+  ('clog_followup_revision', '3171822'),
+  ('clog_revision', '3171822'),
+  ('last_clog_update', '2016-08-21 21:49:02')
+  ;
 /*!40000 ALTER TABLE `okapi_vars` ENABLE KEYS */;
 UNLOCK TABLES;
 
