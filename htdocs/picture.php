@@ -71,6 +71,23 @@ if ($action == 'add') { // Ocprop
         $tpl->error(ERROR_INVALID_OPERATION);
     }
 
+    $rsPics = sql(
+        "SELECT `id`, `title`, `seq`, `seq`+1 AS `nextseq`
+         FROM `pictures`
+         WHERE `object_type`='&1' AND `object_id`='&2'
+         ORDER BY `seq`",
+        $picture->getObjectType(),
+        $picture->getObjectId()
+    );
+    $allpics = sql_fetch_assoc_table($rsPics);
+    if (isset($_REQUEST['position'])) {
+        // picture position numbers always are >= 1
+        $position = max(1, $_REQUEST['position'] + 0);
+    } else {
+        $position = PHP_INT_MAX;
+    }
+    $position = min($position, $allpics ? $allpics[count($allpics)-1]['seq'] + 1 : 1);
+
     // uploaded file ok?
     if (isset($_REQUEST['ok'])) { // Ocprop
         $bError = false;
@@ -78,6 +95,7 @@ if ($action == 'add') { // Ocprop
         $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler'] == '1'); // Ocprop
         $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay'] == '1') == false); // Ocprop
         $picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview'] == '1');
+        $picture->setPosition($position);
 
         $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : ''; // Ocprop
         if ($title == '' || ($picture->getObjectType() == OBJECT_CACHELOG && trim($title) == '')) {
@@ -116,6 +134,12 @@ if ($action == 'add') { // Ocprop
             $picture->setLocal(1);
             $fname = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
             $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
+            // SECURITY NOTE (see redmine #1009):
+            //
+            // Calling rotate() or rotate_and_shrink() does not only resolve
+            // image rotations, but also checks for a valid image format.
+            // rotate() requires imagick to do that.
 
             // try saving file if smaller unchg_size and browser native format
             if (in_array(mb_strtolower($ext), ['gif', 'png', 'jpg', 'jpeg'])
@@ -213,6 +237,9 @@ if ($action == 'add') {
     } elseif ($picture->getObjectType() == OBJECT_CACHELOG) {
         $tpl->assign('loguuid', $_REQUEST['loguuid']);
     }
+    $tpl->assign('allpics', $allpics);
+    $tpl->assign('position', $position);
+    $tpl->assign('appendseq', $allpics ? $allpics[count($allpics)-1]['seq']+1 : 1);
 }
 
 $rsCache = sql("SELECT `wp_oc`, `name` FROM `caches` WHERE `cache_id`='&1'", $picture->getCacheId());

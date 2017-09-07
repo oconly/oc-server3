@@ -6,6 +6,14 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Added
 - notice for unpublished cashes [#1063](https://redmine.opencaching.de/issues/1063)
+- notice for reported cashes [#1100](https://redmine.opencaching.de/issues/1100)
+- recommendation notice in log messages [#1090](https://redmine.opencaching.de/issues/1090)
+- image gallery for own caches [#39](https://redmine.opencaching.de/issues/39)
+- new restore functionality for oc support [#1094](https://redmine.opencaching.de/issues/1094)
+- check for hidden and publish date [#898](https://redmine.opencaching.de/issues/898)
+- added error message for invalid home cords [#982](https://redmine.opencaching.de/issues/982)
+- admins can reopen cache reports [#1003](https://redmine.opencaching.de/issues/1003)
+- provide alternative cache hints from other languages [#1071](https://redmine.opencaching.de/issues/1071)
 
 ### Changed
 - activated error_reporting in vagrant dev environment [#1082](https://redmine.opencaching.de/issues/1082)
@@ -13,10 +21,22 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - admin report warning [#1047](https://redmine.opencaching.de/issues/1047)
 - increase text line height [#1091](https://redmine.opencaching.de/issues/1091)
 - cache image alignment [#1092](https://redmine.opencaching.de/issues/1092)
+- map popup window design for additional waypoints [#955](https://redmine.opencaching.de/issues/955)
 - ask before delete an image [#1028](https://redmine.opencaching.de/issues/1028)
+- better description for the hint field [#889](https://redmine.opencaching.de/issues/889)
+- add event date to popup [#944](https://redmine.opencaching.de/issues/944)
+- save logtyp during edit process [#1099](https://redmine.opencaching.de/issues/1099)
+- show team-comment log flags [#1101](https://redmine.opencaching.de/issues/1101)
+- hide 'original coordinates' if there is an older log [#1102](https://redmine.opencaching.de/issues/1102)
+- optimize admin view [#1002](https://redmine.opencaching.de/issues/1002)
+- support subtitle search of caches [#986](https://redmine.opencaching.de/issues/986)
+- change logout time text [#1095](https://redmine.opencaching.de/issues/1095)
+- behavior during wrong password input [#998](https://redmine.opencaching.de/issues/998)
+- hide coordinate history of quiz and safari caches [#958](https://redmine.opencaching.de/issues/958)
 
 ### Removed
 - removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)
+- removed dnf icon from search result [#1067](https://redmine.opencaching.de/issues/1067)
 
 ### Fixed
 - cookie notice [#1052](https://redmine.opencaching.de/issues/1052)
@@ -32,15 +52,23 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - okapi changelog [#1085](https://redmine.opencaching.de/issues/1085)
 - lib2 SQL debugger [#1093](https://redmine.opencaching.de/issues/1093)
 - some missing translations [#1035](https://redmine.opencaching.de/issues/1035)
+- some whitespace issue [#1020](https://redmine.opencaching.de/issues/1020)
+- small smilie replacement issue [#1103](https://redmine.opencaching.de/issues/1103)
+- not published caches [#1079](https://redmine.opencaching.de/issues/1079)
+- non https links in watch emails [#1062](https://redmine.opencaching.de/issues/1062)
+- typ in cache attribute [#1106](https://redmine.opencaching.de/issues/1106)
+- some ssl image issues on listing page [#1107](https://redmine.opencaching.de/issues/1107)
+- only images are allowed for upload [#1009](https://redmine.opencaching.de/issues/1009)
+
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 
 ### Added
-- added handicap cache attribute  [#1031](https://redmine.opencaching.de/issues/1031)
-- added maintenance mode [#841](https://redmine.opencaching.de/issues/841)
-- added new theme structure and bootstrap 4
-- adding google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
-- adding cookie notice [#768](https://redmine.opencaching.de/issues/768)
+- handicap cache attribute  [#1031](https://redmine.opencaching.de/issues/1031)
+- maintenance mode [#841](https://redmine.opencaching.de/issues/841)
+- new theme structure and bootstrap 4
+- google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
+- cookie notice [#768](https://redmine.opencaching.de/issues/768)
 
 ### Changed
 - change default geocache publish type [#1040](https://redmine.opencaching.de/issues/1040),[#745](https://redmine.opencaching.de/issues/745)

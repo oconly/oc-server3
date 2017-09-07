@@ -478,7 +478,7 @@ function tpl_BuildTemplate($dbDisconnect = true)
     $sCode = tpl_do_replace($sCode);
 
     // fixing path issue
-    $sCode = str_replace('lib2/smarty/ocplugins/', 'src/Oc/SmartyPlugins/', $sCode);
+    $sCode = str_replace('lib2/smarty/ocplugins/', 'src/OcLegacy/SmartyPlugins/', $sCode);
 
     //store the cookie
     write_cookie_settings();
@@ -591,6 +591,8 @@ function load_gettext()
         $locale = $opt['template']['default']['locale'];
     }
     $opt['template']['locale'] = $locale;
+
+    $cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
 
     bindtextdomain('messages', __DIR__ . '/../var/cache2/translate');
     set_php_locale();

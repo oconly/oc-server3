@@ -60,7 +60,7 @@ function myHomeLoad()
     {t 1=$login.username}Hello %1{/t}
 </div>
 
-{if !$allpics}
+{if $allpics === false}
     {* Geocaches found *}
     <div class="content2-container bg-blue02" style="margin-top:20px;">
         <p class="content-title-noshade-size3">
@@ -78,6 +78,7 @@ function myHomeLoad()
             <tr>
                 <td><nobr>
                     {include file="res_logtype.tpl" type=$logItem.type}
+                    {if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
                 </nobr></td>
                 <td style="white-space:nowrap; text-align:center">{$logItem.date|date_format:$opt.format.datelong}</td>
                 <td>
@@ -98,39 +99,49 @@ function myHomeLoad()
     <p class="content-title-noshade-size3">
         <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" width="24" height="24"  style="margin-right: 10px;" />&nbsp;
         {t 1=$total_pictures}Log pictures: %1{/t} &nbsp;
-        {if $pictures|@count > 0 && !$allpics}<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>{/if}
+        {if $pictures|@count > 0 && $allpics === false}<span class="content-title-link">[<a href="myhome.php?allpics=ownlogs">{t}Show all{/t}</a>]</span>{/if}
     </p>
 </div>
 
 {if $pictures|@count == 0}
-    <p>{t}You did not upload any log pictures yet.{/t}</p>
+    {if $allpics == 'owncaches'}
+        <p>{t}There are no log pictures yet for your caches.{/t}</p>
+    {else}
+        <p>{t}You did not upload any log pictures yet.{/t}</p>
+    {/if}
     <br />
 {else}
     <p style="line-height: 1.6em;">
-        {if !$allpics}
-             <b>{t}Your latest log pictures:{/t}</b></p>
-            {assign var=maxlines value=1}
-        {else}
+        {if $allpics == 'ownlogs'}
             {assign var=subtitle value="{t}Your log pictures:{/t}"}
             {assign var=maxlines value=0}
+        {elseif $allpics == 'owncaches'}
+            {assign var=subtitle value="{t}Log pictures for your caches:{/t}"}
+            {assign var=maxlines value=0}
+        {else}
+            <b>{t}Your latest log pictures:{/t}</b>
+            {assign var=maxlines value=1}
         {/if}
     </p>
 
-    {include file="res_logpictures.tpl" logdate=true loguser=false maxlines=$maxlines fullyear=true}
-
-    {if $allpics}
+    {if $allpics == 'owncaches'}
+        {include file="res_logpictures.tpl" logdate=true loguser=true maxlines=$maxlines fullyear=false}
+    {else}
+        {include file="res_logpictures.tpl" logdate=true loguser=false maxlines=$maxlines fullyear=true}
+    {/if}
+    {if $allpics == 'ownlogs'}
         <p>{t}In your <a href="mydetails.php">profile settings</a> you can choose if your log pictures stat and gallery is visible for other users.{/t}</p>
     {/if}
 {/if}
 
-{if !$allpics}
+{if $allpics === false}
     {* Geocaches hidden *}
     <div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px">
         <p class="content-title-noshade-size3">
             <img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
             {t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
             {* Ocprop: (find|us|own)erid=([0-9]+) *}
-            {if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}
+            {if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&f_unpublished=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}
         </p>
     </div>
 
@@ -145,9 +156,9 @@ function myHomeLoad()
                 {/if}
             {/foreach}
             <tr>
-                <td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span></td>
-                <td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></td>
-                <td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></td>
+                <td colspan="4"><span style="line-height:2em"><b>{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span></td>
+                <td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></span></td>
+                <td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></span></td>
                 <td style="text-align:left"><span style="line-height:2em"><b>{t}Last log{/t}</b></span></td>
             </tr>
             {foreach from=$caches item=cacheItem}
@@ -167,7 +178,12 @@ function myHomeLoad()
                 </tr>
             {/foreach}
             <tr><td class="spacer" colspan="3"></td></tr>
-            <tr><td colspan="3"><a class="systemlink" href="ownerlogs.php">{t}Show log history{/t}</a></td></tr>
+            <tr>
+                <td colspan="8">
+                    <a class="systemlink" href="ownerlogs.php">{t}Log history{/t}</a>,
+                    <a class="systemlink" href="myhome.php?allpics=owncaches">{t}Log pictures gallery{/t}</a>
+                </td>
+            </tr>
         {/if}
 
         {* ... unpublished caches *}

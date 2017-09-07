@@ -124,7 +124,8 @@ $rs = sql(
             `caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
             `caches`.`needs_maintenance`,
             `caches`.`listing_outdated`,
-            `caches`.`date_activate`,
+            `caches`.`date_activate` AS `publish_date`,
+            DATEDIFF(DATE(`caches`.`date_activate`), DATE(NOW())) AS `publish_in_days`,
             `cache_desc`.`language` AS `desclanguage`,
             `cache_desc`.`short_desc` AS `shortdesc`,
             `cache_desc`.`desc` AS `desc`,
@@ -196,6 +197,29 @@ if ($rCache['status'] == 5) {
     if ($rCache['userid'] != $login->userid) {
         $tpl->error(ERROR_CACHE_NOT_PUBLISHED);
     }
+}
+
+// try to provide other-language hints if none is available for selected language
+if (trim($rCache['hint']) == '') {
+    $rs = sql(
+        "SELECT
+            `hint`,
+            IFNULL(`stt`.`text`, `native_name`) AS `language`
+         FROM `cache_desc`
+         JOIN `languages`
+            ON `languages`.`short`=`cache_desc`.`language`
+         LEFT JOIN `sys_trans_text` `stt`
+            ON `stt`.`trans_id`=`languages`.`trans_id`
+            AND `stt`.`lang`='&2'
+         WHERE `cache_desc`.`cache_id`='&1'
+         AND TRIM(`hint`) != ''",
+        $cacheid,
+        $opt['template']['locale']
+    );
+    while ($r = sql_fetch_assoc($rs)) {
+        $rCache['hint'] .= '[' . $r['language'] . '] ' . $r['hint'] . '<br />';
+    }
+    sql_free_result($rs);
 }
 
 // format waylength
@@ -270,7 +294,6 @@ $rs = sql(
             `uuid`,
             `url`,
             `title`,
-            `thumb_url`,
             `spoiler`,
             `display`
      FROM `pictures`
@@ -280,8 +303,13 @@ $rs = sql(
      ORDER BY `seq`",
     $cacheid
 );
-$tpl->assign_rs('pictures', $rs);
+$cachepics = [];
+while ($r = sql_fetch_assoc($rs)) {
+    $r['url'] = use_current_protocol($r['url']);
+    $cachepics[] = $r;
+}
 sql_free_result($rs);
+$tpl->assign('pictures', $cachepics);
 
 $tpl->assign('pictures_per_row', $opt['logic']['pictures']['listing_thumbs_per_row']);
 // REDISGN TODO:
@@ -489,7 +517,9 @@ $tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
 $tpl->assign('listing_admin', $login->listingAdmin());
 $tpl->assign('npahelplink', helppagelink('npa'));
 $tpl->assign('desclang', $desclang);
-$tpl->assign('date_activate', $rCache['date_activate']);
+
+$tpl->assign('publish_date', $rCache['publish_date']);
+$tpl->assign('publish_in_days', $rCache['publish_in_days']);
 
 // display the page
 $tpl->display();

@@ -288,6 +288,38 @@ class cache
         return $url;
     }
 
+    // test if af the time of insertion of an existing log the listing
+    // was outdated and there is no newer listing-[not]-outdated-log
+
+    public function getListingOutdatedRelativeToLog($logId)
+    {
+        $logDate = sql_value("SELECT `order_date` FROM `cache_logs` WHERE `id`='&1'", '', $logId);
+
+        return
+            sql_value(  // Is there a newer log with LO flag?
+                "SELECT 1
+                 FROM `cache_logs`
+                 WHERE `cache_id`='&1'
+                 AND `order_date`>'&2'
+                 AND `listing_outdated`>0
+                 LIMIT 1",
+                0,
+                $this->getCacheId(),
+                $logDate
+            ) == 0 && sql_value(  // Was the listing outdated before the log was posted?
+                "SELECT `listing_outdated`
+                 FROM `cache_logs`
+                 WHERE `cache_id`='&1'
+                 AND `listing_outdated`>0
+                 AND `id`!='&2'
+                 ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+                 LIMIT 1",
+                0,
+                $this->getCacheId(),
+                $logId
+            ) == 2;
+    }
+
     public function setListingOutdated($value)
     {
         return $this->reCache->setValue('listing_outdated', $value);
@@ -456,16 +488,29 @@ class cache
             return [];
         }
 
-        $rsCoords = sql(
-            "SELECT `date_created` `date`, `latitude`, `longitude`
-             FROM `cache_coordinates`
-             WHERE `cache_id`='&1'
-             ORDER BY `date_created` DESC",
+        $is_quiz_or_safari = sql_value(
+            "SELECT `type`=7 OR `type`=8 OR `attrib_id` IS NOT NULL
+             FROM `caches`
+             LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `attrib_id`=61
+             WHERE `caches`.`cache_id`='&1'",
+            0,
             $cacheId
         );
-        $coords = sql_fetch_assoc_table($rsCoords);
+        if ($is_quiz_or_safari) {
+            $coords = [];
+        } else {
+            $rsCoords = sql(
+                "SELECT `date_created` `date`, `latitude`, `longitude`
+                 FROM `cache_coordinates`
+                 WHERE `cache_id`='&1'
+                 ORDER BY `date_created` DESC",
+                $cacheId
+            );
+            $coords = sql_fetch_assoc_table($rsCoords);
+        }
 
         if ($coords) {
+            $lastcoorddate = $coords[count($coords)-1]['date'];
             $coords[] = [
                 'date' => '0000-00-00',
                 'latitude' => $coords[count($coords) - 1]['latitude'],
@@ -579,16 +624,18 @@ class cache
         sql_free_result($rsLogs);
 
         if ($coord_changes) {
-            $original = count($coords) - 1;
             $lastlogdate = $logs[count($logs) - 1]['order_date'];
-            while ($original > 0 && $coords[$original - 1]['date'] < $lastlogdate) {
-                --$original;
+            if ($lastcoorddate < $lastlogdate) {
+                $original = count($coords) - 1;
+                while ($original > 0 && $coords[$original - 1]['date'] < $lastlogdate) {
+                    --$original;
+                }
+                $coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
+                $logs[] = [
+                    'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
+                    'movedby' => false
+                ];
             }
-            $coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
-            $logs[] = [
-                'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
-                'movedby' => false
-            ];
         }
 
         return $logs;
@@ -960,14 +1007,14 @@ class cache
     // $userLogType:
     //   Logtype selected by the user, or null if not applicable
 
-    public function getUserLogTypes($userLogType, $oldLogType = 0)
+    public function getUserLogTypes($userLogType, $oldLogType = 0, $statusLogs = true)
     {
         $logTypes = [];
 
         $logtypeNames = get_logtype_names();
-        $allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType);
+        $allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType, $statusLogs);
         $defaultLogType = $userLogType;
-        if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType)) {
+        if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType, $statusLogs)) {
             $defaultLogType = $allowedLogtypes[0];
         }
 
@@ -1000,5 +1047,23 @@ class cache
             0,
             $this->getCacheId()
         ) == 1;
+    }
+
+    /**
+     * @param $logId
+     * @return bool
+     */
+    public function isLatestLog($logId)
+    {
+        $latestLogId = sql_value(
+            "SELECT `id` FROM `cache_logs`
+             WHERE `cache_id`='&1'
+             ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+             LIMIT 1",
+            0,
+            $this->nCacheId
+        );
+
+        return ($logId == $latestLogId);
     }
 }

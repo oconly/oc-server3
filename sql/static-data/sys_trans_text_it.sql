@@ -215,7 +215,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'IT', 'Sao Tome e Principe', '2010-08-30 09:51:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'IT', 'Suriname', '2010-08-30 09:51:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'IT', 'Somalia', '2010-08-30 09:51:45');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'IT', 'Formato sconosciuto per il waypoint. I seguenti sono formati noti: OCxxxx, NCxxxx e GCxxxx dove xxx può essere un qualsiasi numero di lettere o cifre', '2010-08-30 11:38:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'IT', 'Formato sconosciuto per il waypoint. I seguenti sono formati noti: OCxxxxx e GCxxxxx dove x può essere un qualsiasi numero di lettere o cifre', '2010-08-30 11:38:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'IT', 'Esiste più di una cache con il waypoint \&quot;%1\&quot', '2010-08-30 11:29:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'IT', 'Il waypoint \&quot;%1\&quot; non è stato trovato.', '2010-08-30 11:30:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'IT', 'Senegal', '2010-08-30 11:30:10');
@@ -507,7 +507,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'IT', 'Visualizza i log', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'IT', 'Statistiche', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'IT', 'Non usare l\'editor HTML di default.', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'IT', 'Non disconnettermi dopo 15 minuti di inattività.', '2010-09-01 23:49:02');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'IT', 'Non disconnettermi dopo 60 minuti di inattività.', '2010-09-01 23:49:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'IT', 'Ho con me una radio PMR sul canale 2.', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('561', 'IT', 'Altro:', '2010-09-01 23:49:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('562', 'IT', 'La notifica di nuove geocache è disabilitata.', '2010-08-31 20:06:23');
@@ -913,7 +913,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1359', 'IT', 'Non hai ancora trovato questa cache', '2010-09-10 23:58:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1360', 'IT', 'In questa cache c\'è un GeoKrety', '2010-09-10 23:58:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1361', 'IT', 'Questa cache ha %1 raccomandazioni', '2010-09-10 23:58:30');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'IT', 'Modificare il log per la cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-10 23:58:05');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'IT', 'Modificare il log per la cache %1', '2010-09-10 23:58:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'IT', 'Tipo di log:', '2010-09-10 23:57:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'IT', 'JavaScript è disabilitato, è possibile inserire solo testo semplice. Per inserire HTML o usare l\'editor attivare JavaScript, per favore.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'IT', 'Nuova cache', '2010-09-10 23:57:04');
@@ -1559,7 +1559,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2121', 'IT', 'Hai usato {curr} raccomandazioni su {max} disponibili.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2122', 'IT', 'Devi trovare ancora {anzahl} cache per fare un\' altra raccomandazione.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2123', 'IT', 'Puoi raccomandare questa cache solo dopo che la hai loggata come trovata!', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'IT', 'Vedi log storico', '2013-07-25 15:53:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'IT', 'Galleria di immagini di log', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'IT', 'Log storico', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'IT', 'Iserimenti sul log per cache di %1', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'IT', 'Nascondi miei logs', '2013-07-25 15:53:16');
@@ -1761,4 +1761,5 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'IT', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2603', 'IT', 'Più di 12 anni fa', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2607', 'IT', 'Titolo:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'IT', 'Raccomandazione', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');

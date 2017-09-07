@@ -49,7 +49,7 @@
             ({$id}) {t}You are already logged in.<br />
             Please <a href="login.php?action=logout">logout</a> to login again.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_FORMAT}
-            ({$id}) {t}Unkown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.{/t}
+            ({$id}) {t}Unkown format of the given waypoint. The known formats are OCxxxxx and GCxxxxx, whereas x can be any number or char.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_MANY}
             ({$id}) {t 1=$p1|escape}There exists more than one cache with the waypoint &quot;%1&quot;.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_NOTFOUND}
@@ -60,6 +60,8 @@
             ({$id}) {t}Switching to db-root failed.{/t}
         {elseif $id==ERROR_PICTURE_NOT_EXISTS}
             ({$id}) {t}Sorry, the requested picture does not exist.{/t}
+        {elseif $id==ERROR_WRONG_NODE}
+            ({$id}) {t}This log entry has been created on another Opencaching website. The cache can only be edited there.{/t}
         {else}
             {$id|escape|nl2br}
         {/if}

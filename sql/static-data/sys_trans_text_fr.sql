@@ -215,7 +215,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'FR', 'Sao Tomé et Principe', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'FR', 'Suriname', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'FR', 'Somalie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'FR', 'Un format inconnu du waypoint. Les formats suivants sont connus OCxxxx, NCxxxx et GCxxxx, tandis que xxxx peut être un nombre quelconque ou char.', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'FR', 'Un format inconnu du waypoint. Les formats suivants sont connus OCxxxxx et GCxxxxx, tandis que x peut être un nombre quelconque ou char.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'FR', 'Il existe plus d\'une cache avec le waypoint \&quot;%1\&quot;.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'FR', 'Le waypoint \&quot;%1\&quot; n\'est pas trouvé.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'FR', 'Sénégal', '2015-08-25 01:28:59');
@@ -507,7 +507,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'FR', 'Afficher entrées du log', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'FR', 'Image de la statistique', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'FR', 'Ne pas utiliser un éditeur HTML par défaut', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'FR', 'Ne pas me déconnecter après 15 minutes d\'inactivité.', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'FR', 'Ne pas me déconnecter après 60 minutes d\'inactivité.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'FR', 'Je prends un talkie-walkie PMR sur le canal 2 avec moi.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('561', 'FR', 'Autres\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('562', 'FR', 'Alerte de nouvelles géocaches est désactivé.', '2015-08-25 01:28:59');
@@ -913,7 +913,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1359', 'FR', 'Vous avez pas encore trouvé ce cache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1360', 'FR', 'Ce cache stocke une Geokrety', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1361', 'FR', 'Ce cache a %1 recommandations', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'FR', 'Modifier le entrée du log pour le cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'FR', 'Modifier le entrée du log pour le cache %1', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'FR', 'Type de log-entry', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'FR', 'JavaScript est désactivé dans votre navigateur, vous pouvez saisir du texte seulement. Pour utiliser HTML ou l\'éditeur, s\'il vous plaît activer JavaScript.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'FR', 'Noveau cache', '2015-08-25 01:29:00');
@@ -1560,7 +1560,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2121', 'FR', 'Vous avez donné {curr} de {max} recommandations possibles.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2122', 'FR', 'Il vous manque {anzahl} trouvés pour faire une autre recommandation.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2123', 'FR', 'Une recommandation ne peut qu\'être fait dans un log \"trouvé\"\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'FR', 'Afficher l\'historique du logs', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'FR', 'Historique du images du logs', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'FR', 'Histoire du logs', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'FR', 'Entrées du log pour les caches de %1', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'FR', 'Cacher des propres logs', '2015-08-25 01:29:00');
@@ -1908,4 +1908,4 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2611', 'FR', 'Votre rapport de géocache pour', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2612', 'FR', 'convertir', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2613', 'FR', 'waypoint', '2010-08-28 11:48:08');
-
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'FR', 'Recommandation', '2010-10-04 00:17:39');
