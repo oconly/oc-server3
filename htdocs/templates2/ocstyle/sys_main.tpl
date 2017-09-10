@@ -230,12 +230,12 @@
                 <p class="sidebar-maintitle">{t}Country sites{/t}</p>
                 <div style="text-align: center;" class="nodeflags">
                     <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
-                    <a href="http://www.opencaching.de" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100" height="22" /></a><br />
-                    <a href="http://www.opencachingspain.es" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-es.png" width="100" height="22" /></a><br />
-                    <a href="http://www.opencaching.fr" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-fr.png" width="100" height="22" /></a><br />
-                    <a href="http://www.opencaching.it" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-it.png" width="100" height="22" /></a><br />
+                    <a href="https://www.opencaching.de" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100" height="22" /></a><br />
+                    <a href="https://www.opencachingspain.es" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-es.png" width="100" height="22" /></a><br />
+                    <a href="https://www.opencaching.fr" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-fr.png" width="100" height="22" /></a><br />
+                    <a href="https://www.opencaching.it" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-it.png" width="100" height="22" /></a><br />
                     <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
-                    <a href="http://www.opencaching.pl" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-pl.png" width="100" height="22" /></a><br />
+                    <a href="https://opencaching.pl" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-pl.png" width="100" height="22" /></a><br />
                     <a href="http://www.opencaching.ro" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-ro.png" width="100" height="22" /></a><br />
                     <a href="https://opencache.uk" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-org-uk.png" width="100" height="22" /></a><br />
                     <a href="http://www.opencaching.us" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-us.png" width="100" height="22" /></a>
@@ -269,9 +269,46 @@
                             </tr>
                         </table>
                         <table style="margin-left: auto; margin-right: auto;">
-                            <tr><td><a href="http://forum.opencaching.de/"><img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png" /></a></td><td style="text-align: left"><a href="http://forum.opencaching.de/">{t}Opencaching Forum{/t}</a></td></tr>
-                            <tr><td><a href="https://plus.google.com/communities/115824614741379300945"><img src="resource2/{$opt.template.style}/images/media/16x16-google+.png" /></a></td><td style="text-align: left"><a href="https://plus.google.com/communities/115824614741379300945">{t}Google+ Community{/t}</a></td></tr>
-                            <tr><td><a href="https://www.facebook.com/groups/198752500146032/"><img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png" /></a></td><td style="text-align: left"><a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a></td></tr>
+                            <tr>
+                                <td>
+                                    <a href="http://forum.opencaching.de/">
+                                        <img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png"/>
+                                    </a>
+                                </td>
+                                <td style="text-align: left">
+                                    <a href="http://forum.opencaching.de/">{t}Opencaching Forum{/t}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://plus.google.com/communities/115824614741379300945">
+                                        <img src="resource2/{$opt.template.style}/images/media/16x16-google+.png"/>
+                                    </a>
+                                </td>
+                                <td style="text-align: left">
+                                    <a href="https://plus.google.com/communities/115824614741379300945">{t}Google+ Community{/t}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://www.facebook.com/groups/198752500146032/">
+                                        <img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png"/>
+                                    </a>
+                                </td>
+                                <td style="text-align: left">
+                                    <a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://github.com/OpencachingDeutschland/oc-server3">
+                                        <img src="resource2/{$opt.template.style}/images/media/16x16-github.png"/>
+                                    </a>
+                                </td>
+                                <td style="text-align: left">
+                                    <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 {/if}

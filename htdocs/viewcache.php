@@ -101,7 +101,8 @@ if ($login->userid != 0) {
 $rs = sql(
     "SELECT `caches`.`cache_id` AS `cacheid`,
             `caches`.`listing_last_modified` AS `lastmodified`,
-            `caches`.`user_id` AS `userid`,
+            `caches`.`node` != 1 OR`caches`.`listing_last_modified` != '2017-02-14 22:54:22' AS `show_last_modified`,
+            `caches`.`user_id` AS `userid`,      /* see redmine #1109 */
             `caches`.`status` AS `status`,
             `caches`.`latitude` AS `latitude`,
             `caches`.`longitude` AS `longitude`,
@@ -360,7 +361,7 @@ if (isset($_REQUEST['log'])) {
     }
 }
 
-$logs = cache::getLogsArray($cacheid, 0, $rscount + 1, false, $rCache['protect_old_coords']);
+$logs = $cache->getLogsArray(0, $rscount + 1, false, $rCache['protect_old_coords']);
 
 if (isset($logs[$rscount])) {
     unset($logs[$rscount]);
