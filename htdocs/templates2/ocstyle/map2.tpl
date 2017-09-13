@@ -187,7 +187,7 @@ function eval_filtercookies(aValues)
 
     for (var iValue=0; iValue<aValues.length; iValue++)
     {
-        fs = aValues[iValue].split(':');
+        var fs = aValues[iValue].split(':');
 
         if (fs[0] == 'types')
         {
@@ -222,7 +222,7 @@ function eval_filtercookies(aValues)
         }
         else if (fs[0] == 'rated')
         {
-            fr = fs[1].split(',');
+            var fr = fs[1].split(',');
             document.getElementById('terrainmin').value = fr[0];
             document.getElementById('terrainmax').value = fr[1];
             document.getElementById('difficultymin').value = fr[2];
@@ -231,7 +231,7 @@ function eval_filtercookies(aValues)
         }
         else if (fs[0] == 'attr')
         {
-            fa = ',' + fs[1] + ',';
+            var fa = ',' + fs[1] + ',';
 
             {/literal}{strip}
             {foreach from=$aAttributes item=attribGroupItem}
@@ -243,7 +243,7 @@ function eval_filtercookies(aValues)
         }
     }
 
-    mbFilterCookieLoaded = true;
+    var mbFilterCookieLoaded = true;
 }
 
 function eva(fa,id,icon)
@@ -316,6 +316,7 @@ function cookieSave(permanent_filter)
         document.getElementById('recommendationmin').value;
 
     var sAttrFilter = '';
+    var nAttribId;
     for (nAttribId=1; nAttribId<=nMaxAttributeId; nAttribId++)
     {
         var ao = document.getElementById('attribute' + nAttribId);
@@ -343,7 +344,7 @@ function mapLoad()
     if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-    var maptypes = ['OSM', 'OCM',
+    var maptypes = ['OSM',
                     google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
                     google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
   var initType = google.maps.MapTypeId.ROADMAP;
@@ -355,7 +356,8 @@ function mapLoad()
         zoom: mnInitZoom,
         center: new google.maps.LatLng(mnInitLat, mnInitLon),
         mapTypeId: initType,
-        backgroundColor: "#d0dccc",
+        backgroundColor: '#d0dccc',
+        gestureHandling: 'greedy',
 
         mapTypeControl: true,
         mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_RIGHT },
@@ -387,7 +389,7 @@ function mapLoad()
     {/if}
     {literal}
 
-    setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
+    setMapType("OSM", "OpenStreetMap", "https://tile.openstreetmap.org/", 18);
 
     moInfoWindow = new google.maps.InfoWindow();
     moWpInfoWindow = new google.maps.InfoWindow();
@@ -506,9 +508,9 @@ function updateCopyrights()
     {
         {/literal}
         if (newMapType == "OCM")
-            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
+            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
         else
-            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
+            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
         {literal}
         if (mapIcon != null) {
             mapIcon.style.display = "none";
@@ -815,7 +817,7 @@ function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
     var mi = new google.maps.MarkerImage(image + '.png');
     mi.anchor = anchor;
 
-    marker = new google.maps.Marker(
+    var marker = new google.maps.Marker(
         {   position: new google.maps.LatLng(nLat, nLon),
             map: moMap,
             title: sName,
@@ -1427,6 +1429,7 @@ function coordtext(coord)
 
 function showcoords(lat,lng)
 {
+    var lattext, longtext;
     if (lat < 0) { lattext = "S " + coordtext(-lat) }
     else { lattext = "N " + coordtext(lat); }
 
@@ -2108,7 +2111,7 @@ function get_searchfilter_params(output, skipqueryid, zip)
 
     /* rating options
      */
-    nSelectValue = document.getElementById('terrainmin').value;
+    var nSelectValue = document.getElementById('terrainmin').value;
     if (nSelectValue != 0) sPostBody += '&terrainmin=' + nSelectValue;
     nSelectValue = document.getElementById('terrainmax').value;
     if (nSelectValue != 0) sPostBody += '&terrainmax=' + nSelectValue;
