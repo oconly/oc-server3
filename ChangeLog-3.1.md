@@ -8,6 +8,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - add github to left panel [#1112](https://redmine.opencaching.de/issues/1112)
 
 ### Changed
+- show safari caches for guest users [#1127](https://redmine.opencaching.de/issues/1127)
+- change meta tags [#1131](https://redmine.opencaching.de/issues/1131)
 
 ### Removed
 - removed changed dates which was caused during db update [#1109](https://redmine.opencaching.de/issues/1109)
@@ -17,6 +19,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - add missing snippet [#1111](https://redmine.opencaching.de/issues/1111)
 - mixed content issue on listing page [#1114](https://redmine.opencaching.de/issues/1114)
 - map display issue [#1122](https://redmine.opencaching.de/issues/1122)
+- view issue on admin panel [#1128](https://redmine.opencaching.de/issues/1128)
+- download selection box [#1129](https://redmine.opencaching.de/issues/1129)
 
 
 ## unreleased [3.1.3...3.1.4](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...3.1.4)
