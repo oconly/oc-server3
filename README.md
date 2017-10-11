@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![Gitter](https://badges.gitter.im/OpencachingDeutschland/oc-server3.svg)](https://gitter.im/OpencachingDeutschland/oc-server3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Gitter](https://badges.gitter.im/OpencachingDeutschland/oc-server3.svg)](https://gitter.im/OpencachingDeutschland/oc-server3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
 
 Opencaching.de Code Repository
 ==============================
@@ -48,6 +48,7 @@ Sponsoring Technology Partner
 * [Sentry](https://sentry.io/) ![Sentry](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/sentry.png)
 * [Scrutinizer](https://scrutinizer-ci.com)
 * [Travis-Ci](https://travis-ci.org/)   
+* [Codecov](https://codecov.io/)   
 
 We thank our technology partners for their support of our open source project!
 
