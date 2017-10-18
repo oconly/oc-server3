@@ -26,8 +26,6 @@
 /htdocs/sitemap*xml*
 /htdocs/var/*
 
-# repository files which may be replaced locally
-.editorconfig
 /htdocs/util/archive/.htaccess
 /htdocs/util/attributes/.htaccess
 /htdocs/util/change_owner/.htaccess
@@ -53,6 +51,7 @@ Thumbs.db
 parameters.yml
 .crowdin.yaml
 htdocs/app/Resources/translations
+!/htdocs/app/Resources/translations/*.en.yml
 htdocs/translation.zip
 
 /htdocs/bin/*.zip
