@@ -1,0 +1,34 @@
+@import '~bootstrap/scss/variables';
+
+//==========COLORS==========//
+$gray-lighter: $gray-500;
+$gray-light: $gray-600;
+$gray: $gray-700;
+$gray-dark: $gray-800;
+$gray-darker: $gray-900;
+
+$color__error-text: $white;
+$color__error-background: lighten($red, 10%);
+$color__error-border: $red;
+
+$color__info-text: $white;
+$color__info-background: lighten($blue, 10%);
+$color__info-border: $blue;
+
+$color__success-text: $white;
+$color__success-background: lighten($green, 10%);
+$color__success-border: $green;
+
+//==========BLOCK STYLING==========//
+$sidebar---width: 15rem;
+$sidebar---color-background: #1c1d22;
+$sidebar---color-text: $white;
+$sidebar---margin-top: 1rem;
+
+$navigation--level-0---color-background: #121317;
+$navigation--level-1---color-background: #31302b;
+
+$navigation-item__text---padding-vertical: 0.25;
+$navigation-item__text---padding-left: 0.75;
+$navigation-item--current---border-left-width: 0.4;
+$navigation-item--current---border-left-color: #f4941b;

@@ -15,8 +15,6 @@ class AppKernel extends Kernel
 
     /**
      * Boots the current kernel.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -39,6 +37,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
+            new BestIt\KitchensinkBundle\BestItKitchensinkBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -77,7 +78,6 @@ class AppKernel extends Kernel
 
     /**
      * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
-     * @return void
      * @throws \Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
@@ -105,6 +105,6 @@ class AppKernel extends Kernel
      */
     public static function Container()
     {
-       return self::getInstance()->getContainer();
+        return self::getInstance()->getContainer();
     }
 }

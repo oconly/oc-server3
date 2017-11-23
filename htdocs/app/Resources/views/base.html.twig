@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
+
+        <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
+        {% endblock %}
+    </head>
+    <body>
+        <div class="site">
+            <div class="site__inner">
+                <nav class="site__inner-sidebar">
+                    {% include '_components/sidebar/sidebar.html.twig' %}
+                </nav>
+                <main class="site__inner-main main">
+                    <header class="main__header">
+                        {% include '_components/header/header.html.twig' %}
+                    </header>
+                    <div class="main__content main-content">
+                        {% block flash_messages %}
+                            <div class="main-content__flash-messages">
+                                {% include '_components/flash-messages/flash-messages.html.twig' %}
+                            </div>
+                        {% endblock %}
+
+                        {% block body %}{% endblock %}
+                    </div>
+                    <footer class="main__footer">
+                        <h1>Footer</h1>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        {#{% include '_components/footer/footer.html.twig' %}#}
+
+        {% block javascripts %}
+            <script src="{{ asset('assets/js/main.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

@@ -15,8 +15,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class FieldNotesController
- *
- * @package Oc\FieldNotes\Controller
  */
 class FieldNotesController extends AbstractController
 {
@@ -66,7 +64,7 @@ class FieldNotesController extends AbstractController
      *
      * @return Response
      *
-     * @Route("/field-notes/", name="field-notes")
+     * @Route("/field-notes/", name="field_notes.index")
      */
     public function indexAction(Request $request)
     {
@@ -92,20 +90,20 @@ class FieldNotesController extends AbstractController
                     $this->addErrorMessage($error);
                 }
 
-                return $this->redirectToRoute('field-notes');
+                return $this->redirectToRoute('field_notes.index');
             }
 
             $this->addSuccessMessage(
                 $this->translator->trans('field_notes.upload.success')
             );
 
-            return $this->redirectToRoute('field-notes');
+            return $this->redirectToRoute('field_notes.index');
         }
 
         return $this->render('field-notes/index.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'fieldNotes' => $fieldNotes
+            'fieldNotes' => $fieldNotes,
         ]);
     }
 
@@ -116,7 +114,7 @@ class FieldNotesController extends AbstractController
      *
      * @return RedirectResponse
      *
-     * @Route("/field-notes/delete/{id}", name="field-notes.delete")
+     * @Route("/field-notes/delete/{id}", name="field_notes.delete")
      */
     public function deleteAction($id)
     {
@@ -125,11 +123,11 @@ class FieldNotesController extends AbstractController
 
         $fieldNote = $this->fieldNoteService->fetchOneBy([
             'id' => $id,
-            'user_id' => $user->getId()
+            'user_id' => $user->getId(),
         ]);
 
         if ($fieldNote === null) {
-            return $this->redirectToRoute('field-notes');
+            return $this->redirectToRoute('field_notes.index');
         }
 
         $this->fieldNoteService->remove($fieldNote);
@@ -138,7 +136,7 @@ class FieldNotesController extends AbstractController
             $this->translator->trans('field_notes.success.deleted')
         );
 
-        return $this->redirectToRoute('field-notes');
+        return $this->redirectToRoute('field_notes.index');
     }
 
     /**
@@ -148,7 +146,7 @@ class FieldNotesController extends AbstractController
      *
      * @return RedirectResponse
      *
-     * @Route("/field-notes/delete-multiple/", name="field-notes.delete-multiple")
+     * @Route("/field-notes/delete-multiple/", name="field_notes.delete_multiple")
      */
     public function deleteMultipleAction(Request $request)
     {
@@ -157,13 +155,13 @@ class FieldNotesController extends AbstractController
 
         $selectedFieldNotes = $request->get('selected-field-notes');
         if (!is_array($selectedFieldNotes)) {
-            return $this->redirectToRoute('field-notes');
+            return $this->redirectToRoute('field_notes.index');
         }
 
         foreach ($selectedFieldNotes as $fieldNoteId) {
             $fieldNote = $this->fieldNoteService->fetchOneBy([
                 'id' => $fieldNoteId,
-                'user_id' => $user->getId()
+                'user_id' => $user->getId(),
             ]);
 
             if ($fieldNote === null) {
@@ -177,6 +175,6 @@ class FieldNotesController extends AbstractController
             $this->translator->trans('field_notes.success.deleted_multiple')
         );
 
-        return $this->redirectToRoute('field-notes');
+        return $this->redirectToRoute('field_notes.index');
     }
 }

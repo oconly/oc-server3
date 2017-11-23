@@ -11,7 +11,6 @@ use Twig_Environment;
 /**
  * Class ChangelogController
  *
- * @package Oc\Changelog\Controller
  *
  * @Route(service="Oc\Changelog\Controller\ChangelogController")
  */
@@ -34,7 +33,7 @@ class ChangelogController extends Controller
     }
 
     /**
-     * @Route(path="/changelog")
+     * @Route(path="/changelog", name="changelog.index")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

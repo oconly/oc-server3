@@ -1,0 +1,16 @@
+@import 'global';
+
+//==========BLOCKS==========//
+@import 'blocks/flash-messages/flash-messages';
+
+@import 'blocks/main/main';
+
+@import 'blocks/navigation/navigation';
+@import 'blocks/navigation/navigation-item';
+
+@import 'blocks/sidebar/sidebar';
+@import 'blocks/site/site';
+
+//==========BOOTSTRAP==========//
+@import '~bootstrap/scss/reboot';
+@import 'common';
