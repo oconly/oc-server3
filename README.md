@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Gitter](https://badges.gitter.im/OpencachingDeutschland/oc-server3.svg)](https://gitter.im/OpencachingDeutschland/oc-server3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Slack](https://img.shields.io/badge/chat-on%20slack-green.svg?logo=slack)](https://goo.gl/AEYik9) 
 
 Opencaching.de Code Repository
 ==============================
@@ -13,7 +13,7 @@ for setting up your own open and free Geocaching listing service! The code can e
 translated to other languages.
 
 Your contributions to this project are welcome - you may contact the team in the
-[Opencaching.de forum](https://forum.opencaching.de/) if you like to
+[Slack Channel](https://goo.gl/AEYik9) or [Opencaching.de forum](https://forum.opencaching.de/) if you like to
 join us. Development is usually done on a VirtualBox Linux system that you can run on your
 Linux, Windows or Mac workstation, but you may also try to set up the code directly
 on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team Member in
