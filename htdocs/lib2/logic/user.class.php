@@ -381,16 +381,6 @@ class user
         return $this->reUser->setValue('usermail_send_addr', $value);
     }
 
-    public function getNoHTMLEditor()
-    {
-        return $this->reUser->getValue('no_htmledit_flag');
-    }
-
-    public function setNoHTMLEditor($value)
-    {
-        return $this->reUser->setValue('no_htmledit_flag', $value);
-    }
-
     public function getUsePMR()
     {
         return $this->reUser->getValue('pmr_flag');
@@ -1414,7 +1404,7 @@ class user
                         return "save dummy failed [$ext]";
                     }
                 } elseif ($ext == 'bmp') {
-                    if (!imagebmp($im, "$picpath/$fn")) {
+                    if (!imagebmpCustom($im, "$picpath/$fn")) {
                         return "save dummy failed [$ext]";
                     }
                 } else {
@@ -1465,7 +1455,7 @@ class user
                         return "save thumb failed [$ext]";
                     }
                 } elseif ($ext == 'bmp') {
-                    if (!imagebmp($tim, "$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) {
+                    if (!imagebmpCustom($tim, "$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) {
                         return "save thumb failed [$ext]";
                     }
                 } else {
