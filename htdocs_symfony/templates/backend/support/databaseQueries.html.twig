@@ -1,0 +1,236 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Database queries' | trans }}..</h3>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">{{ 'Query' | trans }}</th>
+                <th scope="col">{{ 'SQL' | trans }}</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ 'List caches from users whose registration date is not older than 31 days.' | trans }}</td>
+                <td>SELECT caches.name, user.username, user.date_created, user.last_login FROM caches, user <br/>WHERE caches.user_id = user.user_id
+                    AND user.date_created > now() - interval 31 DAY;
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_1', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ 'List user whose registration date is not older than 31 days.' | trans }}</td>
+                <td>SELECT username, date_created, last_login FROM user <br/>WHERE date_created > now() - interval 31 DAY;</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_2', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ 'List user with foreign IPs whose registration date is not older than 31 days.' | trans }}</td>
+                <td>SELECT * FROM .. <span class="badge badge-danger">muss noch warten, ob IPs auf die Art abgefragt werden können..</span> <br/>WHERE
+                    ..
+                </td>
+                <td>go</td>
+            </tr>
+            <tr>
+                <td>{{ 'List (non-archived, non-locked) caches from users whose last login date is older than one year.' | trans }}</td>
+                <td>SELECT caches.name, caches.cache_id, user.username, user.last_login, caches.status FROM caches, user <br/>WHERE caches.user_id =
+                    user.user_id AND caches.status <= 2 AND user.last_login < now() - interval 1 YEAR;
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_4') }}">{{ 'Go' | trans }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ 'List user where a support user left a comment.' | trans }}</td>
+                <td>SELECT * FROM support_user_comments</span>
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_5') }}">{{ 'Go' | trans }}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <hr>
+
+    <b>{{ 'Flexible SQL queries' | trans }}</b>
+
+    <div class="container">
+        <section class="container col-md-12">
+            {% if SQLFlexForm is defined %}
+                {{ form_start(SQLFlexForm) }}
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        {{ form_row(SQLFlexForm.content_SELECT) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        {{ form_row(SQLFlexForm.content_WHAT) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        {{ form_row(SQLFlexForm.content_FROM) }}
+                    </div>
+                    <div class="form-group col-md-2">
+                        {{ form_row(SQLFlexForm.content_TABLE) }}
+                    </div>
+                    <div class="form-group col-md-1">
+                        {{ form_row(SQLFlexForm.Suchen) }}
+                    </div>
+                </div>
+                {{ form_end(SQLFlexForm) }}
+            {% endif %}
+        </section>
+    </div>
+
+    <hr>
+
+    {% if suppSQLquery1 is defined %}
+        {% if suppSQLquery1 %}
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">{{ 'Cache title' | trans }}</th>
+                    <th scope="col">{{ 'User name' | trans }}</th>
+                    <th scope="col">{{ 'User registration date' | trans }}</th>
+                    <th scope="col">{{ 'Last login' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in suppSQLquery1 %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.date_created }}</td>
+                        <td>{{ item.last_login }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No entries found' | trans }}..</span>
+        {% endif %}
+    {% endif %}
+
+    {% if suppSQLquery2 is defined %}
+        {% if suppSQLquery2 %}
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">{{ 'User name' | trans }}</th>
+                    <th scope="col">{{ 'User registration date' | trans }}</th>
+                    <th scope="col">{{ 'Last login' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in suppSQLquery2 %}
+                    <tr>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.date_created }}</td>
+                        <td>{{ item.last_login }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No entries found' | trans }}..</span>
+        {% endif %}
+    {% endif %}
+
+    {% if suppSQLquery4 is defined %}
+        {% if suppSQLquery4 %}
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">{{ 'Cache Id' | trans }}</th>
+                    <th scope="col">{{ 'Cache title' | trans }}</th>
+                    <th scope="col">{{ 'User name' | trans }}</th>
+                    <th scope="col">{{ 'Last login' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in suppSQLquery4 %}
+                    <tr>
+                        <td>{{ item.cache_id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.last_login }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No entries found' | trans }}..</span>
+        {% endif %}
+    {% endif %}
+
+    {% if suppSQLquery5 is defined %}
+        {% if suppSQLquery5 %}
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">{{ '#' | trans }}</th>
+                    <th scope="col">{{ 'User name' | trans }}</th>
+                    <th scope="col">{{ 'Comment' | trans }}</th>
+                    <th scope="col">{{ 'Comment created' | trans }}</th>
+                    <th scope="col">{{ 'Comment last modified' | trans }}</th>
+                    <th scope="col">{{ 'OCC' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in suppSQLquery5 %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.user.username }}</td>
+                        <td>{{ item.comment |slice(0, 50) }} [..]</td>
+                        <td>{{ item.commentCreated | date('d.m.Y H:i:s') }}</td>
+                        <td>{{ item.commentLastModified | date('d.m.Y H:i:s') }}</td>
+                        <td><a href="{{ path('backend_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}"><i class="fas fa-check"></i></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No entries found' | trans }}..</span>
+        {% endif %}
+    {% endif %}
+
+    {% if suppSQLqueryFlex is defined %}
+        {% if suppSQLqueryFlex %}
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    {% for key in suppSQLqueryFlex[0]|keys %}
+                        <th scope="col">{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in suppSQLqueryFlex %}
+                    <tr>
+                        {% for it in item %}
+                            <td>{{ it }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No entries found' | trans }}..</span>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

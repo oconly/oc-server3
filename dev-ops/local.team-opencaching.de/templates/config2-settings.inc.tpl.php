@@ -14,8 +14,8 @@ if (defined('HTTPS_ENABLED')) {
 }
 
 $opt['debug'] = true;
-$opt['httpd']['user'] = 'vagrant';
-$opt['httpd']['group'] = 'vagrant';
+$opt['httpd']['user'] = 'application';
+$opt['httpd']['group'] = 'application';
 
 // show blog and forum news on index.php
 $debug_startpage_news = false;
@@ -122,7 +122,7 @@ $opt['forum']['name'] = 'forum.opencaching.de';
  * 4 Local Development
  * 5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
  */
-$opt['logic']['node']['id'] = 5;
+$opt['logic']['node']['id'] = 4;
 
 /* pregenerated waypoint list for new caches
  * - Waypoint prefix (OC, OP, OZ ... AA=local development)
