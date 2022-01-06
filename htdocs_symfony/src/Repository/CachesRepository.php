@@ -4,6 +4,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Exception;
 use Oc\Entity\GeoCachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -126,7 +127,7 @@ class CachesRepository
      * @param array $where
      *
      * @return array
-     * @throws RecordsNotFoundException
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -147,7 +148,7 @@ class CachesRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records with given where clause found');
+//            throw new RecordsNotFoundException('No records with given where clause found');
         } else {
             foreach ($result as $item) {
                 $entities[] = $this->getEntityFromDatabaseArray($item);
@@ -307,7 +308,7 @@ class CachesRepository
      * @param array $data
      *
      * @return GeoCachesEntity
-     * @throws \Exception
+     * @throws Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : GeoCachesEntity {
@@ -318,7 +319,7 @@ class CachesRepository
         $entity->node = (int)$data['node'];
         $entity->dateCreated = new DateTime($data['date_created']);
         $entity->isPublishdate = (int)$data['is_publishdate'];
-        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->lastModified = date('Y-m-d H:i:s');
         $entity->okapiSyncbase = (string)$data['okapi_syncbase'];
         $entity->listingLastModified = new DateTime($data['listing_last_modified']);
         $entity->metaLastModified = new DateTime($data['meta_last_modified']);
@@ -356,5 +357,22 @@ class CachesRepository
         $entity->user = $this->userRepository->fetchOneById($entity->userId);
 
         return $entity;
+    }
+
+    /**
+     * @param string $wp
+     *
+     * @return bool
+     */
+    public function isNew(string $wp)
+    : bool {
+        try {
+            if ($this->fetchOneBy(['wp_oc' => $wp])) {
+                return false;
+            }
+        } catch (Exception $exception) {
+            return true;
+        }
+        return true;
     }
 }

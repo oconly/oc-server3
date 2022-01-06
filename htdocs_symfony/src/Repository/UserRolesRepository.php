@@ -7,44 +7,37 @@ namespace Oc\Repository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\SupportListingInfosEntity;
+use Oc\Entity\UserRolesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
- * Class SupportListingInfosRepository
+ * Class UserRolesRepository
  *
  * @package Oc\Repository
  */
-class SupportListingInfosRepository
+class UserRolesRepository
 {
-    const TABLE = 'support_listing_infos';
+    const TABLE = 'user_roles';
 
     /** @var Connection */
     private $connection;
 
-    /** @var NodesRepository */
-    private $nodesRepository;
-
     /**
      * @param Connection $connection
-     * @param NodesRepository $nodesRepository
      */
-    public function __construct(Connection $connection, NodesRepository $nodesRepository)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->nodesRepository = $nodesRepository;
     }
 
     /**
      * @return array
-     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
-    public function fetchAll()
-    : array
+    public function fetchAll() : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -69,11 +62,11 @@ class SupportListingInfosRepository
     /**
      * @param array $where
      *
-     * @return SupportListingInfosEntity
+     * @return UserRolesEntity
      * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = [])
-    : SupportListingInfosEntity {
+    public function fetchOneBy(array $where = []) : UserRolesEntity
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -100,11 +93,10 @@ class SupportListingInfosRepository
      * @param array $where
      *
      * @return array
-     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
-    public function fetchBy(array $where = [])
-    : array {
+    public function fetchBy(array $where = []) : array
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -133,14 +125,14 @@ class SupportListingInfosRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param UserRolesEntity $entity
      *
-     * @return SupportListingInfosEntity
+     * @return UserRolesEntity
      * @throws RecordAlreadyExistsException
      * @throws DBALException
      */
-    public function create(SupportListingInfosEntity $entity)
-    : SupportListingInfosEntity {
+    public function create(UserRolesEntity $entity) : UserRolesEntity
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -158,14 +150,14 @@ class SupportListingInfosRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param UserRolesEntity $entity
      *
-     * @return SupportListingInfosEntity
-     * @throws RecordNotPersistedException
+     * @return UserRolesEntity
      * @throws DBALException
+     * @throws RecordNotPersistedException
      */
-    public function update(SupportListingInfosEntity $entity)
-    : SupportListingInfosEntity {
+    public function update(UserRolesEntity $entity) : UserRolesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -182,15 +174,15 @@ class SupportListingInfosRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param UserRolesEntity $entity
      *
-     * @return SupportListingInfosEntity
-     * @throws RecordNotPersistedException
+     * @return UserRolesEntity
      * @throws DBALException
      * @throws InvalidArgumentException
+     * @throws RecordNotPersistedException
      */
-    public function remove(SupportListingInfosEntity $entity)
-    : SupportListingInfosEntity {
+    public function remove(UserRolesEntity $entity) : UserRolesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -206,58 +198,30 @@ class SupportListingInfosRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param UserRolesEntity $entity
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(SupportListingInfosEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(UserRolesEntity $entity) : array
+    {
         return [
             'id' => $entity->id,
-            'wp_oc' => $entity->wpOc,
-            'node_id' => $entity->nodeId,
-            'node_owner_id' => $entity->nodeOwnerId,
-            'node_listing_id' => $entity->nodeListingId,
-            'node_listing_wp' => $entity->nodeListingWp,
-            'node_listing_name' => $entity->nodeListingName,
-            'node_listing_size' => $entity->nodeListingSize,
-            'node_listing_difficulty' => $entity->nodeListingDifficulty,
-            'node_listing_terrain' => $entity->nodeListingTerrain,
-            'node_listing_coordinates_lon' => $entity->nodeListingCoordinatesLon,
-            'node_listing_coordinates_lat' => $entity->nodeListingCoordinatesLat,
-            'node_listing_available' => $entity->nodeListingAvailable,
-            'node_listing_archived' => $entity->nodeListingArchived,
-            'last_modified' => date('Y-m-d H:i:s'),
-            'importstatus' => $entity->importStatus,
+            'user_id' => $entity->userId,
+            'role_id' => $entity->roleId,
         ];
     }
 
     /**
      * @param array $data
      *
-     * @return SupportListingInfosEntity
-     * @throws RecordNotFoundException
+     * @return UserRolesEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
-    : SupportListingInfosEntity {
-        $entity = new SupportListingInfosEntity();
-        $entity->id = ((int) $data['id']) ?? NULL;
-        $entity->wpOc = (string) $data['wp_oc'];
-        $entity->nodeId = (int) $data['node_id'];
-        $entity->nodeOwnerId = (string) $data['node_owner_id'];
-        $entity->nodeListingId = (string) $data['node_listing_id'];
-        $entity->nodeListingWp = (string) $data['node_listing_wp'];
-        $entity->nodeListingName = (string) $data['node_listing_name'];
-        $entity->nodeListingSize = (int) $data['node_listing_size'];
-        $entity->nodeListingDifficulty = (int) $data['node_listing_difficulty'];
-        $entity->nodeListingTerrain = (int) $data['node_listing_terrain'];
-        $entity->nodeListingCoordinatesLon = (double) $data['node_listing_coordinates_lon'];
-        $entity->nodeListingCoordinatesLat = (double) $data['node_listing_coordinates_lat'];
-        $entity->nodeListingAvailable = (bool) $data['node_listing_available'];
-        $entity->nodeListingArchived = (bool) $data['node_listing_archived'];
-        $entity->lastModified = date('Y-m-d H:i:s');
-        $entity->importStatus = (int) $data['importstatus'];
-        $entity->node = $this->nodesRepository->fetchOneBy(['id' => $entity->nodeId]);
+    public function getEntityFromDatabaseArray(array $data) : UserRolesEntity
+    {
+        $entity = new UserRolesEntity();
+        $entity->id = (int) $data['id'];
+        $entity->userId = (string) $data['user_id'];
+        $entity->roleId = (string) $data['role_id'];
 
         return $entity;
     }
