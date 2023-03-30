@@ -487,7 +487,7 @@ class OcSmarty extends Smarty
     /**
      * @param string $page
      */
-    public function redirect($page)
+    public function redirect(string $page)
     : void {
         global $cookie, $opt;
         $cookie->close();

@@ -1,4 +1,4 @@
-FROM webdevops/php-apache-dev:7.4
+FROM webdevops/php-apache-dev:8.1
 
 # Hack while using PHP 7.4: Switch debian buster repos to archive and disable Valid-Until checks
 RUN sed -i -e 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' \

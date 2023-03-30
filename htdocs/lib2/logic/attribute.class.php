@@ -4,15 +4,17 @@
  ***************************************************************************/
 namespace OcLib2;
 
+namespace OcLib2;
+
 class attribute
 {
     /* array with all attributes grouped by attribute group */
     /**
-     * @param $firstLetterUppercase
+     * @param bool $firstLetterUppercase
      *
      * @return array
      */
-    public static function getAttributesListArray($firstLetterUppercase = false)
+    public static function getAttributesListArray(bool $firstLetterUppercase = false)
     : array {
         return self::getAttributesListArrayInternal(0, false, $firstLetterUppercase);
     }
@@ -29,11 +31,11 @@ class attribute
 
     /**
      * @param $cacheId
-     * @param $firstLetterUppercase
+     * @param bool $firstLetterUppercase
      *
      * @return array
      */
-    public static function getAttributesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
+    public static function getAttributesListArrayByCacheId($cacheId, bool $firstLetterUppercase = false)
     : array {
         return self::getAttributesListArrayInternal($cacheId, false, $firstLetterUppercase);
     }
@@ -44,7 +46,7 @@ class attribute
      * @param bool $firstLetterUppercase
      * @return array
      */
-    public static function getAttributesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
+    public static function getAttributesListArrayInternal($cacheId, bool $bOnlySelectable, bool $firstLetterUppercase)
     : array {
         global $opt;
 
@@ -78,7 +80,7 @@ class attribute
 
             if ($cacheId == 0) {
                 $sAddWhereSql = '';
-                if ($bOnlySelectable == true) {
+                if ($bOnlySelectable) {
                     $sAddWhereSql .= ' AND `cache_attrib`.`selectable`=1';
                 }
 
@@ -165,7 +167,7 @@ class attribute
      * @param $attribId
      * @return array
      */
-    public static function getConflictingAttribIds($attribId)
+    public static function getConflictingAttribIds($attribId): array
     {
         static $conflicts = [
             [1, 38],    // only at night - 24/7

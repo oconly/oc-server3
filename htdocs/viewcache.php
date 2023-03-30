@@ -66,11 +66,11 @@ if (isset($_REQUEST['cacheid'])) {
 
 $cache = new cache($cacheid);
 
-if ($cache->exist() == false) {
+if (!$cache->exist()) {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);
 }
 
-if ($cache->allowView() == false) {
+if (!$cache->allowView()) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
