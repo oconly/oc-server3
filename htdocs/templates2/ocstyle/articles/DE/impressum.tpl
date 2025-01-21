@@ -62,7 +62,7 @@
     <p>
         Opencaching Deutschland e.V.<br/>
         c/o Mirco Baumann<br/>
-        Am Sternbusch 7<br/>
+        Alnwicker Ring 2<br/>
         46562 Voerde<br/>
         <br/>
         E-Mail: verein@opencaching.de<br/>
