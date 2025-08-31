@@ -18,7 +18,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - docker-compose up -d --build
+  - docker compose up -d --build
   - sudo chmod +x psh.phar
   - ./psh.phar travis-ci:init
   - sudo chmod -R 777 htdocs/var/logs/
@@ -28,7 +28,7 @@ script:
   - ./psh.phar travis-ci:ci
 
 after_script:
-  - docker-compose down
+  - docker compose down
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

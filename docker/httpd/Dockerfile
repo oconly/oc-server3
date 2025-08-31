@@ -1,5 +1,21 @@
 FROM webdevops/php-apache-dev:7.4
 
+# Hack while using PHP 7.4: Switch debian buster repos to archive and disable Valid-Until checks
+RUN sed -i -e 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' \
+           -e 's|http://deb.debian.org/debian-security|http://archive.debian.org/debian-security|g' \
+           -e 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' \
+           /etc/apt/sources.list \
+    && sed -i -E 's|^deb .*buster-updates.*$|# &|g' /etc/apt/sources.list \
+    && printf 'Acquire::Check-Valid-Until "false";\nAcquire::AllowInsecureRepositories "true";\n' > /etc/apt/apt.conf.d/99no-check-valid-until
+
+# Make debconf/apt non-interactive to avoid prompts (e.g., postfix)
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN=true
+
+# Preseed postfix to avoid configuration dialog during upgrade/configure
+RUN printf "postfix postfix/main_mailer_type select No configuration\npostfix postfix/mailname string localhost\n" | debconf-set-selections
+
+
 # Prepare yarn to be installed
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
