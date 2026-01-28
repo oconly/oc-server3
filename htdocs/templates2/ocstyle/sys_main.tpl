@@ -306,9 +306,9 @@
                             <td><a href="https://blog.opencaching.de/feed" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-feed.png"
                                             width="16" height="16" alt="OC Blog"/></a></td>
-                            <td><a href="https://twitter.com/opencaching" target="_blank"><img
-                                            src="resource2/{$opt.template.style}/images/media/16x16-twitter.png"
-                                            width="16" height="16" alt="Twitter"/></a></td>
+                            <td><a href="https://social.opencaching.earth/@oc" target="_blank"><img
+                                            src="resource2/{$opt.template.style}/images/media/16x16-fedi.png"
+                                            width="16" height="16" alt="Fediverse"/></a></td>
                             <td><a href="https://www.facebook.com/opencaching.de" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-facebook.png"
                                             width="16" height="16" alt="Facebook"/></a></td>
