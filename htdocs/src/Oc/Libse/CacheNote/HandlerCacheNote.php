@@ -31,10 +31,10 @@ class HandlerCacheNote
     {
         $ret = [];
 
-        $ret['id'] = $r['id'] ?? null;
-        $ret['note'] = $r['description'] ?? null;
-        $ret['latitude'] = $r['latitude'] ?? null;
-        $ret['longitude'] = $r['longitude'] ?? null;
+        $ret['id'] = $r['id'];
+        $ret['note'] = $r['description'];
+        $ret['latitude'] = $r['latitude'];
+        $ret['longitude'] = $r['longitude'];
 
         return $ret;
     }
