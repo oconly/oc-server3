@@ -254,7 +254,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     <!-- Länderknoten -->
                     <p class="sidebar-maintitle">{t}Country sites{/t}</p>
                     <div style="text-align: center;" class="nodeflags">
-                        <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.de" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-de.png" width="100" height="22" /></a><br />
                         <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
                         <a href="https://opencaching.pl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-pl.png" width="100" height="22" /></a><br />

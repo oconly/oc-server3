@@ -260,9 +260,6 @@
 
             <p class="sidebar-maintitle">{t}Country sites{/t}</p>
             <div style="text-align: center;" class="nodeflags">
-                <a href="https://www.opencaching.cz" target="_blank"><img
-                            src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100"
-                            height="22"/></a><br/>
                 <a href="https://www.opencaching.de" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100"
                             height="22"/></a><br/>
