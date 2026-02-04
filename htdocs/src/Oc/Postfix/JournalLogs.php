@@ -57,8 +57,8 @@ class JournalLogs
             $logEntry = new LogEntity();
 
             $entry = json_decode($journal, true);
-
-            if ($entry['_HOSTNAME'] === $this->config['hostname']) {
+            $hostname = $entry['_HOSTNAME'] ?? 'invalid';
+            if ($hostname === $this->config['hostname']) {
                 $cursor = [];
                 $cursorArray = explode(';', $entry['__CURSOR']);
                 foreach ($cursorArray as $field) {

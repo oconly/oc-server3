@@ -1,0 +1,26 @@
+#!/bin/bash
+cd /var/www/opencaching.de/www/code
+
+if [ "`git branch|grep stable`" != "* stable" ]; then
+  echo "error: you are not in stable branch!"
+else 
+    echo "-- import crowdin data..."
+    cd htdocs
+    wget "https://api.crowdin.com/api/project/opencaching/export?key=4b399849489f448eafed67718350da69" -q --spider > /dev/null
+    	
+    wget "https://api.crowdin.com/api/project/opencaching/download/all.zip?key=4b399849489f448eafed67718350da69" -O translations.zip
+    unzip -o translations.zip	
+    #rm -f translations.zip
+    cd ..
+    ./htdocs/bin/console translation:update de --force
+    ./htdocs/bin/console translation:update en --force
+    ./htdocs/bin/console translation:update fr --force
+    ./htdocs/bin/console translation:update el --force
+    ./htdocs/bin/console translation:update es --force
+    ./htdocs/bin/console translation:update it --force
+    ./htdocs/bin/console translation:update nl --force
+    ./htdocs/bin/console translation:update pl --force
+    ./htdocs/bin/console translation:update ru --force
+
+    php ./bin/clear-webcache.php
+fi

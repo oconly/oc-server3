@@ -1,14 +1,23 @@
 {
+  "_comment": "Kommentar/Merkzettel von fraggle: doctrine/doctrine-bundle wurde auf 2.6.4 festgeschrieben, da Version 2.7.0 nicht mit doctrine/orm 2.10.* zusammenpasst.",
   "name": "opencaching/oc-server",
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
+  "config": {
+    "platform": {
+      "php": "7.4.33"
+    },
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
   "require": {
-    "php": "^7.4",
+    "php": ">=7.2.5",
     "ezyang/htmlpurifier": "^v4.8",
-    "smarty/smarty": "~4.0",
+    "smarty/smarty": "~2.6",
     "symfony/symfony": "4.4.*",
     "doctrine/orm": "^2.5",
-    "doctrine/doctrine-bundle": "^1.6|^2.6",
+    "doctrine/doctrine-bundle": "^1.6|2.6.4",
     "symfony/swiftmailer-bundle": "^3.4",
     "symfony/monolog-bundle": "^3.5",
     "symfony/polyfill-apcu": "^1.0",
@@ -34,7 +43,8 @@
     "eluceo/ical": "^0.15.0|^1.0|^2.0",
     "league/csv": "^9.6",
     "mervick/material-design-icons": "^2.2",
-    "knplabs/knp-menu-bundle": "^3.2"
+    "knplabs/knp-menu-bundle": "^3.2",
+    "scssphp/scssphp": "^1.0.0"
   },
   "require-dev": {
     "phpunit/phpunit": "6.*|^7.0|^8.0|^9.0",
@@ -71,11 +81,6 @@
     "symfony": {
       "allow-contrib": false,
       "require": "4.4.*"
-    }
-  },
-  "config": {
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

@@ -95,7 +95,7 @@
                 <p class="text">{t}Not found? Contact us using{/t} <a class="links" href="{$opt.mail.contact}" title="{t}Contact{/t}">{$opt.mail.contact}</a>.</p>
                 <p>&nbsp;</p>
                 <p class="center"><a class="links" href="/articles.php?page=impressum" title="{t}Imprint{/t}">{t}Imprint{/t}</a> - <a class="links" href="/articles.php?page=verein" title="{t}Operator Association{/t}">Opencaching Deutschland e.V.</a> - <a class="links" href="/articles.php?page=contact" title="{t}Contact{/t}">{t}Contact{/t}</a></p>
-                <p class="center"><a class="links" href="/fb" title="{t}Opencaching at Facebook{/t}">Facebook</a> - <a class="links" href="/+" title="{t}Opencaching at Google+{/t}">Google+</a> - <a class="links" href="/t" title="{t}Opencaching at Twitter{/t}">Twitter</a></p>
+                <p class="center"><a class="links" href="/fb" title="{t}Opencaching at Facebook{/t}">Facebook</a> - <a class="links" href="https://social.opencaching.earth/@oc" title="{t}Opencaching im Fediverse{/t}">Fediverse</a></p>
             </div>
         </div>
     </body>

@@ -254,7 +254,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     <!-- Länderknoten -->
                     <p class="sidebar-maintitle">{t}Country sites{/t}</p>
                     <div style="text-align: center;" class="nodeflags">
-                        <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.de" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-de.png" width="100" height="22" /></a><br />
                         <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
                         <a href="https://opencaching.pl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-pl.png" width="100" height="22" /></a><br />
@@ -289,7 +288,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                             <tr>
                                 <td class="mediumsmalltext">{t}Follow us:{/t}</td>
                                 <td><a href="http://blog.opencaching.de/feed"><img src="resource2/{style}/images/media/16x16-feed.png" width="16" height="16" /></a></td>
-                                <td><a href="https://twitter.com/opencaching"><img src="resource2/{style}/images/media/16x16-twitter.png" width="16" height="16"  /></a></td>
+                                <td><a href="https://social.opencaching.earth/@oc"><img src="resource2/{style}/images/media/16x16-fedi.png" width="16" height="16"  /></a></td>
                                 <td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
                             </tr>
                             <tr>
