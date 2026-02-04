@@ -537,7 +537,7 @@ class user
         return $this->reUser->setValue('watchmail_nextmail', $value);
     }
 
-    public function getStatFound()
+    public function getStatFound(): int
     {
         if ($this->reUserStat->exist()) {
             return sql_value(
@@ -545,7 +545,7 @@ class user
                  FROM (SELECT cache_id
                        FROM cache_logs
                        WHERE user_id = "&1"
-                       AND type = 1
+                       AND type IN (1, 7)
                        GROUP BY cache_id
                 ) as tmp
                 ',
