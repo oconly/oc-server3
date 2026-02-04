@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01b4616fbdb663cc368ed1b69bb6c1ff",
+    "content-hash": "00d4a1e835ea64a207d003a4ae8f2e09",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3089,17 +3089,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opencaching/okapi.git",
-                "reference": "34975e38987389cd5d666509d568a69425b7c463"
+                "reference": "3aab5717104f94cc9e6e36964d772ac31ef76b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/34975e38987389cd5d666509d568a69425b7c463",
-                "reference": "34975e38987389cd5d666509d568a69425b7c463",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/3aab5717104f94cc9e6e36964d772ac31ef76b90",
+                "reference": "3aab5717104f94cc9e6e36964d772ac31ef76b90",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -3110,7 +3111,7 @@
                 "source": "https://github.com/opencaching/okapi/tree/master",
                 "issues": "https://github.com/opencaching/okapi/issues"
             },
-            "time": "2022-03-30T10:14:15+00:00"
+            "time": "2024-12-10T09:13:30+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -8382,7 +8383,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.5",
+        "php": ">=7.4.5",
         "ext-gd": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
