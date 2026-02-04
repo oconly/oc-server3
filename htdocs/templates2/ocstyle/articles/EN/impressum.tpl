@@ -44,7 +44,7 @@
     <p>
         Opencaching Deutschland e.V.<br/>
         c/o Mirco Baumann<br/>
-        Am Sternbusch 7<br/>
+        Alnwicker Ring 2<br/>
         46562 Voerde<br/>
         GERMANY<br/>
         <br/>

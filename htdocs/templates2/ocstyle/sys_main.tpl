@@ -260,9 +260,6 @@
 
             <p class="sidebar-maintitle">{t}Country sites{/t}</p>
             <div style="text-align: center;" class="nodeflags">
-                <a href="https://www.opencaching.cz" target="_blank"><img
-                            src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100"
-                            height="22"/></a><br/>
                 <a href="https://www.opencaching.de" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100"
                             height="22"/></a><br/>
@@ -309,9 +306,9 @@
                             <td><a href="https://blog.opencaching.de/feed" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-feed.png"
                                             width="16" height="16" alt="OC Blog"/></a></td>
-                            <td><a href="https://twitter.com/opencaching" target="_blank"><img
-                                            src="resource2/{$opt.template.style}/images/media/16x16-twitter.png"
-                                            width="16" height="16" alt="Twitter"/></a></td>
+                            <td><a href="https://social.opencaching.earth/@oc" target="_blank"><img
+                                            src="resource2/{$opt.template.style}/images/media/16x16-fedi.png"
+                                            width="16" height="16" alt="Fediverse"/></a></td>
                             <td><a href="https://www.facebook.com/opencaching.de" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-facebook.png"
                                             width="16" height="16" alt="Facebook"/></a></td>
@@ -378,12 +375,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="https://opencaching-de.slack.com/join/shared_invite/zt-6blnetpu-UqrvSQr~8r0o3SNmhkmnGQ#/" target="_blank">
-                                    <img src="resource2/{$opt.template.style}/images/media/16x16-slack.png" alt="Slack"/>
+                                <a href="https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su" target="_blank">
+                                    <img src="resource2/{$opt.template.style}/images/media/16x16-mattermost.png" alt="Mattermost"/>
                                 </a>
                             </td>
                             <td style="text-align: left">
-                                <a href="https://opencaching-de.slack.com/join/shared_invite/zt-6blnetpu-UqrvSQr~8r0o3SNmhkmnGQ#/" target="_blank">Slack</a>
+                                <a href="https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su" target="_blank">Mattermost</a>
                             </td>
                         </tr>
                     </table>
