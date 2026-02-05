@@ -69,7 +69,7 @@
     <ul class="indent narrowlist">
         <li>Mirco Baumann, chairman</li>
         <li>Thomas Eiling, vice chairman</li>
-        <li>John Marco Ens, treasurer</li>
+        <li>Nick Lubisch, treasurer</li>
     </ul>
     </p>
 
