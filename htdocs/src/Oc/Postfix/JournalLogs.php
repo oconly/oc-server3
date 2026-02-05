@@ -136,7 +136,7 @@ class JournalLogs
         $end = new \DateTimeImmutable();
 
         $this->connection
-            ->executeUpdate(
+            ->executeStatement(
                 'UPDATE `sysconfig` SET `value` = :value WHERE `name` = :name',
                 [
                     'name' => 'syslog_maillog_lastdate',
