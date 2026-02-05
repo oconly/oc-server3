@@ -11,7 +11,7 @@ $tpl->menuitem = MNU_CACHES_VIEWLOGS;
 // 'tagloadlogs' produces a stripped-down version of the loglist for
 // log autoloading (see viewcache.php). The actual log block to be inserted
 // is tagged with <ocloadlogs>...</ocloadlogs>.
-$tagloadlogs = (@$_REQUEST['tagloadlogs'] == 1);
+$tagloadlogs = (($_REQUEST['tagloadlogs'] ?? null) == 1);
 $tpl->popup = $tagloadlogs;
 
 $login->verify();
@@ -39,7 +39,7 @@ if (isset($_REQUEST['count'])) {
     }
 }
 $admin_access = ($login->admin && ADMIN_USER) > 0;
-$deleted = @$_REQUEST['deleted'] > 0 && $admin_access;
+$deleted = ($_REQUEST['deleted'] ?? 0) > 0 && $admin_access;
 $rCache = [];
 if ($cache_id != 0) {
     //get cache record
