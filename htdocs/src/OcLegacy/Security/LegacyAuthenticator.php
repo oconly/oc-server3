@@ -90,7 +90,7 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      *
      * @return RedirectResponse
      */
-    public function start(Request $request, AuthenticationException $authException = null)
+    public function start(Request $request, ?AuthenticationException $authException = null)
     {
         $currentUri = $request->getUri();
         $url = '/login.php?target=' . rawurlencode($currentUri);
