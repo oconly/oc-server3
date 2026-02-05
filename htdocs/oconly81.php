@@ -6,7 +6,7 @@
 require __DIR__ . '/lib2/web.inc.php';
 require __DIR__ . '/lib2/logic/oconly81.inc.php';
 
-$showall = (@$_REQUEST['showall'] == 1);
+$showall = (($_REQUEST['showall'] ?? null) == 1);
 
 $tpl->name = 'oconly81';
 $tpl->menuitem = MNU_CACHES_OCONLY81;
