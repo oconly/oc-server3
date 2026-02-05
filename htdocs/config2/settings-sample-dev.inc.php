@@ -64,7 +64,7 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
  */
 $opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
-$opt['session']['domain'] = '.team-opencaching.de';    // may be overwritten by $opt['domain'][...]['cookiedomain']
+$opt['session']['domain'] = '.opencaching.ddev.site';    // may be overwritten by $opt['domain'][...]['cookiedomain']
 
 /* Default locale and style
          *
