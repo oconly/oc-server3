@@ -511,7 +511,7 @@ if ($bRememberQuery) {
 
 // remove old queries (after 1 hour without use);
 // execute only every 50 search calls
-if (mt_rand(1, 50) == 1) {
+if (random_int(1, 50) == 1) {
     sql('DELETE FROM `queries` WHERE `last_queried` < NOW() - INTERVAL 1 HOUR AND `user_id` = 0');
 }
 

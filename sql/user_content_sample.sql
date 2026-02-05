@@ -1,7 +1,7 @@
 UPDATE `user` SET
  `last_modified` = '2020-12-16 21:00:10',
  `last_login` = '2021-02-19',
- `domain` = 'docker.team-opencaching.de',
+ `domain` = 'https://opencaching.ddev.site',
  `description` = '<p>\n</p><hr style=\"height:5px;width:100%;\" size=\"5\" /><p><span style=\"font-size:medium;\">You can find information and login data for other users here:</span></p>\n<p><span style=\"font-size:medium;\">..tbd..</span></p>\n<p><span style=\"font-size:medium;\"><br /></span></p>\n<p>\n</p><hr style=\"height:5px;width:100%;\" size=\"5\" />'
 WHERE `user_id` = 107469
 ;
@@ -269,18 +269,18 @@ VALUES
  (24,'e6ea87de-63c3-11eb-9f28-0242ac120003',4,'2021-02-01 13:50:43','2021-02-01 13:50:43',24,'EN','',1,1,'','')
 ;
 
-INSERT INTO `cache_logs` (`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`, `okapi_syncbase`, `log_last_modified`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`, `order_date`, `needs_maintenance`, `listing_outdated`, `text`, `text_html`, `text_htmledit`, `owner_notified`, `picture`)
-VALUES
- (1,'3722f4ce-403d-11eb-96df-0242ac120002',5,'2020-12-18 08:47:00','2020-12-18 08:47:00','2020-12-18 08:55:40','2020-12-18 08:55:40','2020-12-18 08:55:40',9,170291,3,0,'2020-12-18 00:00:00','2020-12-18 08:47:00',2,2,'<p><span style=\"font-size:large;\">Oh, wie schade, gerade eben wurde der Cache gepublisht und schon funktioniert der Webcamlink nicht mehr. </span></p>\n<p><span style=\"font-size:large;\"><img title=\"Frown\" src=\"resource2/tinymce/plugins/emotions/img/smiley-frown.gif\" border=\"0\" alt=\"Frown\" /></span></p>',1,1,0,0),
- (2,'72ac8550-403d-11eb-96df-0242ac120002',5,'2020-12-18 08:48:40','2020-12-18 08:48:53','2020-12-18 08:55:40','2020-12-18 08:55:40','2020-12-18 08:55:40',9,170290,11,0,'2020-12-18 00:00:00','2020-12-18 08:48:40',2,0,'<p>Oh, da brat mir doch einer \'nen Storch.. der Link funtioniert ja tatsächlich nicht. Ich schaue mir das an.</p>',1,1,0,0),
- (3,'6d7e6a68-403e-11eb-96df-0242ac120002',5,'2020-12-18 08:55:40','2020-12-18 08:57:37','2020-12-18 08:57:37','2020-12-18 08:57:37','2020-12-18 08:57:37',9,170290,9,0,'2020-12-18 00:00:00','2020-12-18 08:55:40',0,0,'<p>Oh, die Webcam samt Waschstraße und Storch sind nicht mehr existent. Ich muss den Cache daher archivieren. #Publish\'n\'Archive</p>',1,1,0,0),
- (4,'8cb94bda-4042-11eb-96df-0242ac120002',5,'2020-12-18 09:25:11','2020-12-18 09:25:11','2020-12-18 09:25:11','2020-12-18 09:25:11','2020-12-18 09:25:11',3,170293,1,0,'2020-12-18 00:00:00','2020-12-18 09:25:11',1,0,'<p><span style=\"font-size:small;\">Juhu! Erster! Danke  für den Cache!</span> <img title=\"Laughing\" src=\"resource2/tinymce/plugins/emotions/img/smiley-laughing.gif\" border=\"0\" alt=\"Laughing\" /></p>',1,1,0,0),
- (5,'888f4dab-4047-11eb-96df-0242ac120002',5,'2020-12-18 10:00:51','2020-12-18 10:01:41','2020-12-18 10:01:41','2020-12-18 10:01:41','2020-12-18 10:01:41',15,170294,1,0,'2020-12-18 00:00:00','2020-12-18 10:00:51',0,0,'<p>Lösch mich..!</p>',1,1,0,0),
- (6,'be6104a2-404d-11eb-96df-0242ac120002',5,'2020-12-18 10:45:18','2020-12-18 10:45:18','2020-12-18 10:45:18','2020-12-18 10:45:18','2020-12-18 10:45:18',10,170292,8,0,'2020-12-18 00:00:00','2020-12-18 10:45:18',0,0,'<p>Da bin ich gerne dabei!</p>',1,1,0,0),
- (7,'9a7c5f12-4051-11eb-96df-0242ac120002',5,'2020-12-18 11:12:56','2020-12-18 11:12:56','2020-12-18 11:12:56','2020-12-18 11:12:56','2020-12-18 11:12:56',3,170298,1,0,'2020-12-18 00:00:00','2020-12-18 11:12:56',0,0,'<p>FOUND! LOL! rofl!</p>',1,1,0,0),
- (8,'f77bf871-4051-11eb-96df-0242ac120002',5,'2020-12-18 11:15:32','2020-12-18 11:15:32','2020-12-18 11:15:32','2020-12-18 11:15:32','2020-12-18 11:15:32',22,107469,13,1,'2020-12-18 00:00:00','2020-12-18 11:15:32',0,0,'Der Benutzeraccount wurde deaktiviert.',0,1,0,0),
- (9,'0d5d4831-4053-11eb-96df-0242ac120002',5,'2020-12-18 11:23:18','2020-12-18 11:23:18','2020-12-18 11:23:18','2020-12-18 11:23:18','2020-12-18 11:23:18',3,170299,1,0,'2020-12-18 00:00:00','2020-12-18 11:23:18',0,0,'<p>auch gfunden!</p>',1,1,0,0)
-;
+# INSERT INTO `cache_logs` (`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`, `okapi_syncbase`, `log_last_modified`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`, `order_date`, `needs_maintenance`, `listing_outdated`, `text`, `text_html`, `text_htmledit`, `owner_notified`, `picture`)
+# VALUES
+#  (1,'3722f4ce-403d-11eb-96df-0242ac120002',5,'2020-12-18 08:47:00','2020-12-18 08:47:00','2020-12-18 08:55:40','2020-12-18 08:55:40','2020-12-18 08:55:40',9,170291,3,0,'2020-12-18 00:00:00','2020-12-18 08:47:00',2,2,'<p><span style=\"font-size:large;\">Oh, wie schade, gerade eben wurde der Cache gepublisht und schon funktioniert der Webcamlink nicht mehr. </span></p>\n<p><span style=\"font-size:large;\"><img title=\"Frown\" src=\"resource2/tinymce/plugins/emotions/img/smiley-frown.gif\" border=\"0\" alt=\"Frown\" /></span></p>',1,1,0,0),
+#  (2,'72ac8550-403d-11eb-96df-0242ac120002',5,'2020-12-18 08:48:40','2020-12-18 08:48:53','2020-12-18 08:55:40','2020-12-18 08:55:40','2020-12-18 08:55:40',9,170290,11,0,'2020-12-18 00:00:00','2020-12-18 08:48:40',2,'0','<p>Oh, da brat mir doch einer \'nen Storch.. der Link funtioniert ja tatsächlich nicht. Ich schaue mir das an.</p>',1,1,0,0),
+#  (3,'6d7e6a68-403e-11eb-96df-0242ac120002',5,'2020-12-18 08:55:40','2020-12-18 08:57:37','2020-12-18 08:57:37','2020-12-18 08:57:37','2020-12-18 08:57:37',9,170290,9,0,'2020-12-18 00:00:00','2020-12-18 08:55:40',0,'0','<p>Oh, die Webcam samt Waschstraße und Storch sind nicht mehr existent. Ich muss den Cache daher archivieren. #Publish\'n\'Archive</p>',1,1,0,0),
+#  (4,'8cb94bda-4042-11eb-96df-0242ac120002',5,'2020-12-18 09:25:11','2020-12-18 09:25:11','2020-12-18 09:25:11','2020-12-18 09:25:11','2020-12-18 09:25:11',3,170293,1,0,'2020-12-18 00:00:00','2020-12-18 09:25:11',1,'0','<p><span style=\"font-size:small;\">Juhu! Erster! Danke  für den Cache!</span> <img title=\"Laughing\" src=\"resource2/tinymce/plugins/emotions/img/smiley-laughing.gif\" border=\"0\" alt=\"Laughing\" /></p>',1,1,0,0),
+#  (5,'888f4dab-4047-11eb-96df-0242ac120002',5,'2020-12-18 10:00:51','2020-12-18 10:01:41','2020-12-18 10:01:41','2020-12-18 10:01:41','2020-12-18 10:01:41',15,170294,1,0,'2020-12-18 00:00:00','2020-12-18 10:00:51',0,'0','<p>Lösch mich..!</p>',1,1,0,0),
+#  (6,'be6104a2-404d-11eb-96df-0242ac120002',5,'2020-12-18 10:45:18','2020-12-18 10:45:18','2020-12-18 10:45:18','2020-12-18 10:45:18','2020-12-18 10:45:18',10,170292,8,0,'2020-12-18 00:00:00','2020-12-18 10:45:18',0,'0','<p>Da bin ich gerne dabei!</p>',1,1,0,0),
+#  (7,'9a7c5f12-4051-11eb-96df-0242ac120002',5,'2020-12-18 11:12:56','2020-12-18 11:12:56','2020-12-18 11:12:56','2020-12-18 11:12:56','2020-12-18 11:12:56',3,170298,1,0,'2020-12-18 00:00:00','2020-12-18 11:12:56',0,'0','<p>FOUND! LOL! rofl!</p>',1,1,0,0),
+#  (8,'f77bf871-4051-11eb-96df-0242ac120002',5,'2020-12-18 11:15:32','2020-12-18 11:15:32','2020-12-18 11:15:32','2020-12-18 11:15:32','2020-12-18 11:15:32',22,107469,13,1,'2020-12-18 00:00:00','2020-12-18 11:15:32',0,'0','Der Benutzeraccount wurde deaktiviert.',0,1,0,0),
+#  (9,'0d5d4831-4053-11eb-96df-0242ac120002',5,'2020-12-18 11:23:18','2020-12-18 11:23:18','2020-12-18 11:23:18','2020-12-18 11:23:18','2020-12-18 11:23:18',3,170299,1,0,'2020-12-18 00:00:00','2020-12-18 11:23:18',0,'0','<p>auch gfunden!</p>',1,1,0,0)
+# ;
 
 INSERT INTO `cache_reports` (`id`, `date_created`, `cacheid`, `userid`, `reason`, `note`, `status`, `adminid`, `lastmodified`, `comment`)
 VALUES
