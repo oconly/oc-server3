@@ -7,6 +7,7 @@ namespace Oc\Command;
 
 use Exception;
 use ScssPhp\ScssPhp\Compiler;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class CreateWebCacheCommand extends Command
+class CreateWebCacheCommand extends ContainerAwareCommand
 {
     const COMMAND_NAME = 'cache:web:create';
 
