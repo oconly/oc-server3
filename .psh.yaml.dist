@@ -54,13 +54,6 @@ environments:
         destination: "htdocs/statpics/.htaccess"
       - source: "dev-ops/docker/templates/.env.local"
         destination: "htdocs_symfony/.env.local"
-  travis-ci:
-    paths:
-      - "dev-ops/travis-ci/actions"
-    const:
-      DB_HOST: "mariadb"
-      FRONTEND_URL: "http://docker.team-opencaching.de"
-      SESSION_DOMAIN: ".team-opencaching.de"
   test:
     paths:
       - "dev-ops/test.opencaching.de/actions"
