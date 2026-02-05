@@ -82,7 +82,7 @@ $opt['page']['develsystem'] = true;
 $opt['page']['max_logins_per_hour'] = 1000;    // for development ...
 
 $opt['mail']['from'] = 'root';
-$opt['mail']['subject'] = '[local.team-opencaching.de] ';
+$opt['mail']['subject'] = '[opencaching.ddev.site] ';
 
 /* disable cronjobs which are not needed on devel site
  */
@@ -98,7 +98,7 @@ $opt['logic']['logs']['purge_userdata'] = 0;
 // 3rd party library options
 // only for local.team-opencaching.de usage
 $opt['lib']['w3w']['apikey'] = 'X27PDW41';
-$opt['lib']['google']['mapkey']['local.team-opencaching.de'] = 'AIzaSyC8n28u0AELTMd_Mi9KNaMGzluCNWdOIT4';
+$opt['lib']['google']['mapkey']['opencaching.ddev.site'] = 'AIzaSyC8n28u0AELTMd_Mi9KNaMGzluCNWdOIT4';
 
 // other settings
 $opt['page']['showdonations'] = true;
@@ -126,5 +126,5 @@ if (isset($debug_startpage_news) && $debug_startpage_news) {
 }
 
 
-$opt['logic']['cachemaps']['url'] = 'http://docker.team-opencaching.de/static_map.php?center={latitude},{longitude}&markers={latitude},{longitude}&size=185x185&zoom={userzoom}';
+$opt['logic']['cachemaps']['url'] = 'https://opencaching.ddev.site/static_map.php?center={latitude},{longitude}&markers={latitude},{longitude}&size=185x185&zoom={userzoom}';
 $opt['logic']['cachemaps']['iframe'] = false;
