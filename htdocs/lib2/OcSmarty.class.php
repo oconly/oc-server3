@@ -113,7 +113,7 @@ class OcSmarty extends Smarty
         // register additional functions
         require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/block.nocache.php';
 //        $this->register_block('nocache', 'smarty_block_nocache', 'smarty_block_nocache'); // TODO: Smarty? Was ist der Ersatz dafür?
-        $this->loadFilter('pre', 't');
+        $this->load_filter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -174,12 +174,10 @@ class OcSmarty extends Smarty
         if (count($this->autoload_filters)) {
             foreach ($this->autoload_filters as $_filter_type => $_filters) {
                 foreach ($_filters as $_filter) {
-                    $this->loadFilter($_filter_type, $_filter);
+                    $this->load_filter($_filter_type, $_filter);
                 }
             }
         }
-
-        $_smarty_compile_path = $this->getCompileDir();
     }
 
     /**
@@ -344,7 +342,7 @@ class OcSmarty extends Smarty
         }
         $this->assign('sys_dbslave', ($db['slave_id'] != - 1));
 
-        if ($this->templateExists($this->name . '.tpl')) {
+        if ($this->template_exists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
         } elseif ($this->name != 'sys_error') {
             $this->error(ERROR_TEMPLATE_NOT_FOUND);
@@ -368,7 +366,6 @@ class OcSmarty extends Smarty
 
         // check if the template is compiled
         // if not, check if translation works correct
-        $_smarty_compile_path = $this->getCompileDir();
 
         if ($this->name != 'error') {
             $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
@@ -386,7 +383,7 @@ class OcSmarty extends Smarty
         if ($db['debug'] === true) {
             parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 
-            $this->clearAllAssign();
+            $this->clear_all_assign();
             $this->main_template = 'sys_sqldebugger';
             $this->assign('commands', $sqldebugger->getCommands());
             $this->assign('cancel', $sqldebugger->getCancel());
@@ -419,7 +416,7 @@ class OcSmarty extends Smarty
      */
     public function error(int $id)
     : void {
-        $this->clearAllAssign();
+        $this->clear_all_assign();
         $this->caching = 0;
 
         $this->assign('page', $this->name);
@@ -460,7 +457,7 @@ class OcSmarty extends Smarty
             }
         }
 
-        return parent::isCached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
+        return parent::is_cached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
     }
 
     /**
@@ -473,7 +470,7 @@ class OcSmarty extends Smarty
         // Probably this is no safety or stability issue, but to be sure we restrict
         // the ID to a reasonable set of characters:
 
-        return $this->name . '|' . mb_ereg_replace('/[^A-Za-z0-9_\|\-\.]/', '', $this->cache_id);
+        return $this->name . '|' . mb_ereg_replace('/[^A-Za-z0-9_\|\-\.]/', '', $this->cache_id ?? '');
     }
 
     /**
