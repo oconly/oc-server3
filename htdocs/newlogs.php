@@ -54,7 +54,7 @@ if (isset($ownerid)) {
     $newLogsPerCountry = false;
     $orderByDate = '`cache_logs`.`order_date` DESC, ';
     $logselection = 3;
-} elseif (@$newlogs_rest) {
+} elseif ($newlogs_rest ?? false) {
     // latest logs for all countries but the site's main country
     $tpl->name = 'newlogsrest';
     $tpl->menuitem = MNU_START_NEWLOGS;
