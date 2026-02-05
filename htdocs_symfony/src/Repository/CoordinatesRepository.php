@@ -630,7 +630,7 @@ class CoordinatesRepository
         return $json['words'];
     }
 
-    public function getAllCoordinatesFormatsAsArray(float $newLat = null, float $newLon = null): array
+    public function getAllCoordinatesFormatsAsArray(?float $newLat = null, ?float $newLon = null): array
     {
         if (($newLat != null) && ($newLon != null)) {
             $this->setLatLon($newLat, $newLon);
