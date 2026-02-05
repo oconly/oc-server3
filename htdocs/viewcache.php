@@ -429,7 +429,7 @@ sql_free_result($rs);
 
 /* attributes and cache lists
  */
-$tpl->assign('attributes', attribute::getAttributesListArrayByCacheId($cacheid));
+$tpl->assign('attributes', OcLib2\attribute::getAttributesListArrayByCacheId($cacheid));
 
 if (strpos(json_encode($tpl->get_template_vars('attributes')), '"id":"61"') !== false) {
     $tpl->assign('safariCache', true);
