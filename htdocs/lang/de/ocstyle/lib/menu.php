@@ -314,7 +314,7 @@ function mnu_EchoMainMenu($selmenuid)
     $max = count($menu);
     for ($i = 0; $i < $max; $i++) {
         if ($menu[$i]['visible'] == true) {
-            $sTarget = isset($menu[$i]['target']) ? $menu[$i]['target'] : '';
+            $sTarget = $menu[$i]['target'] ?? '';
             $sItem = '<a href="' . $menu[$i]['filename'] . '" ' . $sTarget . '>' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>';
             $sItemSel = '<a href="' . $menu[$i]['filename'] . '" ' . $sTarget . ' class=\'selected bg-green06\'>' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>';
 
