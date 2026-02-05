@@ -26,7 +26,7 @@ class CrowdinImport
 
         foreach ($translationArray as $translation) {
             foreach (['de', 'fr', 'nl', 'es', 'pl', 'it', 'ru'] as $languageKey) {
-                $this->connection->executeUpdate(
+                $this->connection->executeStatement(
                     'UPDATE sys_trans_text SET `text` = :text
                      WHERE lang = :langKey AND trans_id = :identifier',
                     [
