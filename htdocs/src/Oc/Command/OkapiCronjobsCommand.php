@@ -6,14 +6,14 @@
 namespace Oc\Command;
 
 use okapi\core\Okapi;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class OkapiCronjobsCommand
  */
-class OkapiCronjobsCommand extends ContainerAwareCommand
+class OkapiCronjobsCommand extends Command
 {
     /**
      * @var string
