@@ -9,7 +9,7 @@
             </tr>
         </table>
     </div>
-{elseif isset($subtitle)}
+{elseif isset($subtitle) && $subtitle != ""}
     <p>{$subtitle|default}</p>
 {/if}
 

@@ -132,7 +132,7 @@ class translate
             }
 
             $variables = [];
-            $language_lower = mb_strtolower($language);
+            $language_lower = mb_strtolower($language ?? '');
             $translationHandler->loadNodeTextFile($variables, $opt['logic']['node']['id'] . '.txt', $language_lower);
             $translationHandler->loadNodeTextFile(
                 $variables,

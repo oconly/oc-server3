@@ -40,7 +40,7 @@ if ($sMode == 'locate') {
 } elseif ($sMode == 'searchresult') {
     $nResultId = isset($_REQUEST['resultid']) ? $_REQUEST['resultid'] + 0 : 0;
     $compact = isset($_REQUEST['compact']) && $_REQUEST['compact'];
-    $nLon1 = isset($_REQUEST['lon1']) ? $_REQUEST['lon1'] + 0 : 0;
+    $nLon1 = $_REQUEST['lon1'] ?? 0;
     $nLon2 = isset($_REQUEST['lon2']) ? $_REQUEST['lon2'] + 0 : 0;
     $nLat1 = isset($_REQUEST['lat1']) ? $_REQUEST['lat1'] + 0 : 0;
     $nLat2 = isset($_REQUEST['lat2']) ? $_REQUEST['lat2'] + 0 : 0;
@@ -135,10 +135,7 @@ $tpl->add_body_unload('mapUnload()');
 
 // process start params
 $bGMInitCookiePos = true;
-if (isset($_REQUEST['lat']) &&
-    isset($_REQUEST['lon']) &&
-    isset($_REQUEST['zoom'])
-) {
+if (isset($_REQUEST['lat']) && isset($_REQUEST['lon']) && isset($_REQUEST['zoom'])) {
     $nGMInitLat = $_REQUEST['lat'] + 0;
     $nGMInitLon = $_REQUEST['lon'] + 0;
     $nGMInitZoom = $_REQUEST['zoom'] + 0;
@@ -164,7 +161,7 @@ if (isset($_REQUEST['lat']) &&
     }
 }
 
-$sGMInitWaypoint = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';
+$sGMInitWaypoint = $_REQUEST['wp'] ?? '';
 if ($sGMInitWaypoint != '') {
     $cache = cache::fromWP($sGMInitWaypoint);
     if ($cache == null) {

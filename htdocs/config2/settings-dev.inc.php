@@ -126,5 +126,5 @@ if (isset($debug_startpage_news) && $debug_startpage_news) {
 }
 
 
-$opt['logic']['cachemaps']['url'] = 'http://docker.team-opencaching.de/static_map.php?center={latitude},{longitude}&markers={latitude},{longitude}&size=185x185&zoom={userzoom}';
+$opt['logic']['cachemaps']['url'] = 'https://opencaching.ddev.site/static_map.php?center={latitude},{longitude}&markers={latitude},{longitude}&size=185x185&zoom={userzoom}';
 $opt['logic']['cachemaps']['iframe'] = false;
