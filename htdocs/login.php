@@ -8,9 +8,6 @@ use Doctrine\DBAL\Connection;
 $disable_verifyemail = true;
 require __DIR__ . '/lib2/web.inc.php';
 
-/** @var Connection $connection */
-$connection = AppKernel::Container()->get(Connection::class);
-
 $tpl->name = 'login';
 $tpl->menuitem = MNU_LOGIN;
 
