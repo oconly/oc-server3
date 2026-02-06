@@ -78,8 +78,7 @@ $multiplier['km'] = 1;
 $multiplier['sm'] = 0.62137;
 $multiplier['nm'] = 0.53996;
 
-$homecoords = ($login->logged_in() &&
-    sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'", 0, $login->userid) <> 0);
+$homecoords = ($login->logged_in() && sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'", 0, $login->userid) <> 0);
 
 // Determine if search.php was called by a search function ('Caches' menu,
 // stored query etc.) or for other purpose (e.g. user profile cache lists):
@@ -723,7 +722,7 @@ if ($options['showresult'] == 1) {
                                 `simplehash` int(11) NOT NULL
                              ) ENGINE=MEMORY
                                  SELECT
-                                    `gns_search`.`uni_id` `uni_id`,
+                                    `gns_search`.`uni_id` as `uni_id`,
                                     0 `cnt`,
                                     0 `olduni`,
                                     `simplehash`
@@ -1585,7 +1584,7 @@ if ($options['showresult'] == 1) {
             if ($add_to_zipfile) {
                 $phpzip->add_data($sFilebasename . '.' . $output_module, $content);
             }
-            echo $phpzip->save($sFilebasename . '.zip', 'r');
+            $phpzip->save($sFilebasename . '.zip', 'r');
         }
     } else {
         //===================================================================
@@ -1659,7 +1658,7 @@ function sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_u
         "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
             SELECT
                 (" . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ") `distance`,
-                `caches`.`cache_id` `cache_id`
+                `caches`.`cache_id` as `cache_id`
             FROM `caches` FORCE INDEX (`latitude`)
             WHERE
                 `longitude` > " . ($lon - $max_lon_diff) . "
