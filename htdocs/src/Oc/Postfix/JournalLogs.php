@@ -109,7 +109,7 @@ class JournalLogs
     public function processJournalLogs(): void
     {
         $start = $this->connection
-            ->fetchColumn(
+            ->fetchOne(
                 'SELECT `value` FROM `sysconfig` WHERE `name` = :name',
                 [':name' => 'syslog_maillog_lastdate']
             );
