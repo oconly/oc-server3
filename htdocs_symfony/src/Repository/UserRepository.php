@@ -110,9 +110,9 @@ class UserRepository
             ->from(self::TABLE)
             ->where('user_id = :id')
             ->setParameter(':id', $id)
-            ->execute();
+            ->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException(

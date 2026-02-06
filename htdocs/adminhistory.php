@@ -35,7 +35,7 @@ $showHistory = false;
 $error = '';
 
 if ($cacheId >= 0 &&
-    $connection->fetchOne('SELECT COUNT(*) FROM `caches` WHERE `cache_id`=:id',[':id' => $cacheId]) <> 1)
+    $connection->fetchOne('SELECT COUNT(*) FROM `caches` WHERE `cache_id`=:id',['id' => $cacheId]) <> 1)
 {
     $error = $translate->t('Cache not found', '', '', 0);
 } elseif ($cacheId > 0) {
