@@ -13,6 +13,40 @@ function is_valid_email_address($eMail)
 }
 
 /**
+ * @param $str
+ * @return string
+ */
+if(!function_exists('mb_trim')) {
+    function mb_trim($str)
+    {
+        $bLoop = true;
+        while ($bLoop === true) {
+            $sPos = mb_substr($str, 0, 1);
+
+            if ($sPos === ' ' || $sPos === "\r" || $sPos === "\n" || $sPos === "\t" || $sPos === "\x0B" || $sPos === "\0") {
+                $str = mb_substr($str, 1, mb_strlen($str) - 1);
+            } else {
+                $bLoop = false;
+            }
+        }
+
+        $bLoop = true;
+        while ($bLoop === true) {
+            $sPos = mb_substr($str, -1, 1);
+
+            if ($sPos === ' ' || $sPos === "\r" || $sPos === "\n" || $sPos === "\t" || $sPos === "\x0B" || $sPos === "\0") {
+                $str = mb_substr($str, 0, mb_strlen($str) - 1);
+            } else {
+                $bLoop = false;
+            }
+        }
+
+        return $str;
+    }
+}
+
+
+/**
  * explode with more than one separator
  *
  * @param $str
