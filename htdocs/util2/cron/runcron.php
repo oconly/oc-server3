@@ -68,7 +68,7 @@ function checkJob(&$job): void
 {
     global $ignore_interval;
 
-    $max_last_run = strftime(DB_DATE_FORMAT, time() - ($ignore_interval ? 0 : $job->interval));
+    $max_last_run = date(DB_DATE_FORMAT_NEW, time() - ($ignore_interval ? 0 : $job->interval));
     $count = sqll_value(
         "SELECT COUNT(*)
          FROM `sys_cron`

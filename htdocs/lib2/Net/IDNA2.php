@@ -2706,7 +2706,7 @@ class Net_IDNA2
 
         for ($enco_idx = ($delim_pos) ? ($delim_pos + 1) : 0; $enco_idx < $enco_len; ++$deco_len) {
             for ($old_idx = $idx, $w = 1, $k = $this->_base; 1; $k += $this->_base) {
-                $digit = $this->_decodeDigit($encoded{$enco_idx++});
+                $digit = $this->_decodeDigit($encoded[$enco_idx++]);
                 $idx += $digit * $w;
 
                 $t = ($k <= $bias) ?

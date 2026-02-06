@@ -26,6 +26,7 @@ define('DB_MODE_FRAMEWORK', 0);
 define('DB_MODE_BUSINESSLAYER', 1);
 define('DB_MODE_USER', 2);
 define('DB_DATE_FORMAT', '%Y-%m-%d %H:%M:%S');
+define('DB_DATE_FORMAT_NEW', 'Y-m-d H:M:S');
 
 define('ID_NEW', - 1);
 
