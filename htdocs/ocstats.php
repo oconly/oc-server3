@@ -71,7 +71,7 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
         ->where('id = :id')
         ->setParameter('id', $logo)
         ->executeQuery()
-        ->fetchAssociative(PDO::FETCH_ASSOC);
+        ->fetchAssociative();
 
     if (is_array($statPics)) {
         $tplPath = $opt['rootpath'] . $statPics['tplpath'];
