@@ -13,6 +13,7 @@ use Oc\Libse\Coordinate\FormatterCoordinate;
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
+require_once __DIR__ . '/lib2/logic/attribute.class.php';
 
 function getWaypoints($cacheId)
 {

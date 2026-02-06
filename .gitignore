@@ -59,7 +59,7 @@ htdocs/translation.zip
 /htdocs/bin/translation
 /build/logs
 /build/artifacts
-
+/.env.local
 /*.msi
 /*.log
 /*.cab
