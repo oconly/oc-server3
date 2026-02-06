@@ -31,7 +31,7 @@ if (!$tpl->is_cached()) {
     }
 
     // get HQ Message from DB
-    $aGetHqMessage = $connection->fetchAssociative(
+    $aGetHqMessage = $connection->fetchAllAssociative(
         'SELECT type, message
          FROM `core_hq_message` AS hqm
          WHERE current_timestamp() BETWEEN hqm.start AND hqm.end LIMIT 1'

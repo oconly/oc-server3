@@ -14,7 +14,7 @@ require_once __DIR__ . '/logic/labels.inc.php';
 /**
  * Class OcSmarty
  */
-// @TODO php82 #[\AllowDynamicProperties]
+#[\AllowDynamicProperties]
 class OcSmarty extends Smarty
 {
     public string $_var_bracket_regexp = '';

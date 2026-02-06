@@ -10,7 +10,7 @@ $loader = require __DIR__ . '/app/autoload.php';
 $kernel = AppKernel::getInstance();
 $request = Request::createFromGlobals();
 
-$locale = strtolower($opt['template']['locale']);
+$locale = strtolower($opt['template']['locale']?? 'DE');
 $request->setLocale($locale);
 $response = $kernel->handle($request);
 

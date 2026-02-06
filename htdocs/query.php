@@ -8,7 +8,7 @@ require __DIR__ . '/lib2/web.inc.php';
 $tpl->name = 'query';
 $tpl->menuitem = MNU_MYPROFILE_QUERIES;
 
-$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'view';
+$action = $_REQUEST['action'] ?? 'view';
 
 $login->verify();
 if ($login->userid == 0) {

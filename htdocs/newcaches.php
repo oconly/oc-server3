@@ -141,7 +141,7 @@ if (!$tpl->is_cached()) {
              WHERE `countries` . `short` = :countryCode',
             [
                 'language' => $opt['template']['locale'],
-                'countryCode' => $country ? $country : $login->getUserCountry(),
+                'countryCode' => $country ?? $login->getUserCountry(),
             ]
         )
     );
