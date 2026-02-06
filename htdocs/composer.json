@@ -5,7 +5,7 @@
   "description": "opencaching.de source code",
   "config": {
     "platform": {
-      "php": "8.2.20"
+      "php": "7.4.33"
     },
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
@@ -16,7 +16,7 @@
     }
   },
   "require": {
-    "php": ">=8.2.0",
+    "php": ">=7.4.0",
     "ezyang/htmlpurifier": "^v4.8",
     "smarty/smarty": "~2.6",
     "symfony/symfony": "4.4.*",
