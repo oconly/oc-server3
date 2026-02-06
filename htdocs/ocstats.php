@@ -30,10 +30,10 @@ $userStatisticPicture = (int) $connection->createQueryBuilder()
     ->setParameter('userId', $userId)
     ->setParameter('lang', $lang)
     ->execute()
-    ->fetchColumn();
+    ->fetchOne();
 
 if ($userStatisticPicture === 0 || !file_exists($fileName)) {
-    $userData = $connection->fetchAssoc(
+    $userData = $connection->fetchAssociative(
         'SELECT `user`.`username`,
                 `stat_user`.`hidden`,
                 `stat_user`.`found`,
@@ -69,7 +69,7 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
         ->select('tplpath, maxtextwidth')
         ->from('statpics')
         ->where('id = :id')
-        ->setParameter(':id', $logo)
+        ->setParameter('id', $logo)
         ->execute()
         ->fetch(PDO::FETCH_ASSOC);
 
