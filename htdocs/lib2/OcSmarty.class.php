@@ -14,7 +14,7 @@ require_once __DIR__ . '/logic/labels.inc.php';
 /**
  * Class OcSmarty
  */
-#[\AllowDynamicProperties]
+// @TODO php82 #[\AllowDynamicProperties]
 class OcSmarty extends Smarty
 {
     public $name = 'sys_nothing';

@@ -5,7 +5,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-#[\AllowDynamicProperties]
+// @TODO php82 #[\AllowDynamicProperties]
 class mail extends Smarty
 {
     public $name = 'sys_nothing';
