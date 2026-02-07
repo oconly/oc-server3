@@ -286,7 +286,7 @@ if ($error == false) {
 
                 tpl_set_var(
                     'date',
-                    htmlspecialchars(strftime($dateformat, strtotime($log_record['log_date'])), ENT_COMPAT, 'UTF-8')
+                    htmlspecialchars(date($dateformat, strtotime($log_record['log_date'])), ENT_COMPAT, 'UTF-8')
                 );
                 tpl_set_var(
                     'time',

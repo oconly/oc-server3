@@ -2,7 +2,6 @@
  * You can find the license in the docs directory
  ***************************************************************************}
 {* OCSTYLE *}
-
 {if isset($ownerlogs) || isset($ownlogs)}
     <div class="content2-pagetitle">
         <img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
@@ -41,7 +40,7 @@
             <td class="nav4">
                 <ul>
                     <li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php">{t}All new logs{/t}</a></li>
-                    <li class="group noicon {if !isset($rest) && isset($countryCode)}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
+                    <li class="group noicon {if !isset($rest) && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
                     <li class="group noicon {if isset($rest)}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
                 </ul>
             </td>
@@ -62,11 +61,10 @@
     </p>
 {/if}
 
-{if !isset($rest) && isset($countryCode)}
+{if !isset($rest) && $countryCode}
     <div style="height:4px"></div>
 {/if}
-
-{if $total_found + $total_attended + $total_dnf + $total_recommended}
+{if isset($total_found) || isset($total_attended)  || isset($total_dnf) || isset($total_recommended)}
     <div style="float:right">
         <p style="line-height:2em">
             &nbsp;&nbsp;{t}total{/t}&nbsp;
