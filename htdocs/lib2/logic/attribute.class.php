@@ -4,8 +4,6 @@
  ***************************************************************************/
 namespace OcLib2;
 
-namespace OcLib2;
-
 class attribute
 {
     /* array with all attributes grouped by attribute group */
