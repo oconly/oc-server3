@@ -8,6 +8,7 @@
 namespace Oc\Postfix;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 
 class JournalLogs
 {
@@ -16,10 +17,7 @@ class JournalLogs
      */
     private $config;
 
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     /**
      * constructor
@@ -106,6 +104,9 @@ class JournalLogs
         return explode(PHP_EOL, trim($journalRaw));
     }
 
+    /**
+     * @throws Exception
+     */
     public function processJournalLogs(): void
     {
         $start = $this->connection
@@ -145,6 +146,9 @@ class JournalLogs
             );
     }
 
+    /**
+     * @throws Exception
+     */
     private function updateEmailStatusToBounced(string $email, string $dateTime): void
     {
         $this->connection
@@ -158,6 +162,9 @@ class JournalLogs
             );
     }
 
+    /**
+     * @throws Exception
+     */
     private function updateEmailStatusToSent(string $email): void
     {
         $this->connection
