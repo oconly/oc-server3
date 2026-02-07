@@ -408,7 +408,7 @@
                             {/if}
 
                         {/nocache}
-                        {t}Created at:{/t} {"0"|date_format:$opt.format.datetime}
+                        {t}Created at:{/t} {$smarty.now|date_format:$opt.format.phpdatetime}
                     </small>
                 </p>
             </div>
