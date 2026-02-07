@@ -826,29 +826,29 @@
         },
         {
             "name": "doctrine/deprecations",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38"
+                "reference": "d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38",
-                "reference": "459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca",
+                "reference": "d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "conflict": {
-                "phpunit/phpunit": "<=7.5 || >=13"
+                "phpunit/phpunit": "<=7.5 || >=14"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^9 || ^12 || ^13",
-                "phpstan/phpstan": "1.4.10 || 2.1.11",
+                "doctrine/coding-standard": "^9 || ^12 || ^14",
+                "phpstan/phpstan": "1.4.10 || 2.1.30",
                 "phpstan/phpstan-phpunit": "^1.0 || ^2",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6 || ^10.5 || ^11.5 || ^12",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6 || ^10.5 || ^11.5 || ^12.4 || ^13.0",
                 "psr/log": "^1 || ^2 || ^3"
             },
             "suggest": {
@@ -868,9 +868,9 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.5"
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.6"
             },
-            "time": "2025-04-07T20:06:18+00:00"
+            "time": "2026-02-07T07:09:04+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -4304,12 +4304,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpencachingDeutschland/smarty.git",
-                "reference": "8347690c7a344b70ec94742320c05083b9b78dc1"
+                "reference": "9bb8f15e13bbcf638ddc0969fe7bcd0149a758f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpencachingDeutschland/smarty/zipball/8347690c7a344b70ec94742320c05083b9b78dc1",
-                "reference": "8347690c7a344b70ec94742320c05083b9b78dc1",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/smarty/zipball/9bb8f15e13bbcf638ddc0969fe7bcd0149a758f7",
+                "reference": "9bb8f15e13bbcf638ddc0969fe7bcd0149a758f7",
                 "shasum": ""
             },
             "require": {
@@ -4353,7 +4353,7 @@
                     "url": "https://github.com/wisskid"
                 }
             ],
-            "time": "2026-02-07T11:44:45+00:00"
+            "time": "2026-02-07T13:15:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
