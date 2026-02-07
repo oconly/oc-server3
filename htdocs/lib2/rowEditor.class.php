@@ -417,7 +417,7 @@ class rowEditor
                 $value = strtotime($value);
             }
 
-            $value = strftime(DB_DATE_FORMAT, $value);
+            $value = date(DB_DATE_FORMAT_NEW, $value);
         }
 
         return $value;
