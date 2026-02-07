@@ -13,7 +13,8 @@ class PushWayPointReports
     public function run(): void
     {
         global $opt;
-
+        return;
+        // is disabled via config
         if ($opt['cron']['gcwp']['report']) {
             $rs = sql(
                 'SELECT * FROM `waypoint_reports`

@@ -3365,10 +3365,6 @@ class Net_IDNA2
         return strlen((binary) $string);
     }
 
-    // }}}}
-
-    // {{{ factory
-
     /**
      * Attempts to return a concrete IDNA instance for either php4 or php5.
      *
@@ -3380,10 +3376,6 @@ class Net_IDNA2
     {
         return new self($params);
     }
-
-    // }}}
-
-    // {{{ singleton
 
     /**
      * Attempts to return a concrete IDNA instance for either php4 or php5,
@@ -3408,6 +3400,4 @@ class Net_IDNA2
 
         return $instances[$signature];
     }
-
-    // }}}
 }
