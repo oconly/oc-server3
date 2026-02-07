@@ -82,6 +82,7 @@ if ($db['debug'] === true) {
 
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @return resource
  */
@@ -111,6 +112,7 @@ function sql($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @return resource
  */
@@ -139,6 +141,7 @@ function sql_slave($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $dblink
  * @param $sql
  * @return resource
@@ -337,6 +340,7 @@ function sql_internal($dblink, $sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @return resource
  */
@@ -354,6 +358,7 @@ function sqlf($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @return resource
  */
@@ -371,6 +376,7 @@ function sqlf_slave($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @return resource
  */
@@ -388,6 +394,7 @@ function sqll($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @param int $default
  * @return mixed
@@ -406,6 +413,7 @@ function sqlf_value($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @param int $default
  * @return mixed
@@ -424,6 +432,7 @@ function sqll_value($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $value
  * @return string
  */
@@ -448,6 +457,7 @@ function sql_escape($value)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $value
  * @return string
  */
@@ -460,6 +470,7 @@ function sql_escape_backtick($value)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @param $default
  * @return mixed
@@ -482,6 +493,7 @@ function sql_value($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @param $default
  * @return mixed
@@ -504,6 +516,7 @@ function sql_value_slave($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param bool $bQuerySlave
  * @param $sql
  * @param $default
@@ -552,6 +565,7 @@ function sql_value_internal($bQuerySlave, $sql, $default)
     (includes database charset conversion)
 */
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  * @return array|false|null
  */
@@ -571,6 +585,7 @@ function sql_fetch_array($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  * @return array
  */
@@ -590,6 +605,7 @@ function sql_fetch_assoc($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return array
  */
@@ -606,6 +622,7 @@ function sql_fetch_assoc_table($rs)
 
 // returns false if no more matching rows exist
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return array
  */
@@ -625,6 +642,7 @@ function sql_fetch_row($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  * @return array
  */
@@ -645,6 +663,7 @@ function sql_fetch_column($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_affected_rows()
@@ -655,6 +674,7 @@ function sql_affected_rows()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_affected_rows_slave()
@@ -665,6 +685,7 @@ function sql_affected_rows_slave()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  */
 function sql_free_result($rs): void
@@ -673,6 +694,7 @@ function sql_free_result($rs): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_insert_id()
@@ -683,6 +705,7 @@ function sql_insert_id()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_insert_id_slave()
@@ -693,6 +716,7 @@ function sql_insert_id_slave()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return int
  */
@@ -702,6 +726,7 @@ function sql_num_rows($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_temp_table($table): void
@@ -738,6 +763,7 @@ function sql_temp_table($table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_temp_table_slave($table): void
@@ -761,6 +787,7 @@ function sql_temp_table_slave($table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_drop_temp_table($table): void
@@ -781,6 +808,7 @@ function sql_drop_temp_table($table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $newname
  */
@@ -804,6 +832,7 @@ function sql_rename_temp_table($table, $newname): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_drop_temp_table_slave($table): void
@@ -824,6 +853,7 @@ function sql_drop_temp_table_slave($table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $newname
  */
@@ -849,6 +879,7 @@ function sql_rename_temp_table_slave($table, $newname): void
 
 //database handling
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param bool $raiseError
  * @param null|mixed $username
  * @param null|mixed $password
@@ -885,6 +916,9 @@ function sql_connect($username = null, $password = null, $raiseError = true): vo
     }
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function sql_slave_exclude(): void
 {
     global $login;
@@ -899,6 +933,9 @@ function sql_slave_exclude(): void
     );
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function sql_connect_anyslave(): void
 {
     global $db, $opt, $login;
@@ -935,6 +972,9 @@ function sql_connect_anyslave(): void
     sql_connect_slave($id);
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function sql_connect_master_as_slave(): void
 {
     global $db;
@@ -953,6 +993,7 @@ function sql_connect_master_as_slave(): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $id
  */
 function sql_connect_slave($id): void
@@ -1012,6 +1053,7 @@ function sql_connect_slave($id): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return bool
  */
 function sql_connect_maintenance()
@@ -1033,6 +1075,7 @@ function sql_connect_maintenance()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
 function sql_disconnect(): void
@@ -1064,6 +1107,7 @@ function sql_disconnect(): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sqlstatement
  */
 function sql_error($sqlstatement = ''): void
@@ -1152,6 +1196,7 @@ function sql_error($sqlstatement = ''): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $warnmessage
  */
 function sql_warn($warnmessage): void
@@ -1182,6 +1227,7 @@ function sql_warn($warnmessage): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $f
  * @param resource $rs
  * @param $table
@@ -1218,6 +1264,7 @@ function sql_export_recordset($f, $rs, $table, $truncate = true): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $f
  * @param $table
  */
@@ -1243,6 +1290,7 @@ function sql_export_table($f, $table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $filename
  * @param string[] $tables
  */
@@ -1267,6 +1315,7 @@ function sql_export_tables_to_file($filename, $tables): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $filename
  * @param $table
  */
@@ -1278,6 +1327,7 @@ function sql_export_table_to_file($filename, $table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $f
  * @param $table
  */
@@ -1297,6 +1347,7 @@ function sql_export_structure($f, $table): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $filename
  * @param $table
  */
@@ -1309,6 +1360,7 @@ function sql_export_structure_to_file($filename, $table): void
 
 // test if a database table exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @return bool
  */
@@ -1328,6 +1380,7 @@ function sql_table_exists($table)
 
 // test if a database field exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $field
  * @return bool
@@ -1349,6 +1402,7 @@ function sql_field_exists($table, $field)
 
 // get type of a database field
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $field
  * @return string
@@ -1372,6 +1426,7 @@ function sql_field_type($table, $field)
 
 // test if a database index exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $index
  * @return bool
@@ -1393,6 +1448,7 @@ function sql_index_exists($table, $index)
 
 // test if a function or procedure exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $type
  * @param $name
  * @return bool
@@ -1413,6 +1469,7 @@ function sql_fp_exists($type, $name)
 
 // test if a function exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  * @return bool
  */
@@ -1423,6 +1480,7 @@ function sql_function_exists($name)
 
 // delete a function
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  */
 function sql_dropFunction($name): void
@@ -1432,6 +1490,7 @@ function sql_dropFunction($name): void
 
 // test if a procedure exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  * @return bool
  */
@@ -1442,6 +1501,7 @@ function sql_procedure_exists($name)
 
 // delete a procedure
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  */
 function sql_dropProcedure($name): void
@@ -1450,6 +1510,7 @@ function sql_dropProcedure($name): void
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $triggername
  */
 function sql_dropTrigger($triggername): void
