@@ -65,10 +65,9 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
 $opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '.opencaching.ddev.site';    // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-/* Default locale and style
-         *
-         */
+$opt['debug'] = true;
+$opt['php']['debug'] = PHP_DEBUG_ON;
+/* Default locale and style */
 $opt['template']['default']['locale'] = 'DE';
 $opt['template']['default']['style'] = 'ocstyle';
 $opt['locale']['DE']['page']['subtitle1'] = 'Geocaching mit Opencaching';
@@ -258,7 +257,7 @@ function post_config(): void
         'title' => 'API',
         'menustring' => 'API',
         'authlevel' => 0,
-        'href' => 'http://docker.team-opencaching.de/okapi',
+        'href' => 'https://opencaching.ddev.site/okapi',
 # OKAPI does not support https yet
         'visible' => 1,
         'sublevel' => 1,
