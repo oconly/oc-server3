@@ -392,9 +392,9 @@ function output_cachexml($sWaypoint)
     echo 'size="' . xmlentities($rCache['size']) . '" ';
     echo 'difficulty="' . xmlentities($rCache['difficulty'] / 2) . '" ';
     echo 'terrain="' . xmlentities($rCache['terrain'] / 2) . '" ';
-    echo 'listed_since="' . xmlentities(strftime($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_created']))) . '" ';
+    echo 'listed_since="' . xmlentities(date($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_created']))) . '" ';
     echo 'is_publishdate="' . xmlentities($rCache['is_publishdate']) . '" ';
-    echo 'hidden_on="' . xmlentities(strftime($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_hidden']))) . '" ';
+    echo 'hidden_on="' . xmlentities(date($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_hidden']))) . '" ';
     echo 'toprating="' . xmlentities($rCache['toprating']) . '" ';
     echo 'geokreties="' . xmlentities($nGeokretyCount) . '" ';
     echo 'found="' . xmlentities(($nFoundCount > 0) ? 1 : 0) . '" ';

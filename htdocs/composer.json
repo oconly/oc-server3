@@ -18,7 +18,7 @@
   "require": {
     "php": ">=8.2.0",
     "ezyang/htmlpurifier": "^v4.8",
-    "smarty/smarty": "~2.6",
+    "smarty/smarty": "dev-development",
     "symfony/symfony": "4.4.*",
     "doctrine/orm": "^2.5",
     "doctrine/doctrine-bundle": "^1.6|2.6.4",
@@ -61,6 +61,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/opencaching/okapi"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:OpencachingDeutschland/smarty.git"
     }
   ],
   "autoload": {

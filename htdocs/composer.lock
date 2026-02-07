@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "daa42522641fe9f679e0f864f4c8459f",
+    "content-hash": "a28ba1c20336ca1c6942bc488301cc92",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4300,16 +4300,16 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v2.6.33",
+            "version": "dev-development",
             "source": {
                 "type": "git",
-                "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "533fa2abe308dcc009c7bdab977d530b32408346"
+                "url": "https://github.com/OpencachingDeutschland/smarty.git",
+                "reference": "ec9e1ead72473c9c1fad4b05368318d801690b0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/533fa2abe308dcc009c7bdab977d530b32408346",
-                "reference": "533fa2abe308dcc009c7bdab977d530b32408346",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/smarty/zipball/ec9e1ead72473c9c1fad4b05368318d801690b0b",
+                "reference": "ec9e1ead72473c9c1fad4b05368318d801690b0b",
                 "shasum": ""
             },
             "require": {
@@ -4323,7 +4323,6 @@
                     "libs/Config_File.class.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "LGPL-3.0"
             ],
@@ -4343,12 +4342,18 @@
                 "templating"
             ],
             "support": {
-                "forum": "http://www.smarty.net/forums/",
                 "irc": "irc://irc.freenode.org/smarty",
                 "issues": "http://code.google.com/p/smarty-php/issues/list",
-                "source": "https://github.com/smarty-php/smarty/tree/v2.6.33"
+                "forum": "http://www.smarty.net/forums/",
+                "source": "https://github.com/OpencachingDeutschland/smarty/tree/development"
             },
-            "time": "2021-10-23T12:46:52+00:00"
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/wisskid"
+                }
+            ],
+            "time": "2026-02-07T11:31:08+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -8270,7 +8275,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "opencaching/okapi": 20
+        "opencaching/okapi": 20,
+        "smarty/smarty": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
