@@ -3108,7 +3108,7 @@ class Net_IDNA2
         $mode = 'next';
         $test = 'none';
         for ($k = 0; $k < $inp_len; ++$k) {
-            $v = ord($input{$k}); // Extract byte from input string
+            $v = ord($input[$k]); // Extract byte from input string
 
             if ($v < 128) { // We found an ASCII char - put into stirng as is
                 $output[$out_len] = $v;
@@ -3291,7 +3291,7 @@ class Net_IDNA2
                 $out_len++;
                 $output[$out_len] = 0;
             }
-            $output[$out_len] += ord($input{$i}) << (8 * (3 - ($i % 4)));
+            $output[$out_len] += ord($input[$i]) << (8 * (3 - ($i % 4)));
         }
 
         return $output;
@@ -3365,10 +3365,6 @@ class Net_IDNA2
         return strlen((binary) $string);
     }
 
-    // }}}}
-
-    // {{{ factory
-
     /**
      * Attempts to return a concrete IDNA instance for either php4 or php5.
      *
@@ -3380,10 +3376,6 @@ class Net_IDNA2
     {
         return new self($params);
     }
-
-    // }}}
-
-    // {{{ singleton
 
     /**
      * Attempts to return a concrete IDNA instance for either php4 or php5,
@@ -3408,6 +3400,4 @@ class Net_IDNA2
 
         return $instances[$signature];
     }
-
-    // }}}
 }
