@@ -154,10 +154,7 @@ class JournalLogs
                      `last_email_problem`= :dateTime
                  WHERE email = :email
                  AND DATE(IFNULL(`last_email_problem`, "")) < DATE(:dateTime)',
-                [
-                    'email' => $email,
-                    'dateTime' => $dateTime,
-                ]
+                compact('email', 'dateTime')
             );
     }
 
@@ -168,9 +165,7 @@ class JournalLogs
                 'UPDATE `user`
                  SET `email_problems`=0
                  WHERE email = :email',
-                [
-                    'email' => $email,
-                ]
+                compact('email')
             );
     }
 }
