@@ -3570,12 +3570,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpencachingDeutschland/smarty.git",
-                "reference": "8347690c7a344b70ec94742320c05083b9b78dc1"
+                "reference": "e13d1880b8240f6de767750f053466ef74f19d06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpencachingDeutschland/smarty/zipball/8347690c7a344b70ec94742320c05083b9b78dc1",
-                "reference": "8347690c7a344b70ec94742320c05083b9b78dc1",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/smarty/zipball/e13d1880b8240f6de767750f053466ef74f19d06",
+                "reference": "e13d1880b8240f6de767750f053466ef74f19d06",
                 "shasum": ""
             },
             "require": {
@@ -3619,7 +3619,7 @@
                     "url": "https://github.com/wisskid"
                 }
             ],
-            "time": "2026-02-07T11:44:45+00:00"
+            "time": "2026-02-07T12:47:41+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
