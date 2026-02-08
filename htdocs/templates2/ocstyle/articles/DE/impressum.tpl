@@ -87,7 +87,7 @@
     <ul class="indent narrowlist">
         <li>Mirco Baumann, 1. Vorsitzender</li>
         <li>Thomas Eiling, 2. Vorsitzender</li>
-        <li>Nick Lubisch, Kassenwart</li>
+        <li>Thomas Lange, Kassenwart</li>
     </ul>
     </p>
 
