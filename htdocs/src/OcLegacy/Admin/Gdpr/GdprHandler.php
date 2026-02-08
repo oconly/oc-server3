@@ -198,14 +198,14 @@ SQL
 
     private function getCaches(int $userId): array
     {
-        return $this->connection->fetchAll('SELECT * FROM caches WHERE user_id = :userId', [
+        return $this->connection->fetchAllAssociative('SELECT * FROM caches WHERE user_id = :userId', [
             'userId' => $userId,
         ]);
     }
 
     private function getCacheLogs(int $userId): array
     {
-        return $this->connection->fetchAll('SELECT * FROM cache_logs WHERE user_id = :userId', [
+        return $this->connection->fetchAllAssociative('SELECT * FROM cache_logs WHERE user_id = :userId', [
             'userId' => $userId,
         ]);
     }
@@ -263,11 +263,11 @@ SQL
             return (int) $cache[$idField];
         }, $data);
 
-        $pictures = $this->connection->fetchAll('SELECT * FROM pictures WHERE object_id IN (' . implode(',', $ids) . ') AND object_type = :objectType', [
+        $pictures = $this->connection->fetchAllAssociative('SELECT * FROM pictures WHERE object_id IN (' . implode(',', $ids) . ') AND object_type = :objectType', [
             'objectType' => $objectType,
         ]);
 
-        $modifiedPictures = $this->connection->fetchAll('SELECT * FROM pictures_modified WHERE object_id IN (' . implode(',', $ids) . ') AND object_type = :objectType', [
+        $modifiedPictures = $this->connection->fetchAllAssociative('SELECT * FROM pictures_modified WHERE object_id IN (' . implode(',', $ids) . ') AND object_type = :objectType', [
             'objectType' => $objectType,
         ]);
 
@@ -284,7 +284,7 @@ SQL
             return (int) $cache[$idField];
         }, $data);
 
-        return $this->connection->fetchAll('SELECT * FROM pictures_modified WHERE object_id IN (' . implode(',', $ids) . ') AND object_type = :objectType', [
+        return $this->connection->fetchAllAssociative('SELECT * FROM pictures_modified WHERE object_id IN (' . implode(',', $ids) . ') AND object_type = :objectType', [
             'objectType' => $objectType,
         ]);
     }
