@@ -113,7 +113,7 @@ $opt['locale']['EN']['what3words'] = true;
 
 $opt['locale']['DE']['format']['dm'] = 'd.m.';
 $opt['locale']['DE']['format']['dateshort'] = 'd.m.y';
-$opt['locale']['DE']['format']['date'] = 'x';
+$opt['locale']['DE']['format']['date'] = 'd.m.Y';
 $opt['locale']['DE']['format']['datelong'] = 'd. F Y';
 $opt['locale']['DE']['format']['datetime'] = 'x H:i';
 $opt['locale']['DE']['format']['datetimesec'] = 'x X';
@@ -134,7 +134,7 @@ $opt['locale']['DE']['what3words'] = true;  // "beta"
 
 $opt['locale']['IT']['format']['dateshort'] = 'd/m/y';
 $opt['locale']['IT']['format']['dm'] = 'd/m';
-$opt['locale']['IT']['format']['date'] = 'x';
+$opt['locale']['IT']['format']['date'] = 'd.m.Y';
 $opt['locale']['IT']['format']['datelong'] = 'd. F Y';
 $opt['locale']['IT']['format']['datetime'] = 'x H:i';
 $opt['locale']['IT']['format']['datetimesec'] = 'x X';
@@ -154,7 +154,7 @@ $opt['locale']['IT']['what3words'] = false;
 
 $opt['locale']['ES']['format']['dateshort'] = 'd/m/y';
 $opt['locale']['ES']['format']['dm'] = 'd/m';
-$opt['locale']['ES']['format']['date'] = 'x';
+$opt['locale']['ES']['format']['date'] = 'd.m.Y';
 $opt['locale']['ES']['format']['datelong'] = 'd. F Y';
 $opt['locale']['ES']['format']['datetime'] = 'x H:i';
 $opt['locale']['ES']['format']['datetimesec'] = 'x X';
@@ -175,7 +175,7 @@ $opt['locale']['ES']['what3words'] = true;
 
 $opt['locale']['FR']['format']['dm'] = 'd.m.';
 $opt['locale']['FR']['format']['dateshort'] = 'd.m.y';
-$opt['locale']['FR']['format']['date'] = 'x';
+$opt['locale']['FR']['format']['date'] = 'd.m.Y';
 $opt['locale']['FR']['format']['datelong'] = 'd. F Y';
 $opt['locale']['FR']['format']['datetime'] = 'x H:i';
 $opt['locale']['FR']['format']['datetimesec'] = 'x X';
@@ -196,7 +196,7 @@ $opt['locale']['FR']['what3words'] = true;
 
 $opt['locale']['NL']['format']['dm'] = 'd.m.';
 $opt['locale']['NL']['format']['dateshort'] = 'd.m.y';
-$opt['locale']['NL']['format']['date'] = 'x';
+$opt['locale']['NL']['format']['date'] = 'd.m.Y';
 $opt['locale']['NL']['format']['datelong'] = 'd. F Y';
 $opt['locale']['NL']['format']['datetime'] = 'x H:i';
 $opt['locale']['NL']['format']['datetimesec'] = 'x X';
@@ -236,7 +236,7 @@ $opt['locale']['SV']['what3words'] = true;  // "beta"
 
 $opt['locale']['NO']['format']['dateshort'] = 'd.m.y';
 $opt['locale']['NO']['format']['dm'] = 'd.m.';
-$opt['locale']['NO']['format']['date'] = 'x';
+$opt['locale']['NO']['format']['date'] = 'd.m.Y';
 $opt['locale']['NO']['format']['datelong'] = 'x';
 $opt['locale']['NO']['format']['datetime'] = 'x H:i';
 $opt['locale']['NO']['format']['datetimesec'] = 'x X';
@@ -254,7 +254,7 @@ $opt['locale']['NO']['what3words'] = false;
 
 $opt['locale']['PL']['format']['dm'] = 'd.m.';
 $opt['locale']['PL']['format']['dateshort'] = 'd.m.y';
-$opt['locale']['PL']['format']['date'] = 'x';
+$opt['locale']['PL']['format']['date'] = 'd.m.Y';
 $opt['locale']['PL']['format']['datelong'] = 'd. F Y';
 $opt['locale']['PL']['format']['datetime'] = 'x H:i';
 $opt['locale']['PL']['format']['datetimesec'] = 'x X';
@@ -270,7 +270,7 @@ $opt['locale']['PL']['what3words'] = false;
 
 $opt['locale']['RU']['format']['dateshort'] = 'd.m.y';
 $opt['locale']['RU']['format']['dm'] = 'd.m.';
-$opt['locale']['RU']['format']['date'] = 'x';
+$opt['locale']['RU']['format']['date'] = 'd.m.Y';
 $opt['locale']['RU']['format']['datelong'] = 'd. F Y';
 $opt['locale']['RU']['format']['datetime'] = 'x H:i';
 $opt['locale']['RU']['format']['datetimesec'] = 'x X';
