@@ -63,7 +63,7 @@
     </p>
 
     <p>
-        The managing comittee are (as of January 21th, 2018):
+        The managing comittee are (as of January 7th, 2026):
     </p>
     <p>
     <ul class="indent narrowlist">
