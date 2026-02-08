@@ -81,7 +81,7 @@
         vertretungsberechtigt.
     </p>
     <p>
-        Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 21.01.2018):
+        Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 07.01.2026):
     </p>
     <p>
     <ul class="indent narrowlist">
