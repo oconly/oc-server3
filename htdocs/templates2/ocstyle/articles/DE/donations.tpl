@@ -14,21 +14,10 @@
             <h1>Per &Uuml;berweisung spenden:</h1>
             <p>Bank: Volksbank Heiden<br />
             Kontoinhaber: Opencaching Deutschland e.V.<br />
-            Kontonummer: 944 853 00<br />
-            BLZ: 428 616 08<br /><br />
             IBAN: DE07 4286 1608 0094 4853 00<br />
             BIC (SWIFT): GENODEM1HEI</p>
 
             <h1>Per PayPal spenden:</h1>
 
-            <p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) fallen <strong>keine</strong> Gebühren an.</p>
-
-            <p>
-                Um per PayPal zu spenden, bitte auf folgendes Bild klicken:<br />
-                <div style="margin-left:50px;">
-                    <a href="https://www.paypal.me/opencaching">
-                        <img src="resource2/{$opt.template.style}/images/misc/donate.gif" border="0" alt="Mit PayPal bezahlen" />
-                    </a>
-                </div>
-            </p>
-</div>
+            <p>Spenden per Paypal ist derzeit nicht möglich.</p>
+    </div>
