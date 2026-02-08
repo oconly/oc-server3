@@ -25,7 +25,7 @@ $searchurl = 'search.php';
 
 // get parameter from URL
 $userinput = isset($_REQUEST['userinput']) ? mb_trim($_REQUEST['userinput']) : '';
-$sourceid = isset($_REQUEST['sourceid']) ? $_REQUEST['sourceid'] : 0;
+$sourceid = isset($_REQUEST['sourceid']) ? $_REQUEST['sourceid'] : 'waypoint-search';
 
 if (($sourceid == 'waypoint-search') && ($userinput != '')) {
     $sourceid = 'mozilla-search';
@@ -121,8 +121,7 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                 }
                 break;
         }
-        $tpl->redirect($targeturl);
     }
 }
 
-$tpl->redirect('index.php');
+// $tpl->redirect('index.php');
