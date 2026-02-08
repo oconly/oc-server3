@@ -434,6 +434,8 @@ class cachelog
         if (($hour . $minute === '' || is_numeric($hour))
             && ($minute === '' || is_numeric($minute))
         ) {
+            $hour = (int)$hour;
+            $minute = (int)$minute;
             $dateOk = checkdate($month, $day, $year)
                 && ($year >= 2000)
                 && ($hour >= 0)
