@@ -121,7 +121,8 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                 }
                 break;
         }
+        $tpl->redirect($targeturl);
     }
 }
 
-// $tpl->redirect('index.php');
+$tpl->redirect('index.php');
