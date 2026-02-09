@@ -33,8 +33,7 @@
                 <img src="{$opt.page.teampic_url}clanfamily.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a>
                 <br/>
-                1. Vorsitzender,<br>
-                Softwareentwicklung
+                1. Vorsitzender
             </td>
             <td style="text-align: center;">
                 <img src="{$opt.page.teampic_url}teiling88.png"/><br>
@@ -44,8 +43,8 @@
                 Entwicklungsleiter
             </td>
             <td style="text-align: center;">
-                <img src="{$opt.page.teampic_url}nlubisch.jpg"/><br>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a>
+                <img src="{$opt.page.teampic_url}dummy.jpg"/><br>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=307616">fraggle</a>
                 <br/>
                 Kassenwart,<br/>
                 Softwareentwicklung
