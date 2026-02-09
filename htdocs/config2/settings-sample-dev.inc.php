@@ -14,8 +14,8 @@ if (defined('HTTPS_ENABLED')) {
 }
 
 $opt['debug'] = true;
-$opt['httpd']['user'] = 'application';
-$opt['httpd']['group'] = 'application';
+$opt['httpd']['user'] = getenv('DDEV_UID');
+$opt['httpd']['group'] = getenv('DDEV_GID');
 
 // show blog and forum news on index.php
 $debug_startpage_news = false;
