@@ -54,5 +54,6 @@ mysql -uroot -proot -hdb db < sql/user_content_sample.sql
 
 
 cd htdocs_symfony
+npx update-browserslist-db@latest -y
 yarn install
 yarn dev
