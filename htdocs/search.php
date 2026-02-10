@@ -500,7 +500,7 @@ $bRememberQuery = isset($_REQUEST['skipqueryid']) ? !$_REQUEST['skipqueryid'] : 
 if ($bRememberQuery) {
     if ($queryid == 0 && $options['showresult'] != 0) { // 'showresult' = "execute query"
         sql(
-            "INSERT INTO `queries` (`user_id`, `options`, `last_queried`) VALUES (0, '&1', NOW())",
+            "INSERT INTO `queries` (`user_id`, `name`, `options`, `last_queried`) VALUES (0, '', '&1', NOW())",
             serialize($options)
         );
         $options['queryid'] = sql_insert_id();
