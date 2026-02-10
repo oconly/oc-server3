@@ -4,7 +4,8 @@ docroot: ./htdocs/
 php_version: "8.2"
 webserver_type: apache-fpm
 xdebug_enabled: false
-additional_hostnames: []
+additional_hostnames:
+  - try-opencaching
 additional_fqdns: []
 database:
     type: mariadb
@@ -13,7 +14,6 @@ use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 corepack_enable: false
-webserver_additional_config: .ddev/apache/vhost-rewrites.conf
 hooks:
   post-start:
     - exec: cp htdocs/app/config/parameters.yml.dist htdocs/app/config/parameters.yml
