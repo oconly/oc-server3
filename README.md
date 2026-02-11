@@ -63,7 +63,7 @@ Starting the docker development environment
 
 NOTE: New Version of Opencaching will be called "OC4". We decide to setup a new temporary
 URL: [https://try-opencaching.ddev.site](https://try-opencaching.ddev.site) and we generate a new administration section
-at [https://try-opencaching.ddev.site/backend](https://try-opencaching.ddev.site). For both urls use root:developer to login.
+at [https://try-opencaching.ddev.site/backend](https://try-opencaching.ddev.site/backend). For both urls use root:developer to login.
 
 Contributions
 -------------
