@@ -47,7 +47,6 @@ Sponsoring Technology Partner
 * [Atlassian](https://www.atlassian.com/)
 * [BrowserStack](https://www.browserstack.com/) ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
 * [CrowdIn](https://crowdin.com/)
-* [HostEurope](https://www.hosteurope.de/)
 * [Jetbrains](https://www.jetbrains.com/)
 * [Sentry](https://sentry.io/) ![Sentry](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/sentry.png)
 * [Codecov](https://codecov.io/)
