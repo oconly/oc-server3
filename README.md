@@ -59,8 +59,8 @@ Starting the docker development environment
 
 1. You need ddev on your machine. Please follow the instructions on https://ddev.readthedocs.io/en/stable/ to install it.
 2. Start a terminal and run `ddev start` in the project root
-2. Run `ddev init` to install the dependencies and init the database. This will take a while, so please be patient.
-3. Open your browser and visit the following URL: [https://opencaching.ddev.site](https://opencaching.ddev.site)
+3. Run `ddev init` to install the dependencies and init the database. This will take a while, so please be patient.
+4Open your browser and visit the following URL: [https://opencaching.ddev.site](https://opencaching.ddev.site)
 
 NOTE: New Version of Opencaching will be called "OC4". We decide to setup a new temporary
 URL: [https://try-opencaching.ddev.site](https://try-opencaching.ddev.site) and we generate a new administration section
