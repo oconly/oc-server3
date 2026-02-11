@@ -57,14 +57,14 @@ We thank our technology partners for their support of our open source project!
 Starting the docker development environment
 -------------
 
-1. Start a terminal and run `./psh.phar docker:start` in the project root
-2. Start a new terminal
-    - Run `./psh.phar docker:ssh` and `./psh.phar docker:init`
-3. Open your browser and visit the following URL: [http://docker.team-opencaching.de](http://docker.team-opencaching.de)
+1. You need ddev on your machine. Please follow the instructions on https://ddev.readthedocs.io/en/stable/ to install it.
+2. Start a terminal and run `ddev start` in the project root
+2. Run `ddev init` to install the dependencies and init the database. This will take a while, so please be patient.
+3. Open your browser and visit the following URL: [https://opencaching.ddev.site](https://opencaching.ddev.site)
 
 NOTE: New Version of Opencaching will be called "OC4". We decide to setup a new temporary
-URL: [http://try.docker.team-opencaching.de](http://try.docker.team-opencaching.de) and we generate a new administration section
-at [http://try.docker.team-opencaching.de/backend](http://try.docker.team-opencaching.de/backend). Use root:developer to login.
+URL: [https://try-opencaching.ddev.site](https://try-opencaching.ddev.site) and we generate a new administration section
+at [https://try-opencaching.ddev.site/backend](https://try-opencaching.ddev.site/backend). Use root:developer to login.
 
 Contributions
 -------------
