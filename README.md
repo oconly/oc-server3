@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Mattermost](https://img.shields.io/badge/chat-on%20mattermost-brightgreen)](https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Mattermost](https://img.shields.io/badge/chat-on%20mattermost-brightgreen)](https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su)
 
 Opencaching.de Code Repository
 ==============================
@@ -50,7 +50,6 @@ Sponsoring Technology Partner
 * [HostEurope](https://www.hosteurope.de/)
 * [Jetbrains](https://www.jetbrains.com/)
 * [Sentry](https://sentry.io/) ![Sentry](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/sentry.png)
-* [Scrutinizer](https://scrutinizer-ci.com)
 * [Travis-Ci](https://travis-ci.org/)
 * [Codecov](https://codecov.io/)
 
