@@ -12,13 +12,9 @@ for setting up your own open and free Geocaching listing service! The code can e
 
 Your contributions to this project are welcome - you may contact the team in the
 [Mattermost Channel](https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su)
-or [Opencaching.de forum](https://forum.opencaching.de/) if you like to join us. Development is usually done on a
-VirtualBox Linux system that you can run on your Linux, Windows or Mac workstation, but you may also try to set up the
-code directly on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team
-Member in
-[Opencaching.de forum](https://forum.opencaching.de/) or you start with our new minimal dump.
-
-In the Vagrant System our example login for the opencaching platform ist root with the password developer.
+or [Opencaching.de forum](https://forum.opencaching.de/) if you like to join us. Development is done on a
+docker environment managed via ddev that you can run on your Linux, Windows or Mac workstation, but you may also try to set up the
+code directly on your Linux machine.
 
 This repo contains three branches:
 
@@ -69,7 +65,7 @@ Contributions
 -------------
 Contributing code to Opencaching.de is easy:
 
-* Sign up to Github and [install Git](https://help.github.com/articles/set-up-git),
+* Sign up to GitHub and [install Git](https://help.github.com/articles/set-up-git),
 * create a personal fork of this repository using the Fork button above,
 * clone the fork to your development machine,
 * create a feature branch based on development,
@@ -111,4 +107,3 @@ Related Websites
   -> [Development](https://forum.opencaching.de/viewforum.php?f=46)
 * [Opencaching API project](https://github.com/opencaching/okapi)
 * [Opencaching.pl project](https://github.com/opencaching/opencaching-pl)
-* [old Opencaching.de/se Git Repository](https://github.com/OpencachingTeam/opencaching/)
