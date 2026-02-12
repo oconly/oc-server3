@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+/**
+ *
+ */
 interface EntityInterface
 {
     /**
      * Checks if the entity is new.
      */
-    public function isNew(): bool;
+    public function isNew()
+    : bool;
 
     /**
      * Sets all properties from array.
@@ -19,5 +23,6 @@ interface EntityInterface
     /**
      * Returns all properties as array.
      */
-    public function toArray(): array;
+    public function toArray()
+    : array;
 }

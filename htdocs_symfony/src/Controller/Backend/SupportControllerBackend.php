@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Oc\Controller\Backend;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Exception;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Entity\SupportUserCommentsEntity;
-use Oc\Entity\UserLoginBlockEntity;
 use Oc\Form\SupportBonusCachesAssignment;
 use Oc\Form\SupportCommentField;
 use Oc\Form\SupportImportGPX;
@@ -29,14 +27,11 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\NodesRepository;
-use Oc\Repository\SecurityRolesRepository;
 use Oc\Repository\SupportBonuscachesRepository;
 use Oc\Repository\SupportListingCommentsRepository;
 use Oc\Repository\SupportListingInfosRepository;
 use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
-use Oc\Repository\SupportVandalismRepository;
-use Oc\Repository\UserLoginBlockRepository;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,71 +40,97 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * Class SupportController
+ *
+ * @package Oc\Controller\Backend
  * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_.. and above!
  */
-class SupportControllerBackend extends AbstractController
+class SupportController extends AbstractController
 {
     //  0 - frisch importiert
     // 20 - Import abgeschlossen. Änderungen, sofern vorhanden, wurden verarbeitet.
-    private const IMPORT_STATUS_NEW = 0;
+    const IMPORT_STATUS_NEW = 0;
 
-    private const IMPORT_STATUS_FINISHED = 20;
+    const IMPORT_STATUS_FINISHED = 20;
 
+    /** @var Connection */
     private Connection $connection;
 
+    /** @var CacheAdoptionsRepository */
     private CacheAdoptionsRepository $cacheAdoptionsRepository;
 
+    /** @var CacheCoordinatesRepository */
     private CacheCoordinatesRepository $cacheCoordinatesRepository;
 
+    /** @var CacheLogsArchivedRepository */
     private CacheLogsArchivedRepository $cacheLogsArchivedRepository;
 
-    private CacheReportsRepository $cacheReportsRepository;
-
+    /** @var CachesRepository */
     private CachesRepository $cachesRepository;
 
+    /** @var CacheReportsRepository */
+    private CacheReportsRepository $cacheReportsRepository;
+
+    /** @var CacheStatusModifiedRepository */
     private CacheStatusModifiedRepository $cacheStatusModifiedRepository;
 
+    /** @var CacheStatusRepository */
     private CacheStatusRepository $cacheStatusRepository;
 
+    /** @var NodesRepository */
     private NodesRepository $nodesRepository;
 
-    private SecurityRolesRepository $securityRolesRepository;
-
+    /** @var SupportBonuscachesRepository */
     private SupportBonuscachesRepository $supportBonuscachesRepository;
 
+    /** @var SupportListingCommentsRepository */
     private SupportListingCommentsRepository $supportListingCommentsRepository;
 
+    /** @var SupportListingInfosRepository */
     private SupportListingInfosRepository $supportListingInfosRepository;
 
+    /** @var SupportUserCommentsRepository */
     private SupportUserCommentsRepository $supportUserCommentsRepository;
 
+    /** @var SupportUserRelationsRepository */
     private SupportUserRelationsRepository $supportUserRelationsRepository;
 
-    private SupportVandalismRepository $supportVandalismRepository;
-
-    private UserLoginBlockRepository $userLoginBlockRepository;
-
+    /** @var UserRepository */
     private UserRepository $userRepository;
 
+    /**
+     * @param Connection $connection
+     * @param CacheAdoptionsRepository $cacheAdoptionsRepository
+     * @param CacheCoordinatesRepository $cacheCoordinatesRepository
+     * @param CacheLogsArchivedRepository $cacheLogsArchivedRepository
+     * @param CachesRepository $cachesRepository
+     * @param CacheReportsRepository $cacheReportsRepository
+     * @param CacheStatusModifiedRepository $cacheStatusModifiedRepository
+     * @param CacheStatusRepository $cacheStatusRepository
+     * @param NodesRepository $nodesRepository
+     * @param SupportBonuscachesRepository $supportBonuscachesRepository
+     * @param SupportListingCommentsRepository $supportListingCommentsRepository
+     * @param SupportListingInfosRepository $supportListingInfosRepository
+     * @param SupportUserCommentsRepository $supportUserCommentsRepository
+     * @param SupportUserRelationsRepository $supportUserRelationsRepository
+     * @param UserRepository $userRepository
+     */
     public function __construct(
-            Connection $connection,
-            CacheAdoptionsRepository $cacheAdoptionsRepository,
-            CacheCoordinatesRepository $cacheCoordinatesRepository,
-            CacheLogsArchivedRepository $cacheLogsArchivedRepository,
-            CacheReportsRepository $cacheReportsRepository,
-            CachesRepository $cachesRepository,
-            CacheStatusModifiedRepository $cacheStatusModifiedRepository,
-            CacheStatusRepository $cacheStatusRepository,
-            NodesRepository $nodesRepository,
-            SecurityRolesRepository $securityRolesRepository,
-            SupportBonuscachesRepository $supportBonuscachesRepository,
-            SupportListingCommentsRepository $supportListingCommentsRepository,
-            SupportListingInfosRepository $supportListingInfosRepository,
-            SupportUserCommentsRepository $supportUserCommentsRepository,
-            SupportUserRelationsRepository $supportUserRelationsRepository,
-            SupportVandalismRepository $supportVandalismRepository,
-            UserLoginBlockRepository $userLoginBlockRepository,
-            UserRepository $userRepository
+        Connection $connection,
+        CacheAdoptionsRepository $cacheAdoptionsRepository,
+        CacheCoordinatesRepository $cacheCoordinatesRepository,
+        CacheLogsArchivedRepository $cacheLogsArchivedRepository,
+        CachesRepository $cachesRepository,
+        CacheReportsRepository $cacheReportsRepository,
+        CacheStatusModifiedRepository $cacheStatusModifiedRepository,
+        CacheStatusRepository $cacheStatusRepository,
+        NodesRepository $nodesRepository,
+        SupportBonuscachesRepository $supportBonuscachesRepository,
+        SupportListingCommentsRepository $supportListingCommentsRepository,
+        SupportListingInfosRepository $supportListingInfosRepository,
+        SupportUserCommentsRepository $supportUserCommentsRepository,
+        SupportUserRelationsRepository $supportUserRelationsRepository,
+        UserRepository $userRepository
     ) {
         $this->connection = $connection;
         $this->cacheAdoptionsRepository = $cacheAdoptionsRepository;
@@ -120,32 +141,34 @@ class SupportControllerBackend extends AbstractController
         $this->cacheStatusModifiedRepository = $cacheStatusModifiedRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
         $this->nodesRepository = $nodesRepository;
-        $this->securityRolesRepository = $securityRolesRepository;
         $this->supportBonuscachesRepository = $supportBonuscachesRepository;
         $this->supportListingCommentsRepository = $supportListingCommentsRepository;
         $this->supportListingInfosRepository = $supportListingInfosRepository;
         $this->supportUserCommentsRepository = $supportUserCommentsRepository;
         $this->supportUserRelationsRepository = $supportUserRelationsRepository;
-        $this->supportVandalismRepository = $supportVandalismRepository;
-        $this->userLoginBlockRepository = $userLoginBlockRepository;
         $this->userRepository = $userRepository;
     }
 
     /**
+     * @return Response
      * @Route("/support", name="support_index")
      */
-    public function index(): Response
+    public function index()
+    : Response
     {
         return $this->render('backend/support/index.html.twig');
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/supportSearch", name="support_search")
      */
-    public function searchCachesAndUser(Request $request): Response
-    {
+    public function searchCachesAndUser(Request $request)
+    : Response {
         $fetchedCaches = '';
         $limit = false;
 
@@ -163,39 +186,46 @@ class SupportControllerBackend extends AbstractController
         }
 
         return $this->render(
-                'backend/support/searchedCaches.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'foundCaches' => $fetchedCaches
-                ]
+            'backend/support/searchedCaches.html.twig', [
+                                                          'supportCachesForm' => $formSearch->createView(),
+                                                          'foundCaches' => $fetchedCaches
+                                                      ]
         );
     }
 
     /**
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/reportedCaches", name="support_reported_caches")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function listReportedCaches(): Response
+    public function listReportedCaches()
+    : Response
     {
         $fetchedReports = $this->getReportedCaches();
 
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         return $this->render(
-                'backend/support/reportedCaches.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'reportedCaches_by_id' => $fetchedReports
-                ]
+            'backend/support/reportedCaches.html.twig', [
+                                                          'supportCachesForm' => $formSearch->createView(),
+                                                          'reportedCaches_by_id' => $fetchedReports
+                                                      ]
         );
     }
 
     /**
+     * @return Response
+     *
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCaches", name="support_bonus_caches")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function listBonusCaches(): Response
+    public function listBonusCaches()
+    : Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
         $formAssignBonusCache = $this->createForm(SupportBonusCachesAssignment::class);
@@ -203,46 +233,55 @@ class SupportControllerBackend extends AbstractController
         $fetchedBonuscaches = $this->getBonusCaches();
 
         return $this->render(
-                'backend/support/bonusCaches.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'supportAssignBonusCacheForm' => $formAssignBonusCache->createView(),
-                        'bonusCaches_by_id' => $fetchedBonuscaches
-                ]
+            'backend/support/bonusCaches.html.twig', [
+                                                       'supportCachesForm' => $formSearch->createView(),
+                                                       'supportAssignBonusCacheForm' => $formAssignBonusCache->createView(),
+                                                       'bonusCaches_by_id' => $fetchedBonuscaches
+                                                   ]
         );
     }
 
     /**
-     * @throws Exception
+     * @param string $wpID
+     *
+     * @return Response
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/bonusCachesAssignmentChoice/{wpID}", name="support_bonus_caches_assignment_choice")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function bonusCachesAssignmentChoice(string $wpID): Response
-    {
+    public function bonusCachesAssignmentChoice(string $wpID)
+    : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]);
         $fetchedOwnerCaches = $this->cachesRepository->fetchBy(['user_id' => $fetchedCache->userId]);
 
         return $this->render(
-                'backend/support/bonusCachesAssignment.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'bonus_Cache' => $wpID,
-                        'caches_by_owner' => $fetchedOwnerCaches
-                ]
+            'backend/support/bonusCachesAssignment.html.twig', [
+                                                                 'supportCachesForm' => $formSearch->createView(),
+                                                                 'bonus_Cache' => $wpID,
+                                                                 'caches_by_owner' => $fetchedOwnerCaches
+                                                             ]
         );
     }
 
     /**
-     * @throws Exception
+     * @param string $wpID
+     * @param int $userID
+     * @param string $toBonusCache
+     *
+     * @return Response
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name="support_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function bonusCachesAssignment(string $wpID, int $userID, string $toBonusCache): Response
-    {
+    public function bonusCachesAssignment(string $wpID, int $userID, string $toBonusCache)
+    : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         $fetchedOwnerCaches = $this->cachesRepository->fetchBy(['user_id' => $userID]);
@@ -250,24 +289,26 @@ class SupportControllerBackend extends AbstractController
         $this->supportBonuscachesRepository->update_or_create_bonus_entry($wpID, $toBonusCache);
 
         return $this->render(
-                'backend/support/bonusCachesAssignment.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'bonus_Cache' => $toBonusCache,
-                        'caches_by_owner' => $fetchedOwnerCaches
-                ]
+            'backend/support/bonusCachesAssignment.html.twig', [
+                                                                 'supportCachesForm' => $formSearch->createView(),
+                                                                 'bonus_Cache' => $toBonusCache,
+                                                                 'caches_by_owner' => $fetchedOwnerCaches
+                                                             ]
         );
     }
 
     /**
-     * @throws Exception
+     * @param Request $request
+     *
+     * @return Response
      * @throws RecordAlreadyExistsException
-     * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesDirectAssignment", name="support_directly_assign_bonus_cache")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function bonusCachesDirectAssignment(Request $request): Response
-    {
+    public function bonusCachesDirectAssignment(Request $request)
+    : Response {
         $formDirectBonusAssignment = $this->createForm(SupportBonusCachesAssignment::class);
 
         $formDirectBonusAssignment->handleRequest($request);
@@ -287,15 +328,21 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
-     * @throws Exception
+     * @param string $wpID
+     * @param bool $removeToBonus
+     * @param bool $removeBonus
+     *
+     * @return Response
      * @throws InvalidArgumentException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name="support_remove_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function removeBonusCachesAssignment(string $wpID, bool $removeToBonus, bool $removeBonus): Response
-    {
+    public function removeBonusCachesAssignment(string $wpID, bool $removeToBonus, bool $removeBonus)
+    : Response {
         $fetchedBonusCache = $this->supportBonuscachesRepository->fetchOneBy(['wp_oc' => $wpID]);
 
         if ($fetchedBonusCache) {
@@ -317,11 +364,15 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/dbQueries", name="support_db_queries")
      */
-    public function listDbQueries(Request $request): Response
-    {
+    public function listDbQueries(Request $request)
+    : Response {
         $fetchedInformation = [];
 
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -333,10 +384,10 @@ class SupportControllerBackend extends AbstractController
             $inputData = $formSQLFlex->getData();
 
             $fetchedInformation =
-                    $this->executeSQL_flexible($inputData['content_WHAT'], $inputData['content_TABLE'], (string)$inputData['content_CONDITION']);
+                $this->executeSQL_flexible($inputData['content_WHAT'], $inputData['content_TABLE'], (string) $inputData['content_CONDITION']);
 
             $countFetched = count($fetchedInformation);
-            for ($i = 0; $i < $countFetched; $i++) {
+            for ($i = 0; $i < $countFetched; $i ++) {
                 if (array_key_exists('password', $fetchedInformation[$i])) {
                     $fetchedInformation[$i]['password'] = '-';
                 }
@@ -350,24 +401,28 @@ class SupportControllerBackend extends AbstractController
         }
 
         return $this->render(
-                'backend/support/databaseQueries.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'SQLFlexForm' => $formSQLFlex->createView(),
-                        'suppSQLqueryFlex' => $fetchedInformation
-                ]
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'SQLFlexForm' => $formSQLFlex->createView(),
+                                                           'suppSQLqueryFlex' => $fetchedInformation
+                                                       ]
         );
     }
 
     /**
+     * @param string $wpID
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @throws Exception
      * @Route("/cacheHistory/{wpID}", name="support_cache_history")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function list_cache_history(string $wpID): Response
-    {
+    public function list_cache_history(string $wpID)
+    : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         $fetchedId = $this->cachesRepository->getIdByWP($wpID);
@@ -383,26 +438,30 @@ class SupportControllerBackend extends AbstractController
         $fetchedAdoptions = $this->cacheAdoptionsRepository->fetchBy(['cache_id' => $fetchedId]);
 
         return $this->render(
-                'backend/support/cacheHistory.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'cache_reports' => $fetchedReports,
-                        'deleted_logs' => $fetchedLogDeletes,
-                        'report_status_modified' => $fetchedStatusModfied,
-                        'changed_coordinates' => $fetchedCoordinates,
-                        'cache_adoptions' => $fetchedAdoptions,
-                ]
+            'backend/support/cacheHistory.html.twig', [
+                                                        'supportCachesForm' => $formSearch->createView(),
+                                                        'cache_reports' => $fetchedReports,
+                                                        'deleted_logs' => $fetchedLogDeletes,
+                                                        'report_status_modified' => $fetchedStatusModfied,
+                                                        'changed_coordinates' => $fetchedCoordinates,
+                                                        'cache_adoptions' => $fetchedAdoptions,
+                                                    ]
         );
     }
 
     /**
+     * @param int $repID
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/repCaches/{repID}", name="support_reported_cache")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function list_reported_cache_details(int $repID): Response
-    {
+    public function list_reported_cache_details(int $repID)
+    : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
         $formComment = $this->createForm(SupportCommentField::class);
 
@@ -413,25 +472,30 @@ class SupportControllerBackend extends AbstractController
         $fetchedStatusModfied = $this->cacheStatusModifiedRepository->fetchBy(['cache_id' => $fetchedReport->cacheid]);
 
         return $this->render(
-                'backend/support/reportedCacheDetails.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'supportAdminCommentForm' => $formComment->createView(),
-                        'reported_cache_by_id' => $fetchedReport,
-                        'cache_status' => $fetchedStatus,
-                        'report_status_modified' => $fetchedStatusModfied
-                ]
+            'backend/support/reportedCacheDetails.html.twig', [
+                                                                'supportCachesForm' => $formSearch->createView(),
+                                                                'supportAdminCommentForm' => $formComment->createView(),
+                                                                'reported_cache_by_id' => $fetchedReport,
+                                                                'cache_status' => $fetchedStatus,
+                                                                'report_status_modified' => $fetchedStatusModfied
+                                                            ]
         );
     }
 
     /**
-     * @throws Exception
+     * @param string $wpID
+     * @param int $userID
+     *
+     * @return Response
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/occ/{wpID}&{userID}", name="support_occ")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function occPage(string $wpID, int $userID): Response
-    {
+    public function occPage(string $wpID, int $userID)
+    : Response {
         $formCommentUser = $this->createForm(SupportCommentField::class);
         $formCommentCache = $this->createForm(SupportCommentField::class);
 
@@ -476,47 +540,51 @@ class SupportControllerBackend extends AbstractController
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         return $this->render(
-                'backend/support/occ.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'supportCommentFormUser' => $formCommentUser->createView(),
-                        'supportCommentFormCache' => $formCommentCache->createView(),
-                        'occ_cache_data' => $fetchedCacheData,
-                        'occ_cache_comments' => $fetchedCacheComments,
-                        'occ_cache_infos' => $fetchedCacheInfos,
-                        'occ_user_data' => $fetchedUserData,
-                        'occ_user_comments' => $fetchedUserComments,
-                        'occ_user_relations' => $fetchedUserRelations
-                ]
+            'backend/support/occ.html.twig', [
+                                               'supportCachesForm' => $formSearch->createView(),
+                                               'supportCommentFormUser' => $formCommentUser->createView(),
+                                               'supportCommentFormCache' => $formCommentCache->createView(),
+                                               'occ_cache_data' => $fetchedCacheData,
+                                               'occ_cache_comments' => $fetchedCacheComments,
+                                               'occ_cache_infos' => $fetchedCacheInfos,
+                                               'occ_user_data' => $fetchedUserData,
+                                               'occ_user_comments' => $fetchedUserComments,
+                                               'occ_user_relations' => $fetchedUserRelations
+                                           ]
         );
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/occSaveText", name="support_occ_save_text")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function occ_saveTextArea(Request $request): Response
-    {
+    public function occ_saveTextArea(Request $request)
+    : Response {
         $form = $this->createForm(SupportCommentField::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
 
             if ($inputData['hidden_sender'] == 'textfield_cache_comment') {
-                $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => (string)$inputData['hidden_ID2']]);
+                $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => (string) $inputData['hidden_ID2']]);
                 $entity->comment = $inputData['content_comment_field'];
                 $this->supportListingCommentsRepository->update($entity);
             } elseif ($inputData['hidden_sender'] == 'textfield_user_comment') {
-                $entity = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => (int)$inputData['hidden_ID1']]);
+                $entity = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => (int) $inputData['hidden_ID1']]);
                 $entity->comment = $inputData['content_comment_field'];
                 $this->supportUserCommentsRepository->update($entity);
             }
 
             return $this->redirectToRoute('backend_support_occ', [
-                    'userID' => (string)$inputData['hidden_ID1'],
-                    'wpID' => (string)$inputData['hidden_ID2']
+                'userID' => (string) $inputData['hidden_ID1'],
+                'wpID' => (string) $inputData['hidden_ID2']
             ]);
         }
 
@@ -524,20 +592,24 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/repCachesSaveText", name="support_reported_cache_save_text")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function repCaches_saveTextArea(Request $request): Response
-    {
+    public function repCaches_saveTextArea(Request $request)
+    : Response {
         $form = $this->createForm(SupportCommentField::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
 
-            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int)$inputData['hidden_ID1']]);
+            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_ID1']]);
             $entity->comment = $inputData['content_comment_field'];
 
             $this->cacheReportsRepository->update($entity);
@@ -549,14 +621,20 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
+     * @param int $repID
+     * @param int $adminId
+     * @param string $route
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name="support_reported_cache_supportuser_assignment")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route): Response
-    {
+    public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route)
+    : Response {
         $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
         $entity->adminid = $adminId;
 
@@ -566,14 +644,19 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
+     * @param int $repID
+     * @param string $route
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @route("/repCachesAssignSupportuser/{repID}&{route}", name="support_reported_cache_set_status")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function repCaches_setReportStatus(int $repID, string $route): Response
-    {
+    public function repCaches_setReportStatus(int $repID, string $route)
+    : Response {
         $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
         $entity->status = 3; // ToDo: die '3' hart vorgeben? Oder wie?
 
@@ -583,73 +666,41 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
-     * @throws Exception
+     * @param int $userID
+     *
+     * @return Response
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/uad/{userID}", name="support_user_account_details")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function list_user_account_details(int $userID): Response
-    {
+    public function list_user_account_details(int $userID)
+    : Response {
         $fetchedUserDetails = $this->userRepository->fetchOneById($userID);
-        $fetchedUserLoginBlock = null;
-        try {
-            $fetchedUserLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
-        } catch (RecordNotFoundException $e) {
-        }
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+        $formActions = $this->createForm(SupportUserAccountDetails::class);
 
         return $this->render(
-                'backend/support/userDetails.html.twig', [
-                        'supportCachesForm' => $this->createForm(SupportSearchCaches::class)->createView(),
-                        'supportUserAccountActions' => $this->createForm(SupportUserAccountDetails::class)->createView(),
-                        'user_account_details' => $fetchedUserDetails,
-                        'user_login_block' => $fetchedUserLoginBlock
-                ]
+            'backend/support/userDetails.html.twig', [
+                                                       'supportCachesForm' => $formSearch->createView(),
+                                                       'supportUserAccountActions' => $formActions->createView(),
+                                                       'user_account_details' => $fetchedUserDetails
+                                                   ]
         );
     }
 
     /**
-     * @throws Exception
-     * @throws RecordNotFoundException
+     * @param string $searchtext
+     * @param bool $limit
      *
-     * @Route("/vandalism/{wpID}&{userID}", name="support_vandalism")
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
-     *
-     * Vandalismusscript 1:1 adaptiert von htdocs/restorecaches.php
-     */
-    public function vandalism(string $wpID, int $userID): Response
-    {
-        $data = $this->supportVandalismRepository->getArchiveData($this->cachesRepository->getIdByWP($wpID), $wpID);
-
-        return $this->render(
-                'backend/support/vandalism.html.twig', [
-                        'curremt_cache_details' => $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]),
-                        'user_account_details' => $this->userRepository->fetchOneById($userID),
-                        'modified_information' => $data
-                ]
-        );
-    }
-
-    /**
-     * @throws Exception
-     *
-     * @Route("/vandalismRestore", name="support_vandalism_restore")
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
-     */
-    public function vandalismRestore(Request $request): Response
-    {
-        $restoredData = $this->supportVandalismRepository->restoreListings($request->request->all());
-
-        return $this->render(
-                'backend/support/vandalismFinish.html.twig',
-                ['modified_information' => $restoredData[0], 'simulate' => $restoredData[1]]
-        );
-    }
-
-    /**
+     * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      */
-    private function getCachesForSearchField(string $searchtext, bool $limit = false): array
-    {
+    private function getCachesForSearchField(string $searchtext, bool $limit = false)
+    : array {
         //      so sieht die SQL-Vorlage aus..
         //        SELECT name, wp_oc, wp_gc, wp_gc_maintained, user.username, user.email
         //        FROM caches
@@ -663,28 +714,31 @@ class SupportControllerBackend extends AbstractController
         //        LIMIT $limit
         $qb = $this->connection->createQueryBuilder();
         $qb->select('caches.name', 'caches.wp_oc', 'caches.wp_gc', 'caches.wp_gc_maintained', 'user.user_id', 'user.username', 'user.email')
-                ->from('caches')
-                ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
-                ->where('caches.wp_oc = :searchTerm')
-                ->orWhere('caches.wp_gc = :searchTerm')
-                ->orWhere('caches.wp_gc_maintained = :searchTerm')
-                ->orWhere('caches.name LIKE :searchTermLIKE')
-                ->orWhere('user.username LIKE :searchTermLIKE')
-                ->orWhere('user.email LIKE :searchTermLIKE')
-                ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
-                ->orderBy('caches.wp_oc', 'ASC');
+            ->from('caches')
+            ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+            ->where('caches.wp_oc = :searchTerm')
+            ->orWhere('caches.wp_gc = :searchTerm')
+            ->orWhere('caches.wp_gc_maintained = :searchTerm')
+            ->orWhere('caches.name LIKE :searchTermLIKE')
+            ->orWhere('user.username LIKE :searchTermLIKE')
+            ->orWhere('user.email LIKE :searchTermLIKE')
+            ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
+            ->orderBy('caches.wp_oc', 'ASC');
 
         if ($limit === true) {
             $qb->setMaxResults(1);
         }
 
-        return $qb->executeQuery()->fetchAllAssociative();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     /**
+     * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function getBonusCaches(): array
+    public function getBonusCaches()
+    : array
     {
         try {
             return $this->supportBonuscachesRepository->fetchAll();
@@ -694,17 +748,24 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
+     * @return array
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
-    public function getReportedCaches(): array
+    public function getReportedCaches()
+    : array
     {
         return $this->cacheReportsRepository->fetchAll();
     }
 
     /**
+     * @param int $days
+     *
+     * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/dbQueries1/{days}", name="support_db_queries_1")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
@@ -716,22 +777,26 @@ class SupportControllerBackend extends AbstractController
 
         $qb = $this->connection->createQueryBuilder();
         $qb->select('caches.name', 'user.username', 'user.date_created', 'user.last_login')
-                ->from('caches')
-                ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
-                ->where('user.date_created > now() - interval :searchTerm DAY')
-                ->andWhere('caches.user_id = user.user_id')
-                ->setParameters(['searchTerm' => $days])
-                ->orderBy('date_created', 'DESC');
+            ->from('caches')
+            ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+            ->where('user.date_created > now() - interval :searchTerm DAY')
+            ->andWhere('caches.user_id = user.user_id')
+            ->setParameters(['searchTerm' => $days])
+            ->orderBy('date_created', 'DESC');
 
         return $this->render(
-                'backend/support/databaseQueries.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'suppSQLquery1' => $qb->executeQuery()->fetchAllAssociative()
-                ]
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery1' => $qb->execute()->fetchAllAssociative()
+                                                       ]
         );
     }
 
     /**
+     * @param int $days
+     *
+     * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/dbQueries2/{days}", name="support_db_queries_2")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
@@ -743,21 +808,23 @@ class SupportControllerBackend extends AbstractController
 
         $qb = $this->connection->createQueryBuilder();
         $qb->select('username', 'date_created', 'last_login')
-                ->from('user')
-                ->where('date_created > now() - interval :searchTerm DAY')
-                ->setParameters(['searchTerm' => $days])
-                ->orderBy('date_created', 'DESC');
+            ->from('user')
+            ->where('date_created > now() - interval :searchTerm DAY')
+            ->setParameters(['searchTerm' => $days])
+            ->orderBy('date_created', 'DESC');
 
         return $this->render(
-                'backend/support/databaseQueries.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'suppSQLquery2' => $qb->executeQuery()->fetchAllAssociative()
-                ]
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery2' => $qb->execute()->fetchAllAssociative()
+                                                       ]
         );
     }
 
     /**
+     * @return Response
      * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/dbQueries4", name="support_db_queries_4")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -768,38 +835,33 @@ class SupportControllerBackend extends AbstractController
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         $qb = $this->connection->createQueryBuilder();
-        $qb->select(
-                'caches.name',
-                'caches.cache_id',
-                'caches.status',
-                'user.user_id',
-                'user.username',
-                'user.last_login',
-                'count(cache_logs.type) as logCount'
-        )
-                ->distinct()
-                ->from('caches')
-                ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
-                ->innerJoin('caches', 'cache_logs', 'cache_logs', 'caches.cache_id = cache_logs.cache_id')
-                ->where('user.last_login < now() - interval :searchTerm YEAR')
-                ->andWhere('caches.status <= 2')
-                ->andWhere(('caches.user_id = user.user_id'))
-                ->andWhere(('caches.cache_id = cache_logs.cache_id'))
-                ->andWhere(('cache_logs.type = 2 or cache_logs.type = 3'))
-                ->setParameters(['searchTerm' => 1])
-                ->orderBy('user.last_login', 'ASC')
-                ->groupBy('caches.name');
+        $qb->select('caches.name', 'caches.cache_id', 'caches.status', 'user.user_id', 'user.username', 'user.last_login', 'count(cache_logs.type) as logCount')
+            ->distinct()
+            ->from('caches')
+            ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+            ->innerJoin('caches', 'cache_logs', 'cache_logs', 'caches.cache_id = cache_logs.cache_id')
+            ->where('user.last_login < now() - interval :searchTerm YEAR')
+            ->andWhere('caches.status <= 2')
+            ->andWhere(('caches.user_id = user.user_id'))
+            ->andWhere(('caches.cache_id = cache_logs.cache_id'))
+            ->andWhere(('cache_logs.type = 2 or cache_logs.type = 3'))
+            ->setParameters(['searchTerm' => 1])
+            ->orderBy('user.last_login', 'ASC')
+            ->groupBy('caches.name');
 
         return $this->render(
-                'backend/support/databaseQueries.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'suppSQLquery4' => $qb->executeQuery()->fetchAllAssociative()
-                ]
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery4' => $qb->execute()->fetchAllAssociative()
+                                                       ]
         );
     }
 
     /**
+     * @return Response
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/dbQueries5", name="support_db_queries_5")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -809,15 +871,17 @@ class SupportControllerBackend extends AbstractController
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         return $this->render(
-                'backend/support/databaseQueries.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'suppSQLquery5' => $this->supportUserCommentsRepository->fetchAll()
-                ]
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery5' => $this->supportUserCommentsRepository->fetchAll()
+                                                       ]
         );
     }
 
     /**
+     * @return Response
      * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/dbQueries6", name="support_db_queries_6")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -829,20 +893,20 @@ class SupportControllerBackend extends AbstractController
         // Liste mit Caches erstellen, deren Listingeigenschaften auf Dornröschen zutreffen
         $qb_caches = $this->connection->createQueryBuilder();
         $qb_caches->select('caches.cache_id', 'caches.name', 'caches.wp_oc')
-                ->from('caches')
-                ->where('caches.size != 7')
-                ->andWhere('caches.status <= 2')
-                ->andWhere('caches.wp_gc = \'\'')
-                ->andWhere('caches.wp_gc_maintained = \'\'')
-                ->andWhere('caches.type IN (1, 2, 3, 7, 8, 9, 10)');
-        $qb_caches_list = $qb_caches->executeQuery()->fetchAllAssociative();
+            ->from('caches')
+            ->where('caches.size != 7')
+            ->andWhere('caches.status <= 2')
+            ->andWhere('caches.wp_gc = \'\'')
+            ->andWhere('caches.wp_gc_maintained = \'\'')
+            ->andWhere('caches.type IN (1, 2, 3, 7, 8, 9, 10)');
+        $qb_caches_list = $qb_caches->execute()->fetchAllAssociative();
 
         // Liste mit Fundlogs erstellen, die innerhalb der letzten zwei Jahre liegen
         $qb_logs = $this->connection->createQueryBuilder();
         $qb_logs->select('cache_logs.cache_id')
-                ->from('cache_logs')
-                ->where('cache_logs.type = 1', 'cache_logs.date > now() - INTERVAL 2 YEAR');
-        $qb_logs_list = $qb_logs->executeQuery()->fetchAllAssociative();
+            ->from('cache_logs')
+            ->where('cache_logs.type = 1', 'cache_logs.date > now() - INTERVAL 2 YEAR');
+        $qb_logs_list = $qb_logs->execute()->fetchAllAssociative();
 
         // Cacheliste reduzieren um die Caches, die innerhalb der letzten zwei Jahre einen Fund hatten
         foreach ($qb_logs_list as $qbll) {
@@ -854,30 +918,41 @@ class SupportControllerBackend extends AbstractController
         }
 
         return $this->render(
-                'backend/support/databaseQueries.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'suppSQLquery6' => $qb_caches_list
-                ]
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery6' => $qb_caches_list
+                                                       ]
         );
     }
 
     /**
+     * @param string $what
+     * @param string $table
+     * @param string $condition
+     *
+     * @return array
+     *
      * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function executeSQL_flexible(string $what, string $table, string $condition): array
-    {
+    public function executeSQL_flexible(string $what, string $table, string $condition)
+    : array {
         $qb = $this->connection->createQueryBuilder();
         $qb->select($what)
-                ->from($table);
+            ->from($table);
         if ($condition != '') {
             $qb->where($condition);
         }
 
-        return ($qb->executeQuery()->fetchAllAssociative());
+        return ($qb->execute()->fetchAllAssociative());
     }
 
     /**
+     * @param Request $request
+     * @param int $userID
+     *
+     * @return Response
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Driver\Exception
@@ -885,49 +960,13 @@ class SupportControllerBackend extends AbstractController
      * @route("/supportUADactions/{userID}", name="support_executeUAD_actions")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
-    public function executeUAD_actions(Request $request, int $userID): Response
-    {
+    public function executeUAD_actions(Request $request, int $userID)
+    : Response {
         $form = $this->createForm(SupportUserAccountDetails::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->getClickedButton() === $form->get('button_account_inactive')) {
                 // TODO: fill
-            } elseif ($form->getClickedButton() === $form->get('button_login_block')) {
-                $user = $this->userRepository->fetchOneById($userID);
-                $userToBlockIsHigher = false;
-                $userToBlockRoles = $user->getRoles();
-
-                if ($userToBlockRoles) {
-                    foreach ($userToBlockRoles as $role) {
-                        if (!$this->isGranted($role)) {
-                            $userToBlockIsHigher = true;
-                        }
-                    }
-                }
-
-                if ($this->isGranted('ROLE_SUPPORT_HEAD') && !$userToBlockIsHigher) {
-                    $timeToBlock = $form->get('dropDown_login_block')->getData();
-                    $message = $form->get('message_login_block')->getData();
-
-                    try {
-                        $entity = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
-
-                        if ($timeToBlock === -1) {
-                            // -1 = entferne die Blockierung des Logins // alle anderen Zahlen = setze die blockierung auf $JETZT plus x Tage
-                            $this->userLoginBlockRepository->remove($entity);
-                        } else {
-                            // setze Zeitstemepel + x Tage
-                            $untilWhenToBlock = new DateTime(date('Y-m-d H:i:s') . '+ ' . $timeToBlock . ' day');
-                            $entity->loginBlockUntil = $untilWhenToBlock->format('Y-m-d H:i:s');
-                            $entity->message = $message;
-                            $this->userLoginBlockRepository->update($entity);
-                        }
-                    } catch (RecordNotFoundException $e) {
-                        $untilWhenToBlock = new DateTime(date('Y-m-d H:i:s') . '+ ' . $timeToBlock . ' day');
-                        $entity = new UserLoginBlockEntity($userID, $untilWhenToBlock->format('Y-m-d H:i:s'), $message);
-                        $entity = $this->userLoginBlockRepository->create($entity);
-                    }
-                }
             } elseif ($form->getClickedButton() === $form->get('button_GDPR_deletion')) {
                 // TODO: fill
                 // Achtung: für die DSGVO-Löschung müssen vorher der Account und die dazugehörigen Cachelistings deaktiviert werden!
@@ -935,7 +974,7 @@ class SupportControllerBackend extends AbstractController
                 //          Da das dem Inhalt des ersten Buttons (button_account_inactive) entspricht, genügt es vermutlich, dessen Funktion aufzurufen
             } elseif ($form->getClickedButton() === $form->get('button_mark_email_invalid')) {
                 $entity = $this->userRepository->fetchOneById($userID);
-                $entity->emailProblems = true;
+                $entity->emailProblems = 1;
                 $this->userRepository->update($entity);
             } else {
                 print("upsi?");
@@ -947,21 +986,20 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
      * @throws Exception
-     * @throws InvalidArgumentException
-     * @throws RecordAlreadyExistsException
-     * @throws RecordNotFoundException
-     * @throws RecordNotPersistedException
-     * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Driver\Exception
+     *
      * @route("/GPXimport/", name="support_gpx_import"), methods={"POST"}
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      *
      * Button/Dialog zum Einlesen der GPX-Datei
      * inklusive Rückinfo zu Anzahl eingelesener Caches
      */
-    public function GPX_import(Request $request): Response
-    {
+    public function GPX_import(Request $request)
+    : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
         $formUpload = $this->createForm(SupportImportGPX::class);
         $amountProcessedCaches = 0;
@@ -998,27 +1036,30 @@ class SupportControllerBackend extends AbstractController
         }
 
         return $this->render(
-                'backend/support/occ_gpx_import.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'supportUploadGPXForm' => $formUpload->createView(),
-                        'amountProcessedCaches' => $amountProcessedCaches,
-                        'amountAssignedCaches' => $amountAssignedCaches,
-                        'amountUpdatedCaches' => $amountUpdatedCaches,
-                        'listOfAmbiguousCaches' => $listOfAmbiguousCaches,
-                        'fetchedListingInfos' => $fetchedListingInfos,
-                        'differencesDetected' => $differencesDetected
-                ]
+            'backend/support/occ_gpx_import.html.twig', [
+                                                          'supportCachesForm' => $formSearch->createView(),
+                                                          'supportUploadGPXForm' => $formUpload->createView(),
+                                                          'amountProcessedCaches' => $amountProcessedCaches,
+                                                          'amountAssignedCaches' => $amountAssignedCaches,
+                                                          'amountUpdatedCaches' => $amountUpdatedCaches,
+                                                          'listOfAmbiguousCaches' => $listOfAmbiguousCaches,
+                                                          'fetchedListingInfos' => $fetchedListingInfos,
+                                                          'differencesDetected' => $differencesDetected
+                                                      ]
         );
     }
 
     /**
+     * @return array
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      *
      * Unterschiede zwischen importierten Caches und deren OC-Pendants herausfinden
      */
-    public function list_differences_table_listing_infos(): array
+    public function list_differences_table_listing_infos()
+    : array
     {
         $fetchedListingInfos = $this->supportListingInfosRepository->fetchAll();
         $differencesDetected = [];
@@ -1028,62 +1069,67 @@ class SupportControllerBackend extends AbstractController
             $tempArray = [$fetchedListingInfo->wpOc . '/' . $fetchedListingInfo->nodeListingWp];
 
             if ($fetchedOCCache->name != $fetchedListingInfo->nodeListingName) {
-                $tempArray[] = $fetchedOCCache->name . ' != ' . $fetchedListingInfo->nodeListingName;
+                array_push($tempArray, $fetchedOCCache->name . ' != ' . $fetchedListingInfo->nodeListingName);
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if ($fetchedOCCache->difficulty != $fetchedListingInfo->nodeListingDifficulty) {
-                $tempArray[] = $fetchedOCCache->difficulty / 2 . ' != ' . $fetchedListingInfo->nodeListingDifficulty / 2;
+                array_push($tempArray, $fetchedOCCache->difficulty / 2 . ' != ' . $fetchedListingInfo->nodeListingDifficulty / 2);
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if ($fetchedOCCache->terrain != $fetchedListingInfo->nodeListingTerrain) {
-                $tempArray[] = $fetchedOCCache->terrain / 2 . ' != ' . $fetchedListingInfo->nodeListingTerrain / 2;
+                array_push($tempArray, $fetchedOCCache->terrain / 2 . ' != ' . $fetchedListingInfo->nodeListingTerrain / 2);
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if (round($fetchedOCCache->longitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLon * 10000)) {
-                $tempArray[] = $fetchedOCCache->longitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLon;
+                array_push($tempArray, $fetchedOCCache->longitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLon);
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if (round($fetchedOCCache->latitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLat * 10000)) {
-                $tempArray[] = $fetchedOCCache->latitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLat;
+                array_push($tempArray, $fetchedOCCache->latitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLat);
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if (($fetchedListingInfo->nodeListingAvailable && ($fetchedOCCache->status != 1))
-                    || (!$fetchedListingInfo->nodeListingAvailable
-                            && ($fetchedOCCache->status == 1))
+                || (!$fetchedListingInfo->nodeListingAvailable
+                    && ($fetchedOCCache->status == 1))
             ) {
-                $tempArray[] = 'OC status != import status';
+                array_push($tempArray, 'OC status != import status');
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if (($fetchedListingInfo->nodeListingArchived && ($fetchedOCCache->status != 3))
-                    || (!$fetchedListingInfo->nodeListingAvailable
-                            && ($fetchedOCCache->status == 3))
+                || (!$fetchedListingInfo->nodeListingAvailable
+                    && ($fetchedOCCache->status == 3))
             ) {
-                $tempArray[] = 'OC status != import status';
+                array_push($tempArray, 'OC status != import status');
             } else {
-                $tempArray[] = '';
+                array_push($tempArray, '');
             }
 
             if (count($tempArray) != 1) {
-                $differencesDetected[] = $tempArray;
+                array_push($differencesDetected, $tempArray);
             }
         }
 
         return ($differencesDetected);
     }
 
-    public function list_all_support_listing_infos(): array
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
+     */
+    public function list_all_support_listing_infos()
+    : array
     {
         try {
             return ($this->supportListingInfosRepository->fetchAll());
@@ -1093,14 +1139,17 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
-     * @throws Exception
+     * @param array $waypoints_as_array
+     *
+     * @return array
      * @throws InvalidArgumentException
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
-    public function check_array_for_Oc_Gc_relations(array $waypoints_as_array): array
-    {
+    public function check_array_for_Oc_Gc_relations(array $waypoints_as_array)
+    : array {
         // Jeden importierten Cache im Array einzeln durchgehen..
         // in DB caches/* prüfen, ob ein OC-Cache zugeordnet werden kann
         //   wenn ja:
@@ -1117,8 +1166,6 @@ class SupportControllerBackend extends AbstractController
         //
         $amountAssignedCaches = 0;
         $amountUpdatedCaches = 0;
-        $fetchedWpGcCaches = [];
-        $fetchedWpGcMaintainedCaches = [];
         $listOfAmbiguousCaches = '';
 
         foreach ($waypoints_as_array as $wpt) {
@@ -1136,52 +1183,50 @@ class SupportControllerBackend extends AbstractController
                 $listOfAmbiguousCaches .= $wpt['node_listing_wp'] . ', ';
             }
 
-            if ($wpt['wp_oc'] != -1) {
+            if ($wpt['wp_oc'] != - 1) {
                 $fetchedExistingSupportListingInfoArray = [];
                 $fetchedExistingSupportListingInfo = [];
                 $newComment = '';
 
                 try {
                     $fetchedExistingSupportListingInfo =
-                            $this->supportListingInfosRepository->fetchOneBy(['node_listing_id' => $wpt['node_listing_id']]);
+                        $this->supportListingInfosRepository->fetchOneBy(['node_listing_id' => $wpt['node_listing_id']]);
                     $fetchedExistingSupportListingInfoArray =
-                            $this->supportListingInfosRepository->getDatabaseArrayFromEntity($fetchedExistingSupportListingInfo);
+                        $this->supportListingInfosRepository->getDatabaseArrayFromEntity($fetchedExistingSupportListingInfo);
                 } catch (Exception $exception) {
                 }
 
                 if (!empty($fetchedExistingSupportListingInfoArray)) {
-                    foreach (
-                            [
-                                    'node_listing_name',
-                                    'node_listing_size',
-                                    'node_listing_difficulty',
-                                    'node_listing_terrain',
-                                    'node_listing_coordinates_lon',
-                                    'node_listing_coordinates_lat',
-                                    'node_listing_available',
-                                    'node_listing_archived'
-                            ] as $checkItem
-                    ) {
+                    foreach ([
+                        'node_listing_name',
+                        'node_listing_size',
+                        'node_listing_difficulty',
+                        'node_listing_terrain',
+                        'node_listing_coordinates_lon',
+                        'node_listing_coordinates_lat',
+                        'node_listing_available',
+                        'node_listing_archived'
+                    ] as $checkItem) {
                         if ($wpt[$checkItem] != $fetchedExistingSupportListingInfoArray[$checkItem]) {
                             $newComment .= $checkItem
-                                    . ' changed from '
-                                    . $fetchedExistingSupportListingInfoArray[$checkItem]
-                                    . ' to '
-                                    . $wpt[$checkItem]
-                                    . PHP_EOL;
+                                           . ' changed from '
+                                           . $fetchedExistingSupportListingInfoArray[$checkItem]
+                                           . ' to '
+                                           . $wpt[$checkItem]
+                                           . PHP_EOL;
                         }
                     }
 
                     if ($newComment != '') {
                         $newComment =
-                                date('Y-m-d H:i:s')
-                                . ' -automatically generated comment-:'
-                                . PHP_EOL
-                                . 'Data import from foreign node via GPX for '
-                                . $fetchedExistingSupportListingInfoArray['node_listing_wp']
-                                . PHP_EOL
-                                . $newComment
-                                . PHP_EOL;
+                            date('Y-m-d H:i:s')
+                            . ' -automatically generated comment-:'
+                            . PHP_EOL
+                            . 'Data import from foreign node via GPX for '
+                            . $fetchedExistingSupportListingInfoArray['node_listing_wp']
+                            . PHP_EOL
+                            . $newComment
+                            . PHP_EOL;
 
                         try {
                             $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpt['wp_oc']]);
@@ -1200,7 +1245,7 @@ class SupportControllerBackend extends AbstractController
                 $entity = $this->supportListingInfosRepository->getEntityFromDatabaseArray($wpt);
                 $this->supportListingInfosRepository->create($entity);
 
-                $amountAssignedCaches++;
+                $amountAssignedCaches ++;
             }
         }
 
@@ -1208,11 +1253,15 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
-     * @throws Exception
+     * @param string $filemane
+     *
+     * @return array
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      */
-    public function read_Xml_file_and_get_array(string $filemane): array
-    {
+    public function read_Xml_file_and_get_array(string $filemane)
+    : array {
         $strData = file_get_contents($filemane);
         $strData = str_replace(['<groundspeak:', '</groundspeak:'], ['<', '</'], $strData);
 
@@ -1228,10 +1277,10 @@ class SupportControllerBackend extends AbstractController
             $waypoints_as_array = [];
 
             foreach ($arrOutput['wpt'] as $wpt) {
-                $wpt_array['wp_oc'] = -1;
+                $wpt_array['wp_oc'] = - 1;
                 $wpt_array['node_id'] = $this->nodesRepository->get_id_by_prefix(substr($wpt['name'], 0, 2));
-                // TODO: node_owner_id ist in Groundspeak GPX-Dateien nicht enthalten. Aber eventuell in anderen Quellen?
-                $wpt_array['node_owner_id'] = 0;
+                $wpt_array['node_owner_id'] =
+                    0; // TODO: node_owner_id ist in Groundspeak GPX-Dateien nicht enthalten. Aber eventuell in anderen Quellen?
                 $wpt_array['node_owner_name'] = $wpt['cache']['owner'];
                 $wpt_array['node_listing_id'] = substr($wpt['url'], strlen($wpt['url']) - 36, 36);
                 $wpt_array['node_listing_wp'] = $wpt['name'];
@@ -1245,11 +1294,10 @@ class SupportControllerBackend extends AbstractController
                 $wpt_array['node_listing_archived'] = ($wpt['cache']['@attributes']['archived'] === "True") ? 1 : 0;
                 $wpt_array['importstatus'] = self::IMPORT_STATUS_NEW;
 
-                $waypoints_as_array[] = $wpt_array;
+                array_push($waypoints_as_array, $wpt_array);
             }
 
             return ($waypoints_as_array);
         }
     }
-
 }

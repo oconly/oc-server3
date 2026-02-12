@@ -5,19 +5,27 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SupportUserCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ * Class SupportUserCommentsRepository
+ *
+ * @package Oc\Repository
+ */
 class SupportUserCommentsRepository
 {
-    private const TABLE = 'support_user_comments';
+    const TABLE = 'support_user_comments';
 
+    /** @var Connection */
     private Connection $connection;
 
+    /** @var UserRepository */
     private UserRepository $userRepository;
 
     public function __construct(Connection $connection, UserRepository $userRepository)
@@ -27,15 +35,19 @@ class SupportUserCommentsRepository
     }
 
     /**
+     * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
-    public function fetchAll(): array
+    public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
-                ->select('*')
-                ->from(self::TABLE)
-                ->executeQuery();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAllAssociative();
 
@@ -53,15 +65,20 @@ class SupportUserCommentsRepository
     }
 
     /**
+     * @param array $where
+     *
+     * @return SupportUserCommentsEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
-    public function fetchOneBy(array $where = []): SupportUserCommentsEntity
-    {
+    public function fetchOneBy(array $where = [])
+    : SupportUserCommentsEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
-                ->select('*')
-                ->from(self::TABLE)
-                ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -69,7 +86,7 @@ class SupportUserCommentsRepository
             }
         }
 
-        $statement = $queryBuilder->executeQuery();
+        $statement = $queryBuilder->execute();
 
         $result = $statement->fetchAssociative();
 
@@ -81,14 +98,19 @@ class SupportUserCommentsRepository
     }
 
     /**
+     * @param array $where
+     *
+     * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
-    public function fetchBy(array $where = []): array
-    {
+    public function fetchBy(array $where = [])
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
-                ->select('*')
-                ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -96,7 +118,7 @@ class SupportUserCommentsRepository
             }
         }
 
-        $statement = $queryBuilder->executeQuery();
+        $statement = $queryBuilder->execute();
 
         $result = $statement->fetchAllAssociative();
 
@@ -114,11 +136,14 @@ class SupportUserCommentsRepository
     }
 
     /**
-     * @throws Exception
+     * @param SupportUserCommentsEntity $entity
+     *
+     * @return SupportUserCommentsEntity
      * @throws RecordAlreadyExistsException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function create(SupportUserCommentsEntity $entity): SupportUserCommentsEntity
-    {
+    public function create(SupportUserCommentsEntity $entity)
+    : SupportUserCommentsEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -126,21 +151,24 @@ class SupportUserCommentsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                self::TABLE,
-                $databaseArray
+            self::TABLE,
+            $databaseArray
         );
 
-        $entity->id = (int)$this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @throws Exception
+     * @param SupportUserCommentsEntity $entity
+     *
+     * @return SupportUserCommentsEntity
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function update(SupportUserCommentsEntity $entity): SupportUserCommentsEntity
-    {
+    public function update(SupportUserCommentsEntity $entity)
+    : SupportUserCommentsEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -148,57 +176,70 @@ class SupportUserCommentsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
         );
 
         return $entity;
     }
 
     /**
-     * @throws Exception
+     * @param SupportUserCommentsEntity $entity
+     *
+     * @return SupportUserCommentsEntity
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
      */
-    public function remove(SupportUserCommentsEntity $entity): SupportUserCommentsEntity
-    {
+    public function remove(SupportUserCommentsEntity $entity)
+    : SupportUserCommentsEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
+            self::TABLE,
+            ['id' => $entity->id]
         );
 
-        $entity->id = 0;
+        $entity->id = null;
 
         return $entity;
     }
 
-    public function getDatabaseArrayFromEntity(SupportUserCommentsEntity $entity): array
-    {
+    /**
+     * @param SupportUserCommentsEntity $entity
+     *
+     * @return array
+     */
+    public function getDatabaseArrayFromEntity(SupportUserCommentsEntity $entity)
+    : array {
         return [
-                'id' => $entity->id,
-                'oc_user_id' => $entity->ocUserId,
-                'comment' => $entity->comment,
-                'comment_created' => $entity->commentCreated,
-                'comment_last_modified' => date('Y-m-d H:i:s'),
+            'id' => $entity->id,
+            'oc_user_id' => $entity->ocUserId,
+            'comment' => $entity->comment,
+            'comment_created' => $entity->commentCreated,
+            'comment_last_modified' => date('Y-m-d H:i:s'),
         ];
     }
 
     /**
+     * @param array $data
+     *
+     * @return SupportUserCommentsEntity
      * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function getEntityFromDatabaseArray(array $data): SupportUserCommentsEntity
-    {
+    public function getEntityFromDatabaseArray(array $data)
+    : SupportUserCommentsEntity {
         $entity = new SupportUserCommentsEntity(0);
-        $entity->id = (int)$data['id'];
-        $entity->ocUserId = (int)$data['oc_user_id'];
+        $entity->id = (int) $data['id'];
+        $entity->ocUserId = (int) $data['oc_user_id'];
         $entity->user = $this->userRepository->fetchOneById($entity->ocUserId);
-        $entity->comment = (string)$data['comment'];
-        $entity->commentCreated = (string)$data['comment_created'];
+        $entity->comment = (string) $data['comment'];
+        $entity->commentCreated = (string) $data['comment_created'];
         $entity->commentLastModified = date('Y-m-d H:i:s');
 
         return $entity;
