@@ -45,7 +45,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package Oc\Controller\Backend
  * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_.. and above!
  */
-class SupportController extends AbstractController
+class SupportControllerBackend extends AbstractController
 {
     //  0 - frisch importiert
     // 20 - Import abgeschlossen. Änderungen, sofern vorhanden, wurden verarbeitet.
