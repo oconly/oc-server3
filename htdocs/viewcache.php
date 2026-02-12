@@ -387,7 +387,6 @@ if (isset($logs[$rscount])) {
     $tpl->assign('morelogs', true);
 }
 $loganz = sizeof($logs);
-
 $tpl->assign('logs', $logs);
 $tpl->assign('loganz', $loganz);
 

@@ -43,7 +43,7 @@ class mail extends Smarty
         $this->caching = 0;
 
         // register additional functions
-        $this->loadFilter('pre', 't');
+        $this->load_filter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -86,7 +86,7 @@ class mail extends Smarty
     {
         global $tpl, $opt;
 
-        if (!$this->templateExists($this->name . '.tpl')) {
+        if (!$this->template_exists($this->name . '.tpl')) {
             $tpl->error(ERROR_MAIL_TEMPLATE_NOT_FOUND);
         }
         $this->assign('template', $this->name);

@@ -12,9 +12,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- *
- */
 class UploadType extends AbstractType
 {
     /**

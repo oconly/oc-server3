@@ -5,9 +5,6 @@ namespace Oc\Translation;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
-/**
- *
- */
 class CrowdinExport
 {
     /**

@@ -15,9 +15,6 @@ use Symfony\Component\ExpressionLanguage\Node\Node;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
-/**
- *
- */
 class ImportService
 {
     /**

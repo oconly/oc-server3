@@ -23,7 +23,6 @@ $tpl->cache_id = $sUserCountry;
 $isRedirect404 = isset($_SERVER['REDIRECT_URL']);
 $tpl->assign('isRedirect404', $isRedirect404);
 
-
 // determine website url, if is 404 redirection
 if ($isRedirect404) {
     // check length

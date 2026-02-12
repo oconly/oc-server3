@@ -7,9 +7,6 @@ use Knp\Menu\ItemInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- *
- */
 class MenuEvent extends Event
 {
     /**
