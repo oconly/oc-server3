@@ -45,17 +45,11 @@ class getNew
      */
     public function rsForSmarty($type, $args = null)
     {
-        switch ($type) {
-            case 'cache':
-                return $this->cacheRs($args);
-                break;
-            case 'event':
-                return $this->eventRs($args);
-                break;
-            case 'rating':
-                return $this->ratingRs($args);
-                break;
-        }
+        return match ($type) {
+            'cache' => $this->cacheRs($args),
+            'event' => $this->eventRs($args),
+            default => $this->ratingRs($args),
+        };
     }
 
     /**
@@ -67,22 +61,15 @@ class getNew
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
      * @param null|mixed $includeText
-     * @return string HTML string used for smarty assign method
-     * @internal param bool $includetext ???following??? add table-tag?
      */
-    public function feedForSmarty($type, $items = null, $url = null, $timeout = null, $includeText = null)
+    public function feedForSmarty($type, $items = null, $url = null, $timeout = null, $includeText = null): array
     {
-        switch ($type) {
-            case 'forum':
-                return $this->forumFeed($items, $url, $timeout, $includeText);
-                break;
-            case 'blog':
-                return $this->blogFeed($items, $url, $timeout, $includeText);
-                break;
-            case 'wiki':
-                return $this->wikiFeed($items, $url, $timeout, $includeText);
-                break;
-        }
+        return match ($type) {
+            'forum' => $this->forumFeed($items, $url, $timeout, $includeText),
+            'blog' => $this->blogFeed($items, $url, $timeout, $includeText),
+            'wiki' => $this->wikiFeed($items, $url, $timeout, $includeText),
+            default => [],
+        };
     }
 
     /**
@@ -276,9 +263,8 @@ class getNew
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
      * @param bool $includeText ???following??? add table-tag?
-     * @return string HTML string used for smarty assign method
      */
-    private function blogFeed($items = null, $url = null, $timeout = null, $includeText = null)
+    private function blogFeed($items = null, $url = null, $timeout = null, $includeText = null): array
     {
         global $opt;
 
@@ -308,9 +294,8 @@ class getNew
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
      * @param bool $includeText ???following??? add table-tag?
-     * @return string HTML string used for smarty assign method
      */
-    private function forumFeed($items = null, $url = null, $timeout = null, $includeText = null)
+    private function forumFeed($items = null, $url = null, $timeout = null, $includeText = null): array
     {
         global $opt;
 
@@ -339,29 +324,27 @@ class getNew
      * @param string $url url of the feed to parse (RSSParser)
      * @param bool $includeText ???following??? add table-tag?
      * @param int $timeout maximum seconds to wait for the requested page
-     * @return string HTML string used for smarty assign method
      */
-    private function wikiFeed($items = null, $url = null, $timeout = null, $includeText = null)
+    private function wikiFeed($items = null, $url = null, $timeout = null, $includeText = null): array
     {
         global $opt;
 
-        if (!is_numeric($items) || $items === null) {
+        if (!is_numeric($items)) {
             $items = $opt['wikinews']['count'];
         }
 
-        if (!is_string($url) || $url === null) {
+        if (!is_string($url)) {
             $url = $opt['wikinews']['url'];
         }
 
-        if ($timeout === null || !is_numeric($timeout)) {
+        if (!is_numeric($timeout)) {
             $timeout = $opt['wikinews']['timeout'];
         }
 
-        if ($includeText === null || !is_bool($includeText)) {
+        if (!is_bool($includeText)) {
             $includeText = false;
         }
 
-        // execute RSSParser
         return RSSParser::parse($items, $url, $timeout, $includeText);
     }
 }
