@@ -128,7 +128,7 @@ class translate
             if (!isset($language) && isset($locale)) {
                 $language = $locale;
             } else {
-                $language = $opt['template']['locale'];
+                $language = $opt['template']['locale'] ?? '';
             }
 
             $variables = [];
