@@ -15,24 +15,21 @@ class RSSParser
      * @param string $url url of the feed to parse
      * @param $timeout
      * @param bool $includetext
-     * @return string $item feeditems as HTML-string
+     * @return array
      */
     public static function parse($items, $url, $timeout, $includetext)
     {
         global $tpl;
 
         if ($items <= 0) {
-            return '';
+            return [];
         }
 
         // error
         $rss = [];
 
         // check $url
-        if (preg_match(
-            '!^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\:\,\?\'\\\+&amp;%\$#\=~_\-]+))*$!',
-            $url
-        )) {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
             $tpl->assign('includetext', $includetext);
 
             $arrContextOptions = [
@@ -82,10 +79,10 @@ class RSSParser
                             // fill array
                             $rss[] = [
                                     'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
-                                    'title' => $item->title,
-                                    'link' => $item->link,
+                                    'title' => (string)$item->title,
+                                    'link' => (string)$item->link,
                                 ];
-                            $headlines[] = '' . htmlspecialchars_decode($item->title);
+                            $headlines[] = htmlspecialchars_decode((string)$item->title);
                             $i++;
                         }
                     }
