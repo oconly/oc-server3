@@ -252,7 +252,7 @@
             <ul>
                 <li class="title">
                     {if isset($submenu) }
-                        {if $submenu[0].parent==1} start page hack {t}News{/t}{else}{t}Main menu{/t}{/if}
+                        {if $submenu[0].parent==1}{t}News{/t}{else}{t}Main menu{/t}{/if}
                     {/if}
                 </li>
                 {nocache}
