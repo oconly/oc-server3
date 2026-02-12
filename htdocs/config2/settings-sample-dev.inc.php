@@ -110,7 +110,7 @@ $opt['page']['sponsor']['popup'] = '';
 
 /* forum news integration (index.php)
  */
-$opt['forum']['url'] = 'https://forum.opencaching.de/index.php?action=.xml;type=rss;limit=10';
+$opt['forum']['url'] = 'https://opencaching.ddev.site/rss_forum.php';
 $opt['forum']['link'] = 'http://forum.opencaching.de';
 $opt['forum']['name'] = 'forum.opencaching.de';
 
@@ -163,7 +163,7 @@ $opt['news']['timeout'] = 10;
  * requires url to be a vaild rss feed
  *  show the number of 'count' topics from rss feed
 */
-$opt['forum']['url'] = 'http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=50';
+$opt['forum']['url'] = 'https://opencaching.ddev.site/rss_forum.php';
 $opt['forum']['count'] = 10;
 $opt['forum']['timeout'] = 10;
 
