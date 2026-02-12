@@ -18,8 +18,13 @@ require_once __DIR__ . '/lib2/logic/labels.inc.php';
 
 $login->verify();
 
+/**
+ * @param $cacheid
+ *
+ * @return array
+ */
 function getChildWaypoints($cacheid)
-{
+: array {
     $wphandler = new HandlerChildWp();
     $waypoints = $wphandler->getChildWps($cacheid);
     $count = count($waypoints);
@@ -61,11 +66,11 @@ if (isset($_REQUEST['cacheid'])) {
 
 $cache = new cache($cacheid);
 
-if ($cache->exist() == false) {
+if (!$cache->exist()) {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);
 }
 
-if ($cache->allowView() == false) {
+if (!$cache->allowView()) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 

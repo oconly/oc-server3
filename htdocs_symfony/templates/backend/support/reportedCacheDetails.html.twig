@@ -13,8 +13,11 @@
             {% if reported_cache_by_id %}
                 <br/>
                 <p>
-                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }}
-                    <b>by:</b> {{ reported_cache_by_id.user.username }}
+                    <b>{{ 'Details for report of' | trans }}:</b>
+                    <a href="{{ path('app_cache_by_wp_oc_gc', { 'wpID': reported_cache_by_id.cache.wpOc }) }}"
+                       target="_blank">{{ reported_cache_by_id.cache.wpOc }} {{ reported_cache_by_id.cache.name }}</a>
+                    <b>by:</b>
+                    <a href="{{ path('app_user_by_id', { 'userID': reported_cache_by_id.user.userId }) }}">{{ reported_cache_by_id.user.username }}</a>
                     (
                     <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1"
                        target="_blank">{{ 'Nearby search at geocaching.com' | trans }}
@@ -25,7 +28,7 @@
                 <p><b>{{ 'Report last modified' | trans }}:</b> {{ reported_cache_by_id.lastmodified | date('d.m.Y') }}</p>
                 <p><b>{{ 'Reason' | trans }}:</b> {{ reported_cache_by_id.reportReason.name | trans }}</p>
                 <p><b>{{ 'State' | trans }}:</b> {{ reported_cache_by_id.reportStatus.name | trans }}
-                    {% if reported_cache_by_id.admin %} <b>by:</b> {{ reported_cache_by_id.admin.username }} {% endif %}</p>
+                    {% if reported_cache_by_id.adminid %} <b>by:</b> {{ reported_cache_by_id.admin.username }} {% endif %}</p>
                 <p><b>{{ 'Reporter comment' | trans }}:</b> {{ reported_cache_by_id.note }}</p>
                 <br/>
 
@@ -46,7 +49,7 @@
                 <p><b>{{ 'Action' | trans }}</b></p>
                 <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
                 <br/>
-                {% if not reported_cache_by_id.admin %}
+                {% if not reported_cache_by_id.adminid %}
                     <a class="btn btn-primary"
                        href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.userId, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
                 {% else %}

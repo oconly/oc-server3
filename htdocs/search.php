@@ -500,7 +500,7 @@ $bRememberQuery = isset($_REQUEST['skipqueryid']) ? !$_REQUEST['skipqueryid'] : 
 if ($bRememberQuery) {
     if ($queryid == 0 && $options['showresult'] != 0) { // 'showresult' = "execute query"
         sql(
-            "INSERT INTO `queries` (`user_id`, `options`, `last_queried`) VALUES (0, '&1', NOW())",
+            "INSERT INTO `queries` (`user_id`, `name`, `options`, `last_queried`) VALUES (0, '', '&1', NOW())",
             serialize($options)
         );
         $options['queryid'] = sql_insert_id();
@@ -510,7 +510,7 @@ if ($bRememberQuery) {
 
 // remove old queries (after 1 hour without use);
 // execute only every 50 search calls
-if (mt_rand(1, 50) == 1) {
+if (random_int(1, 50) == 1) {
     sql('DELETE FROM `queries` WHERE `last_queried` < NOW() - INTERVAL 1 HOUR AND `user_id` = 0');
 }
 

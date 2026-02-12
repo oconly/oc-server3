@@ -185,6 +185,9 @@ SQL
         ]);
     }
 
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
     private function deleteCacheLogSubTables(int $userId): void
     {
         $this->connection->executeQuery('DELETE FROM cache_logs_archived WHERE user_id = :userId', [
@@ -253,6 +256,9 @@ SQL
         }
     }
 
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
     public function fetchPictures(array $data, string $idField, int $objectType): array
     {
         if ($data === []) {

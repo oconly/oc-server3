@@ -91,7 +91,7 @@ if (!$tpl->is_cached()) {
         $newCachesQuery->andWhere('`date_hidden` >= curdate()');
     }
 
-    $newCaches = $newCachesQuery->execute()->fetchAll();
+    $newCaches = $newCachesQuery->executeQuery()->fetchAllAssociative();
 
     $tpl->assign('newCaches', $newCaches);
 
@@ -113,14 +113,14 @@ if (!$tpl->is_cached()) {
             $countQuery->andWhere('`date_hidden` >= curdate()');
         }
 
-        $count = $countQuery->execute()->fetchOne();
+        $count = $countQuery->executeQuery()->fetchOne();
 
         $pager = new pager('newcaches.php?startat={offset}' . $cacheype_par);
     } else {
         $countQuery->andWhere('`caches`.`country`= :country');
         $countQuery->setParameter('country', $country);
 
-        $count = $countQuery->execute()->fetchOne();
+        $count = $countQuery->executeQuery()->fetchOne();
 
         $pager = new pager('newcaches.php?country=' . $country . '&startat={offset}' . $cacheype_par);
     }

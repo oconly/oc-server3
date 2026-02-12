@@ -29,7 +29,7 @@ $userStatisticPicture = (int) $connection->createQueryBuilder()
     ->andWhere('lang = :lang')
     ->setParameter('userId', $userId)
     ->setParameter('lang', $lang)
-    ->execute()
+    ->executeQuery()
     ->fetchOne();
 
 if ($userStatisticPicture === 0 || !file_exists($fileName)) {

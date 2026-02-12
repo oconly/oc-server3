@@ -14,8 +14,8 @@ if (defined('HTTPS_ENABLED')) {
 }
 
 $opt['debug'] = true;
-$opt['httpd']['user'] = 'application';
-$opt['httpd']['group'] = 'application';
+$opt['httpd']['user'] = getenv('DDEV_USER');
+$opt['httpd']['group'] = getenv('DDEV_USER');
 
 // show blog and forum news on index.php
 $debug_startpage_news = false;
@@ -65,10 +65,9 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
 $opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '.opencaching.ddev.site';    // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-/* Default locale and style
-         *
-         */
+$opt['debug'] = true;
+$opt['php']['debug'] = PHP_DEBUG_ON;
+/* Default locale and style */
 $opt['template']['default']['locale'] = 'DE';
 $opt['template']['default']['style'] = 'ocstyle';
 $opt['locale']['DE']['page']['subtitle1'] = 'Geocaching mit Opencaching';

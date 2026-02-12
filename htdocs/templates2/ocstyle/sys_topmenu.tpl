@@ -4,6 +4,6 @@
  {* OCSTYLE *}
 {strip}
     {foreach name=topmenu from=$items item=menuitem}
-        <li><a href="{$menuitem.href}" {if isset($menuitem.target)}{$menuitem.target}{/if} {if $menuitem.selected} class="selected bg-green06"{/if}>{$menuitem.menustring|escape}</a></li>
+        <li><a href="{$menuitem.href}" {if isset($menuitem.target)}{$menuitem.target|default}{/if} {if $menuitem.selected} class="selected bg-green06"{/if}>{$menuitem.menustring|escape}</a></li>
     {/foreach}
 {/strip}

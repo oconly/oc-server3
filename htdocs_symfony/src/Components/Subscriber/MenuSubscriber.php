@@ -11,63 +11,42 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- *
+ * Navigation menu for frontend and backend
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var Security
-     */
     private $security;
 
-    /**
-     * @var TranslatorInterface
-     */
     private $translator;
 
-    /**
-     * MenuSubscriber constructor.
-     *
-     * @param Security $security
-     * @param TranslatorInterface $translator
-     */
     public function __construct(Security $security, TranslatorInterface $translator)
     {
         $this->security = $security;
         $this->translator = $translator;
     }
 
-    /**
-     * @return array[]
-     */
-    public static function getSubscribedEvents()
-    : array
+    public static function getSubscribedEvents(): array
     {
         return [
-            KnpMenuEvent::class => ['onSetupMenu', 100],
+                KnpMenuEvent::class => ['onSetupMenu', 100],
         ];
     }
 
-    /**
-     */
     private function addMenuItem(
-        ItemInterface $menu,
-        string $child,
-        string $label,
-        string $route,
-        string $labelName,
-        string $labelValue
+            ItemInterface $menu,
+            string $child,
+            string $label,
+            string $route,
+            string $labelName,
+            string $labelValue
     ) {
         $menu->addChild($child, [
-            'label' => $label,
-            'route' => $route,
+                'label' => $label,
+                'route' => $route,
             // 'childOptions' => $event->getChildOptions(), // wozu braucht's das?
         ])->setLabelAttribute($labelName, $labelValue);
     }
 
-    /**
-     * @param KnpMenuEvent $event
-     */
     public function onSetupMenu(KnpMenuEvent $event)
     {
         $menu = $event->getMenu();
@@ -75,13 +54,14 @@ class MenuSubscriber implements EventSubscriberInterface
         // TODO: Routen und Icons bei den meisten Menüeinträgen noch anpassen.
         // https://symfony.com/bundles/KnpMenuBundle/current/index.html
 
-        $this->addMenuItem($menu, 'menuSearch', $this->translator->trans('Search'), 'backend_caches_index', 'icon', 'fas fa-search-location');
-        $this->addMenuItem($menu['menuSearch'], 'menuSearchCaches', $this->translator->trans('Search caches'), 'backend_caches_index', 'icon', 'fas fa-search-location');
-        $this->addMenuItem($menu['menuSearch'], 'menuSearchUsers', $this->translator->trans('Search users'), 'backend_user_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu, 'menuSearch', $this->translator->trans('Search'), 'app_caches_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu['menuSearch'], 'menuSearchCaches', $this->translator->trans('Search caches'), 'app_caches_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu['menuSearch'], 'menuSearchUsers', $this->translator->trans('Search users'), 'app_user_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu['menuSearch'], 'menuCoordinatesConverter', $this->translator->trans('Identify coordinates format'), 'app_coordinates_format_identify', 'icon', 'fas fa-search-location');
 
         $this->addMenuItem($menu, 'menuHide', $this->translator->trans('Hide'), '', 'icon', 'fas fa-hiking');
 
-        $this->addMenuItem($menu, 'menuMap', $this->translator->trans('Map'), 'backend_map_show', 'icon', 'fas fa-map');
+        $this->addMenuItem($menu, 'menuMap', $this->translator->trans('Map'), 'app_map_show', 'icon', 'fas fa-map');
 
         $this->addMenuItem($menu, 'menuNews', $this->translator->trans('News'), '', 'icon', 'fas fa-newspaper');
         $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsBlog'), 'Blog & OC-Talk', '', 'icon', 'fas fa-newspaper');
@@ -124,7 +104,7 @@ class MenuSubscriber implements EventSubscriberInterface
         $this->addMenuItem($menu['menuOC'], 'menuOCPrivacy', $this->translator->trans('Privacy policy'), '', 'icon', 'fas fa-map-marker-alt');
         $this->addMenuItem($menu['menuOC'], 'menuOCImprint', $this->translator->trans('Imprint'), '', 'icon', 'fas fa-map-marker-alt');
         $this->addMenuItem($menu['menuOC'], 'menuOCTOU', $this->translator->trans('Terms of use'), '', 'icon', 'fas fa-map-marker-alt');
-        $this->addMenuItem($menu['menuOC'], 'menuOCOCOnly81', $this->translator->trans('OCOnly-81'), 'backend_oconly81_index', 'icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu['menuOC'], 'menuOCOCOnly81', $this->translator->trans('OCOnly-81'), 'app_oconly81_index', 'icon', 'fas fa-map-marker-alt');
 
         if ($this->security->isGranted('ROLE_TEAM')) {
             $this->addMenuItem($menu, 'menuSupport', $this->translator->trans('Support Center'), 'backend_support_reported_caches', 'icon', 'fas fa-user-shield');

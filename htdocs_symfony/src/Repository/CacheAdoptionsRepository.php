@@ -6,21 +6,16 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheAdoptionsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class CacheAdoptionsRepository
- *
- * @package Oc\Repository#
- */
 class CacheAdoptionsRepository
 {
-    const TABLE = 'cache_adoptions';
+    private const TABLE = 'cache_adoptions';
 
     /** @var Connection */
     private Connection $connection;
@@ -28,12 +23,6 @@ class CacheAdoptionsRepository
     /** @var UserRepository */
     private UserRepository $userRepository;
 
-    /**
-     * CacheAdoptionsRepository constructor.
-     *
-     * @param Connection $connection
-     * @param UserRepository $userRepository
-     */
     public function __construct(Connection $connection, UserRepository $userRepository)
     {
         $this->connection = $connection;
@@ -41,9 +30,8 @@ class CacheAdoptionsRepository
     }
 
     /**
-     * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws Exception
      * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
@@ -51,9 +39,9 @@ class CacheAdoptionsRepository
     : array
     {
         $statement = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->execute();
+                ->select('*')
+                ->from(self::TABLE)
+                ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -71,9 +59,6 @@ class CacheAdoptionsRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return GeoCacheAdoptionsEntity
      * @throws RecordNotFoundException
      * @throws Exception
      * @throws \Doctrine\DBAL\Exception
@@ -82,9 +67,9 @@ class CacheAdoptionsRepository
     public function fetchOneBy(array $where = [])
     : GeoCacheAdoptionsEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->setMaxResults(1);
+                ->select('*')
+                ->from(self::TABLE)
+                ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -92,7 +77,7 @@ class CacheAdoptionsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -113,8 +98,8 @@ class CacheAdoptionsRepository
     public function fetchBy(array $where = [])
     : array {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE);
+                ->select('*')
+                ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -122,7 +107,7 @@ class CacheAdoptionsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -140,9 +125,6 @@ class CacheAdoptionsRepository
     }
 
     /**
-     * @param GeoCacheAdoptionsEntity $entity
-     *
-     * @return GeoCacheAdoptionsEntity
      * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\Exception
      */
@@ -155,19 +137,16 @@ class CacheAdoptionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-            self::TABLE,
-            $databaseArray
+                self::TABLE,
+                $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->id = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheAdoptionsEntity $entity
-     *
-     * @return GeoCacheAdoptionsEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      */
@@ -180,18 +159,15 @@ class CacheAdoptionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['id' => $entity->id]
+                self::TABLE,
+                $databaseArray,
+                ['id' => $entity->id]
         );
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheAdoptionsEntity $entity
-     *
-     * @return GeoCacheAdoptionsEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      */
@@ -202,11 +178,11 @@ class CacheAdoptionsRepository
         }
 
         $this->connection->delete(
-            self::TABLE,
-            ['id' => $entity->id]
+                self::TABLE,
+                ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -219,13 +195,13 @@ class CacheAdoptionsRepository
     public function getDatabaseArrayFromEntity(GeoCacheAdoptionsEntity $entity)
     : array {
         return [
-            'id' => $entity->id,
-            'cache_id' => $entity->cacheId,
-            'date' => $entity->date,
-            'from_user_id' => $entity->fromUserId,
-            'to_user_id' => $entity->toUserId,
-            'from_user' => $entity->fromUser,
-            'to_user' => $entity->toUser,
+                'id' => $entity->id,
+                'cache_id' => $entity->cacheId,
+                'date' => $entity->date,
+                'from_user_id' => $entity->fromUserId,
+                'to_user_id' => $entity->toUserId,
+                'from_user' => $entity->fromUser,
+                'to_user' => $entity->toUser,
         ];
     }
 
@@ -241,11 +217,11 @@ class CacheAdoptionsRepository
     public function getEntityFromDatabaseArray(array $data)
     : GeoCacheAdoptionsEntity {
         $entity = new GeoCacheAdoptionsEntity();
-        $entity->id = (int) $data['id'];
-        $entity->cacheId = (int) $data['cache_id'];
+        $entity->id = (int)$data['id'];
+        $entity->cacheId = (int)$data['cache_id'];
         $entity->date = new DateTime($data['date']);
-        $entity->fromUserId = (int) $data['from_user_id'];
-        $entity->toUserId = (int) $data['to_user_id'];
+        $entity->fromUserId = (int)$data['from_user_id'];
+        $entity->toUserId = (int)$data['to_user_id'];
         $entity->fromUser = $this->userRepository->fetchOneById($entity->fromUserId);
         $entity->toUser = $this->userRepository->fetchOneById($entity->toUserId);
 

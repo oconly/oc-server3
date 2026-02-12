@@ -6826,3 +6826,10 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-08-25 12:43:00
+
+
+
+alter table map2_result
+    modify shared_counter int unsigned null,
+    modify request_counter int unsigned null
+;

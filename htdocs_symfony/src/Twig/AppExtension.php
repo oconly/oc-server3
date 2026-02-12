@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Twig;
 
 use Oc\Repository\CoordinatesRepository;
@@ -7,58 +9,49 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-/**
- * Class AppExtension
- *
- * @package Oc\Twig
- */
 class AppExtension extends AbstractExtension
 {
-    private $coordinatesRepository;
+    private CoordinatesRepository $coordinatesRepository;
 
-    /**
-     * AppExtension constructor.
-     *
-     * @param CoordinatesRepository $coordinatesRepository
-     */
     public function __construct(CoordinatesRepository $coordinatesRepository)
     {
         $this->coordinatesRepository = $coordinatesRepository;
     }
 
-    /**
-     * @return TwigFilter[]
-     */
-    public function getFilters()
-    : array
+    public function getFilters(): array
     {
         return [
-            new TwigFilter('ocFilterDifficulty', [$this, 'ocFilterDifficulty']),
-            new TwigFilter('ocFilterTerrain', [$this, 'ocFilterTerrain']),
-            new TwigFilter('rot13', [$this, 'ocFilterROT13']),
-            new TwigFilter('rot13gc', [$this, 'ocFilterROT13gc']),
+                new TwigFilter('ocFilterDuration', [$this, 'ocFilterDuration']),
+                new TwigFilter('ocFilterDifficulty', [$this, 'ocFilterDifficulty']),
+                new TwigFilter('ocFilterTerrain', [$this, 'ocFilterTerrain']),
+                new TwigFilter('rot13', [$this, 'ocFilterROT13']),
+                new TwigFilter('rot13gc', [$this, 'ocFilterROT13gc']),
+        ];
+    }
+
+    public function getFunctions(): array
+    {
+        return [
+                new TwigFunction('ocFilterCoordinatesDegMin', [$this, 'ocFilterCoordinatesDegMin']),
+                new TwigFunction('ocFilterCoordinatesDegMinSec', [$this, 'ocFilterCoordinatesDegMinSec']),
         ];
     }
 
     /**
-     * @return TwigFunction[]
-     */
-    public function getFunctions()
-    : array
-    {
-        return [
-            new TwigFunction('ocFilterCoordinatesDegMin', [$this, 'ocFilterCoordinatesDegMin']),
-            new TwigFunction('ocFilterCoordinatesDegMinSec', [$this, 'ocFilterCoordinatesDegMinSec']),
-        ];
-    }
-
-    /**
-     * @param $number
      *
-     * @return string
+     * convert a float value into a time string, like hh:mm
+     *
      */
-    private function convertDifficultyTerrainRating($number)
-    : string {
+    public function ocFilterDuration(float $number): string
+    {
+        return floor($number) . ':' . sprintf("%'.02d", round(60 * ($number - floor($number)), PHP_ROUND_HALF_UP));
+    }
+
+    /**
+     * convert database Difficulty and Terrain ratings into values used on website
+     */
+    private function convertDifficultyTerrainRating($number): string
+    {
         if ($number % 2 === 0) {
             return number_format($number / 2, 0);
         } else {
@@ -68,60 +61,51 @@ class AppExtension extends AbstractExtension
 
     /**
      * calculate and format difficulty value
-     *
-     * @param $number
-     *
-     * @return string
+     * with_prefix=true: return value is like "D1", otherwise "1"
      */
-    public function ocFilterDifficulty($number)
-    : string {
-        return 'D' . $this->convertDifficultyTerrainRating($number);
+    public function ocFilterDifficulty($number, $with_prefix = true): string
+    {
+        if ($with_prefix) {
+            return 'D' . $this->convertDifficultyTerrainRating($number);
+        } else {
+            return $this->convertDifficultyTerrainRating($number);
+        }
     }
 
     /**
      * calculate and format terrain value
-     *
-     * @param $number
-     *
-     * @return string
+     * with_prefix=true: return value is like "T1", otherwise "1"
      */
-    public function ocFilterTerrain($number)
-    : string {
-        return 'T' . $this->convertDifficultyTerrainRating($number);
+    public function ocFilterTerrain($number, $with_prefix = true): string
+    {
+        if ($with_prefix) {
+            return 'T' . $this->convertDifficultyTerrainRating($number);
+        } else {
+            return $this->convertDifficultyTerrainRating($number);
+        }
     }
 
     /**
      * convert string via ROT13
-     *
-     * @param $string
-     *
-     * @return string
      */
-    public function ocFilterROT13($string)
-    : string {
+    public function ocFilterROT13($string): string
+    {
         return str_rot13($string);
     }
 
     /**
      * convert string via ROT13, but ignore characters in [] brackets
-     *
-     * @param $string
-     *
-     * @return string
      */
-    public function ocFilterROT13gc($string)
-    : string {
+    public function ocFilterROT13gc($string): string
+    {
         return str_rot13_gc($string);
     }
 
     /**
-     * @param $lat
-     * @param $lon
-     *
-     * @return string
+     * convert decimal coordinates into DM format
      */
-    public function ocFilterCoordinatesDegMin($lat, $lon)
-    : string {
+    public function ocFilterCoordinatesDegMin($lat, $lon): string
+    {
         $this->coordinatesRepository->setLatLon($lat, $lon);
 
         $result = $this->coordinatesRepository->getDegreeMinutes();
@@ -130,13 +114,10 @@ class AppExtension extends AbstractExtension
     }
 
     /**
-     * @param $lat
-     * @param $lon
-     *
-     * @return string
+     * convert decimal coordinates into DMS format
      */
-    public function ocFilterCoordinatesDegMinSec($lat, $lon)
-    : string {
+    public function ocFilterCoordinatesDegMinSec($lat, $lon): string
+    {
         $this->coordinatesRepository->setLatLon($lat, $lon);
 
         $result = $this->coordinatesRepository->getDegreeMinutesSeconds();

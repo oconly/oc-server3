@@ -4,18 +4,21 @@ docroot: ./htdocs/
 php_version: "8.2"
 webserver_type: apache-fpm
 xdebug_enabled: false
-additional_hostnames: []
+additional_hostnames:
+  - try-opencaching
 additional_fqdns: []
 database:
     type: mariadb
     version: "10.11"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment:
-  - COMPOSER_AUTH={"github-oauth":{"github.com":"TOKENEINFÜGEN"}}
-
+web_environment: []
 corepack_enable: false
-webserver_additional_config: .ddev/apache/vhost-rewrites.conf
+hooks:
+  post-start:
+    - exec: cp htdocs/app/config/parameters.yml.dist htdocs/app/config/parameters.yml
+    - exec: cp htdocs/config2/settings-sample-dev.inc.php htdocs/config2/settings.inc.php
+    - exec: cp htdocs_symfony/.env.local_dist htdocs_symfony/.env.local
 
 # Key features of DDEV's config.yaml:
 
@@ -31,7 +34,6 @@ webserver_additional_config: .ddev/apache/vhost-rewrites.conf
 # docroot: <relative_path> # Relative path to the directory containing index.php.
 
 # php_version: "8.4"  # PHP version to use, "5.6" through "8.5"
-
 # You can explicitly specify the webimage but this
 # is not recommended, as the images are often closely tied to DDEV's' behavior,
 # so this can break upgrades.
@@ -292,6 +294,10 @@ webserver_additional_config: .ddev/apache/vhost-rewrites.conf
 # information on the commands that can be extended and the tasks you can define
 # for them. Example:
 #hooks:
+## Un-comment to consume async message.
+#    post-start:
+#    - exec: symfony run --daemon --watch=config,src,templates,vendor bin/console messenger:consume async -vv
+
 ## Un-comment to consume async message.
 #    post-start:
 #    - exec: symfony run --daemon --watch=config,src,templates,vendor bin/console messenger:consume async -vv

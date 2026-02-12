@@ -23,6 +23,8 @@ class mail extends Smarty
 
     /**
      * mail constructor.
+     *
+     * @throws SmartyException
      */
     public function __construct()
     {
@@ -78,6 +80,7 @@ class mail extends Smarty
      * @param bool $page_url
      *
      * @return bool
+     * @throws SmartyException
      */
     public function send($page_url = false)
     {
