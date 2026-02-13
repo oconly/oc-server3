@@ -1482,7 +1482,7 @@ if ($options['showresult'] == 1) {
     }
 
     // range of output
-    $startat = isset($_REQUEST['startat']) ? floor($_REQUEST['startat'] + 0) : 0;
+    $startat = floor($_REQUEST['startat'] ?? 0);
     if (!is_numeric($startat)) {
         $startat = 0;
     }
