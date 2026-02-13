@@ -19,7 +19,7 @@ $user = new user($login->userid);
 $tpl->assign('newemail', $user->getNewEMail());
 
 if (isset($_REQUEST['request'])) {
-    $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : '';
+    $email = $_REQUEST['email'] ?? '';
     $tpl->assign('email', $email);
 
     $bError = false;
@@ -48,7 +48,7 @@ if (isset($_REQUEST['request'])) {
         }
     }
 } elseif (isset($_REQUEST['change'])) {
-    $code = isset($_REQUEST['code']) ? mb_trim($_REQUEST['code']) : '';
+    $code = mb_trim($_REQUEST['code'] ?? '');
     $tpl->assign('code', $code);
 
     $bError = false;
@@ -88,12 +88,13 @@ if (isset($_REQUEST['request'])) {
             } else {
                 $tpl->assign('codeChanged', true);
                 $user->clearNewEMailCode();
-                // $tpl->assign('newemail', '');
-                // $tpl->assign('code', '');
                 $user->confirmEmailAddress();
             }
         }
     }
+} else {
+    $tpl->assign('email', '');
+    $tpl->assign('code', '');
 }
 
 $tpl->display();
