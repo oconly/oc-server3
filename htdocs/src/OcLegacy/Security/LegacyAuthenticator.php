@@ -42,7 +42,7 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider): ?LegacyUser
     {
-        if (!$credentials['id'] || !$credentials['username']) {
+        if (!($credentials['id'] ?? false) || !($credentials['username'] ?? false)) {
             return null;
         }
 

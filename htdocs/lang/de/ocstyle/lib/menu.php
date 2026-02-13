@@ -219,7 +219,7 @@ $menu = [
         'title' => t('Admin'),
         'menustring' => t('Admin'),
         'siteid' => 'admin',
-        'visible' => $usr['admin'] > 0,
+        'visible' => ($usr['admin'] ?? 0) > 0,
         'filename' => 'translate.php'
     ],
     [
