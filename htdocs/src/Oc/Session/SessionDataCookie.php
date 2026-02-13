@@ -110,8 +110,8 @@ class SessionDataCookie implements SessionDataInterface
                 $opt['session']['cookiename'] . 'https_session',
                 $https_session,
                 time() + 365 * 24 * 60 * 60,
-                $opt['session']['path'],
-                $opt['session']['domain'],
+                $opt['session']['path'] ?? '/',
+                $opt['session']['domain'] ?? '',
                 false, // must be available for http
                 true // communication only, no js
             );
