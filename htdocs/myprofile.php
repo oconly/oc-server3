@@ -23,6 +23,7 @@ if ($login->userid == 0) {
     }
 }
 
+
 if ($action === 'changeemail') {
     $tpl->redirect('newemail.php');
 } elseif ($action === 'change') {
@@ -147,7 +148,7 @@ function change()
         }
     }
 
-    $showAllCountries = isset($_REQUEST['showAllCountries']) ? $_REQUEST['showAllCountries'] + 0 : 0;
+    $showAllCountries = (int) ($_REQUEST['showAllCountries'] ?? 0);
     if (isset($_REQUEST['showAllCountriesSubmit'])) {
         $showAllCountries = 1;
     }
