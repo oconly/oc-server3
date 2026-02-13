@@ -55,7 +55,7 @@ foreach ($options as $option) {
     } else {
         $opt404[$option] = $opt['page']['404']['www.opencaching.de'][$option];
     }
-    if ($opt404[$option]['urlname'] == '') {
+    if (isset($opt404[$option]['urlname']) && $opt404[$option]['urlname'] == '') {
         $opt404[$option]['urlname'] = parse_url($opt404[$option]['url'], PHP_URL_HOST);
     }
 }
