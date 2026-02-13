@@ -644,7 +644,7 @@ class cache
                             $coords[$coordpos]['longitude']
                         );
                         if (abs($distance) > 0.005) {
-                            $rLog['newcoord'] = $newcoord->getDecimalMinutes($protect_old_coords && $new != $current_coord);
+                            $rLog['newcoord'] = $newcoord->getDecimalMinutes($protect_old_coords /* && $new != $current_coord $new ist niemals gesetzt */);
                             if ($protect_old_coords) {
                                 $rLog['movedbykm'] = false;
                             } elseif ($distance <= 1) {
