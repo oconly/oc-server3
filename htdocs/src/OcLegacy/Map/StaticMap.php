@@ -138,7 +138,7 @@ class StaticMap
         }
         if (isset($_GET['markers']) && !empty($_GET['markers'])) {
             foreach (explode('|', $_GET['markers']) as $marker) {
-                list($markerLat, $markerLon, $markerType) = explode(',', $marker);
+                @list($markerLat, $markerLon, $markerType) = @explode(',', $marker);
                 $markerLat = floatval($markerLat);
                 $markerLon = floatval($markerLon);
                 $markerType = basename($markerType);
