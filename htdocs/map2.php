@@ -400,12 +400,12 @@ function output_cachexml($sWaypoint)
     echo 'found="' . xmlentities(($nFoundCount > 0) ? 1 : 0) . '" ';
     echo 'notfound="' . xmlentities(($nNotFoundCount > 0) ? 1 : 0) . '" ';
     echo 'attended="' . xmlentities(($nAttendedCount > 0) ? 1 : 0) . '" ';
-    echo 'oconly="' . xmlentities($rCache['oconly']) . '" ';
-    echo 'owner="' . xmlentities($rCache['owner']) . '" ';
-    echo 'username="' . xmlentities($rCache['username']) . '" ';
-    echo 'userid="' . xmlentities($rCache['user_id']) . '" ';
-    echo 'picurl="' . xmlentities(str_replace('http://', 'https://', $rCache['picurl'])) . '" ';
-    echo 'pictitle="' . xmlentities(trim($rCache['pictitle'])) . '" >\n';
+    echo 'oconly="' . xmlentities($rCache['oconly'] ?? '') . '" ';
+    echo 'owner="' . xmlentities($rCache['owner'] ?? '') . '" ';
+    echo 'username="' . xmlentities($rCache['username'] ?? '') . '" ';
+    echo 'userid="' . xmlentities($rCache['user_id'] ?? '') . '" ';
+    echo 'picurl="' . xmlentities(str_replace('http://', 'https://', $rCache['picurl'] ?? '')) . '" ';
+    echo 'pictitle="' . xmlentities(trim($rCache['pictitle'] ?? '')) . '" >\n';
 
     foreach ($waypoints as $waypoint) {
         echo '    <wpt ';
