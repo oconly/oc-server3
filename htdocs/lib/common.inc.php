@@ -499,7 +499,8 @@ function tpl_BuildTemplate($dbDisconnect = true): void
     header('Content-type: text/html; charset=utf-8');
 
     //run the template code
-    eval($sCode);
+    // dieser code wirft warnings ohne ende ganz dickes @TODO: fix this
+    @eval($sCode);
 
     //disconnect the database
     if ($dbDisconnect) {
