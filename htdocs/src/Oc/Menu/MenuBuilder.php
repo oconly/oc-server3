@@ -30,7 +30,6 @@ class MenuBuilder
         $menu = $this->factory->createItem(MenuEnum::MENU_MAIN);
 
         $this->eventDispatcher->dispatch(
-            MenuEnum::MENU_MAIN,
             new MenuEvent($this->eventDispatcher, $this->factory, $menu, $menu)
         );
 
