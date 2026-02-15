@@ -8,7 +8,7 @@ require __DIR__ . '/lib2/web.inc.php';
 $tpl->name = 'event_attendance';
 $tpl->popup = true;
 
-$cache_id = isset($_REQUEST['id']) ? $_REQUEST['id'] + 0 : 0;
+$cache_id = (int)($_REQUEST['id'] ?? 0);
 if ($cache_id != 0) {
     $rs = sql(
         "SELECT `caches`.`name`, `user`.`username`, `caches`.`date_hidden`
