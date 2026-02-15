@@ -62,7 +62,11 @@ require __DIR__ . '/lib2/logic/data-license.inc.php';
 require __DIR__ . '/lib2/search/search.inc.php';
 require __DIR__ . '/templates2/' . $opt['template']['style'] . '/search.tpl.inc.php';
 
-
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    if (!$login->logged_in()) {
+        die('deactivated');
+    }
+}
 //=========================================================
 //  1. initialize searching and template variables
 //=========================================================
