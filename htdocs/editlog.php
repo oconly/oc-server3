@@ -90,13 +90,10 @@ $cache = new cache($log_record['cache_id']);
 
 // process url parametes
 // Ocprop: logtype, logday, logmonth, logyear, rating, submitform
-$log_type = isset($_POST['logtype']) ? $_POST['logtype'] : $log_record['logtype'];
-$log_date_day =
-    isset($_POST['logday']) ? trim($_POST['logday']) : date('d', strtotime($log_record['date']));
-$log_date_month =
-    isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date('m', strtotime($log_record['date']));
-$log_date_year =
-    isset($_POST['logyear']) ? trim($_POST['logyear']) : date('Y', strtotime($log_record['date']));
+$log_type = $_POST['logtype'] ?? $log_record['logtype'];
+$log_date_day = trim($_POST['logday'] ?? date('d', strtotime($log_record['date'])));
+$log_date_month = trim($_POST['logmonth'] ?? date('m', strtotime($log_record['date'])));
+$log_date_year = trim($_POST['logyear'] ?? date('Y', strtotime($log_record['date'])));
 $log_time_hour =
     isset($_POST['loghour'])
     ? trim($_POST['loghour'])
@@ -105,9 +102,9 @@ $log_time_minute =
     isset($_POST['logminute'])
     ? trim($_POST['logminute'])
     : (substr($log_record['date'], 11) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
-$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption'] + 0 : 0;
-$top_cache = isset($_POST['rating']) ? $_POST['rating'] + 0 : 0;
-$log_pw = isset($_POST['log_pw']) ? $_POST['log_pw'] : '';
+$top_option = (int)($_POST['ratingoption'] ?? 0);
+$top_cache = (int)($_POST['rating'] ?? 0);
+$log_pw = $_POST['log_pw'] ?? '';
 
 if (isset($_POST['submitform']) ||
     (
@@ -115,10 +112,10 @@ if (isset($_POST['submitform']) ||
         && $_POST['oldDescMode'] != $_POST['descMode']
     )
 ) {
-    $oc_team_comment = isset($_POST['teamcomment']) ? $_POST['teamcomment'] != '' : false;
-    $needsMaintenance = isset($_POST['needs_maintenance2']) ? $_POST['needs_maintenance2'] + 0 : (isset($_POST['needs_maintenance']) ? $_POST['needs_maintenance'] + 0 : 0);
-    $listingOutdated = isset($_POST['listing_outdated2']) ? $_POST['listing_outdated2'] + 0 : (isset($_POST['listing_outdated']) ? $_POST['listing_outdated'] + 0 : 0);
-    $confirmListingOk = isset($_POST['confirm_listing_ok']) ? $_POST['confirm_listing_ok'] + 0 : 0;
+    $oc_team_comment = isset($_POST['teamcomment']) && $_POST['teamcomment'] != '';
+    $needsMaintenance = isset($_POST['needs_maintenance2']) ? (int)$_POST['needs_maintenance2'] : (isset($_POST['needs_maintenance']) ? (int)$_POST['needs_maintenance'] : 0);
+    $listingOutdated = isset($_POST['listing_outdated2']) ? (int)$_POST['listing_outdated2'] : (isset($_POST['listing_outdated']) ? (int)$_POST['listing_outdated']  : 0);
+    $confirmListingOk = isset($_POST['confirm_listing_ok']) ? (int)$_POST['confirm_listing_ok'] : 0;
 
     // validate NM and LO flags
     if (!in_array($log_type, $logtype_allows_nm) || $cache->getType() == 6) {
@@ -228,8 +225,8 @@ if ($loggable && isset($_POST['submitform'])) { // Ocprop
     $log_date = date(
         'Y-m-d H:i:s',
         mktime(
-            $log_time_hour + 0,
-            $log_time_minute + 0,
+            (int)$log_time_hour,
+            (int)$log_time_minute,
             $log_time_second,
             $log_date_month,
             $log_date_day,
@@ -408,8 +405,8 @@ $tpl->assign('use_log_pw', $use_log_pw);
 $tpl->assign('smileypath', $opt['template']['smiley']);
 $tpl->assign('smilies', $smiley_a);
 
-$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+$tpl->assign('scrollposx', (int)($_REQUEST['scrollposx'] ?? 0));
+$tpl->assign('scrollposy', (int)($_REQUEST['scrollposy'] ?? 0));
 
 // select template mode and send it out
 $tpl->assign('editlog', true);
