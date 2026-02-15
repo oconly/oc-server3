@@ -276,7 +276,7 @@ function remove()
 {
     global $tpl, $translang;
 
-    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] + 0 : 0;
+    $id = (int)($_REQUEST['id'] ?? 0);
 
     sql("DELETE FROM `sys_trans` WHERE `id`='&1'", $id);
     sql("DELETE FROM `sys_trans_text` WHERE `trans_id`='&1'", $id);
@@ -289,10 +289,10 @@ function edit()
 {
     global $tpl, $translang;
 
-    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] + 0 : 0;
+    $id = (int)($_REQUEST['id'] ?? 0);
 
     if (isset($_REQUEST['usetrans'])) {
-        $usetransid = $_REQUEST['usetrans'] + 0;
+        $usetransid = (int)$_REQUEST['usetrans'];
 
         $rs = sql(
             "SELECT `lang`,
@@ -823,7 +823,7 @@ function xmlimport3()
 {
     global $opt, $translang, $tpl;
 
-    $nCount = isset($_REQUEST['count']) ? $_REQUEST['count'] + 0 : 0;
+    $nCount = (int)($_REQUEST['count'] ?? 0);
 
     for ($nIndex = 1; $nIndex <= $nCount; $nIndex++) {
         if (isset($_REQUEST['useitem' . $nIndex]) && ($_REQUEST['useitem' . $nIndex] == '1')) {
