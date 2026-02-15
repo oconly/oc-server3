@@ -226,7 +226,7 @@ if (!$error) {
         }
 
         // fill activate hours
-        $activate_hour = isset($_POST['activate_hour']) ? $_POST['activate_hour'] + 0 : date('H') + 0;
+        $activate_hour = (int)($_POST['activate_hour'] ?? date('H'));
         $activation_hours = '';
         for ($i = 0; $i <= 23; $i++) {
             if ($activate_hour == $i) {
@@ -543,7 +543,7 @@ if (!$error) {
                  LEFT JOIN `sys_trans_text` AS `ttdesc`
                    ON `tdesc`.`id`=`ttdesc`.`trans_id`
                    AND `ttdesc`.`lang`='&1'
-                 WHERE `cache_attrib`.`group_id`=" . ($rAttrGroup['id'] + 0) . '
+                 WHERE `cache_attrib`.`group_id`=" . ((int)$rAttrGroup['id']) . '
                  AND NOT IFNULL(`cache_attrib`.`hidden`, 0) = 1
                  AND `cache_attrib`.`selectable` != 0
                  ORDER BY `cache_attrib`.`group_id`, `cache_attrib`.`id`',
@@ -1023,7 +1023,7 @@ if (!$error) {
                 $acheAttributesCount = count($cache_attribs);
                 // insert cache-attributes
                 for ($i = 0; $i < $acheAttributesCount; $i++) {
-                    if (($cache_attribs[$i] + 0) > 0) {
+                    if (((int)$cache_attribs[$i]) > 0) {
                         sql(
                             "INSERT INTO `caches_attributes` (
                                  `cache_id`,
@@ -1033,7 +1033,7 @@ if (!$error) {
                                  '&2'
                              )",
                             $cache_id,
-                            $cache_attribs[$i] + 0
+                            (int)$cache_attribs[$i]
                         );
                     }
                 }
@@ -1056,8 +1056,8 @@ if (!$error) {
 }
 
 if (!$no_tpl_build) {
-    tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-    tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+    tpl_set_var('scrollposx', (int)($_REQUEST['scrollposx'] ?? 0));
+    tpl_set_var('scrollposy', (int)($_REQUEST['scrollposy'] ?? 0));
 
     // make the template and send it out
     tpl_BuildTemplate();
