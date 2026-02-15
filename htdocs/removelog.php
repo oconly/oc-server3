@@ -297,7 +297,7 @@ if ($error == false) {
                             5
                         )
                 );
-                tpl_set_var('userid', htmlspecialchars($log_record['log_user_id'] + 0, ENT_COMPAT, 'UTF-8'));
+                tpl_set_var('userid', htmlspecialchars((int)$log_record['log_user_id'], ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('username', htmlspecialchars($log_record['log_username'], ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('typetext', htmlspecialchars($sLogTypeText, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('logtext', $log_record['log_text']);
