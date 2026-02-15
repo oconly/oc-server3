@@ -21,9 +21,9 @@ if ($action == 'edit') {
     $user = new user($login->userid);
 
     if (isset($_REQUEST['ok'])) {
-        $interval = isset($_REQUEST['interval']) ? $_REQUEST['interval'] + 0 : 1;
-        $hour = isset($_REQUEST['hour']) ? $_REQUEST['hour'] + 0 : 0;
-        $weekday = isset($_REQUEST['weekday']) ? $_REQUEST['weekday'] + 0 : 1;
+        $interval = (int)($_REQUEST['interval'] ?? 1);
+        $hour = (int)($_REQUEST['hour'] ?? 0);
+        $weekday = (int)($_REQUEST['weekday'] ?? 1);
 
         $bError = false;
         if (!$user->setWatchmailMode($interval)) {
@@ -68,7 +68,7 @@ if ($action == 'edit') {
     $tpl->assign('weekday', $user->getWatchmailDay());
 } elseif ($action == 'add') {
     $target = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-    $cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+    $cacheid = (int)($_REQUEST['cacheid'] ?? 0);
     if (sql_value("SELECT COUNT(*) FROM `caches` WHERE `cache_id`='&1'", 0, $cacheid) > 0) {
         sql(
             "INSERT IGNORE INTO `cache_watches` (`cache_id`, `user_id`) VALUES ('&1', '&2')",
@@ -79,8 +79,8 @@ if ($action == 'edit') {
 
     $tpl->redirect($tpl->checkTarget($target, 'mywatches.php'));
 } elseif ($action == 'remove') {
-    $target = isset($_REQUEST['target']) ? $_REQUEST['target'] : '';
-    $cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+    $target = $_REQUEST['target'] ?? '';
+    $cacheid = (int)($_REQUEST['cacheid'] ?? 0);
     sql("DELETE FROM `cache_watches` WHERE `cache_id`='&1' AND `user_id`='&2'", $cacheid, $login->userid);
 
     $tpl->redirect($tpl->checkTarget($target, 'mywatches.php'));
@@ -113,7 +113,7 @@ if ($action == 'edit') {
     sql_free_result($rs);
 
     if (isset($_REQUEST['dontwatchlist'])) {
-        $list = new cachelist($_REQUEST['dontwatchlist'] + 0);
+        $list = new cachelist((int)$_REQUEST['dontwatchlist']);
         if ($list->exist()) {
             $list->watch(false);
         }
