@@ -11,12 +11,12 @@ $tpl->name = 'cachelists';
 $tpl->menuitem = MNU_CACHES_LISTS;
 
 if (isset($_REQUEST['watchlist'])) {
-    $list = new cachelist($_REQUEST['watchlist'] + 0);
+    $list = new cachelist((int)($_REQUEST['watchlist'] ?? 0));
     if ($list->exist()) {
         $list->watch(true);
     }
 } elseif (isset($_REQUEST['dontwatchlist'])) {
-    $list = new cachelist($_REQUEST['dontwatchlist'] + 0);
+    $list = new cachelist((int)($_REQUEST['dontwatchlist'] ?? 0));
     if ($list->exist()) {
         $list->watch(false);
     }
