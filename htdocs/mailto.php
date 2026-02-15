@@ -13,7 +13,7 @@ if ($login->userid == 0) {
     $tpl->redirect('login.php?target=' . urlencode($tpl->target));
 }
 
-$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+$userid = (int)($_REQUEST['userid'] ?? 0);
 $user = new user($userid);
 if ($user->exist() == false) {
     $tpl->error(ERROR_USER_NOT_EXISTS);
