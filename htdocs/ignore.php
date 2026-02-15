@@ -5,9 +5,9 @@
 
 require __DIR__ . '/lib2/web.inc.php';
 
-$cache_id = isset($_GET['cacheid']) ? $_GET['cacheid'] + 0 : 0;
-$action = isset($_GET['action']) ? $_GET['action'] : '';
-$target = isset($_GET['target']) ? $_GET['target'] : 'viewcache.php?cacheid=' . $cache_id;
+$cache_id = (int)($_GET['cacheid'] ?? 0);
+$action = $_GET['action'] ?? '';
+$target = $_GET['target'] ?? 'viewcache.php?cacheid=' . $cache_id;
 
 $login->verify();
 
