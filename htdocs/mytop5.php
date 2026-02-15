@@ -16,7 +16,7 @@ if ($login->userid == 0) {
 $action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : '';
 
 if ($action == 'delete') {
-    $cache_id = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+    $cache_id = (int)($_REQUEST['cacheid'] ?? 0);
     sql("DELETE FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", $cache_id, $login->userid);
     if (sql_affected_rows() == 0) {
         // will happen if
