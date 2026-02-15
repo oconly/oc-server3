@@ -7,12 +7,12 @@ require_once __DIR__ . '/lib2/web.inc.php';
 
 $add_where = '';
 $newLogsPerCountry = $opt['logic']['new_logs_per_country'];
-$startat = isset($_GET['startat']) ? floor($_GET['startat'] + 0) : 0;
+$startat = floor($_GET['startat'] ?? 0);
 $urlparams = '';
 $optimize_for_latest_logs = false;
 
 if (isset($_GET['logselection'])) {
-    $logselection = max(1, min($_GET['logselection'] + 0, 3));
+    $logselection = max(1, min((int)$_GET['logselection'], 3));
     $cookie->set('newlogs', $logselection);
 } else {
     $logselection = $cookie->get('newlogs');
