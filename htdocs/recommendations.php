@@ -8,7 +8,7 @@ require __DIR__ . '/lib2/web.inc.php';
 $tpl->name = 'recommendations';
 $tpl->menuitem = MNU_CACHES_SEARCH_RECOMMENDATIONS;
 
-$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+$cacheid = (int)($_REQUEST['cacheid'] ?? 0);
 
 $rs = sql(
     "SELECT `caches`.`cache_id` AS `id`,
