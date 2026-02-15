@@ -10,7 +10,7 @@ $tpl->popup = true;
 
 $login->verify();
 
-$cacheId = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+$cacheId = (int)($_REQUEST['cacheid'] ?? 0);
 
 $rs = sql(
     "SELECT `caches`.`name`
