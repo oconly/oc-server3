@@ -54,7 +54,7 @@ if ($error == false) {
 
                 // read descMode; if not set, initialize from user profile
                 if (isset($_POST['descMode'])) {  // Ocprop
-                    $descMode = $_POST['descMode'] + 0;
+                    $descMode = (int)$_POST['descMode'];
                     if (($descMode < EditorConstants::HTML_MODE) || ($descMode > EditorConstants::EDITOR_MODE)) {
                         $descMode = EditorConstants::EDITOR_MODE;
                     }
@@ -227,7 +227,7 @@ if ($error == false) {
                 if ($descMode == EditorConstants::EDITOR_MODE) {
                     // TinyMCE
                     $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
-                    $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ($cache_id + 0) . '&lang=' . strtolower($locale) . '"></script>' . "\n";
+                    $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ((int)$cache_id) . '&lang=' . strtolower($locale) . '"></script>' . "\n";
                 }
                 $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
                 tpl_set_var('htmlheaders', $headers);
@@ -241,8 +241,8 @@ if ($error == false) {
     }
 }
 
-tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+tpl_set_var('scrollposx', (int)($_REQUEST['scrollposx'] ?? 0));
+tpl_set_var('scrollposy', (int)($_REQUEST['scrollposy'] ?? 0));
 
 //make the template and send it out
 tpl_BuildTemplate();
