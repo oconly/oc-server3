@@ -10,7 +10,7 @@ $tpl->menuitem = MNU_MYPROFILE_OWNERLOGS;
 $login->verify();
 
 if (isset($_REQUEST['userid']) && $login->hasAdminPriv(ADMIN_USER)) {
-    $ownerid = $_REQUEST['userid'] + 0;
+    $ownerid = (int)$_REQUEST['userid'];
 } elseif ($login->userid == 0) {
     $tpl->redirect('login.php?target=ownerlogs.php');
 } else {
