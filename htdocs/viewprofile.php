@@ -13,8 +13,8 @@ $connection = AppKernel::Container()->get(Connection::class);
 $tpl->name = 'viewprofile';
 $tpl->menuitem = MNU_CACHES_USERPROFILE;
 
-$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
-$allpics = isset($_REQUEST['allpics']) ? $_REQUEST['allpics'] + 0 : 0;
+$userid = (int)($_REQUEST['userid'] ?? 0);
+$allpics = (int)($_REQUEST['allpics'] ?? 0);
 
 if ($userid == 0) {
     $login->verify();
@@ -468,13 +468,13 @@ $tpl->assign('accMailing', $record['accept_mailing']);
 $tpl->assign('pmr', $record['pmr_flag']);
 
 if (isset($_REQUEST['watchlist'])) {
-    $list = new cachelist($_REQUEST['watchlist'] + 0);
+    $list = new cachelist((int)$_REQUEST['watchlist']);
     if ($list->exist()) {
         $list->watch(true);
     }
 } else {
     if (isset($_REQUEST['dontwatchlist'])) {
-        $list = new cachelist($_REQUEST['dontwatchlist'] + 0);
+        $list = new cachelist((int)$_REQUEST['dontwatchlist']);
         if ($list->exist()) {
             $list->watch(false);
         }
