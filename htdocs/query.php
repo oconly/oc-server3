@@ -16,26 +16,26 @@ if ($login->userid == 0) {
 }
 
 if ($action == 'save') {
-    $queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] + 0 : 0;
-    $sortby = isset($_REQUEST['sortby']) ? $_REQUEST['sortby'] : false;
-    $sortorder = isset($_REQUEST['sortorder']) ? $_REQUEST['sortorder'] : false;
-    $creationdate = isset($_REQUEST['creationdate']) ? $_REQUEST['creationdate'] : false;
-    $queryname = isset($_REQUEST['queryname']) ? $_REQUEST['queryname'] : '';
-    $submit = isset($_REQUEST['submit']) ? ($_REQUEST['submit'] == '1') : false;
+    $queryid = (int)($_REQUEST['queryid'] ?? 0);
+    $sortby = $_REQUEST['sortby'] ?? false;
+    $sortorder = $_REQUEST['sortorder'] ?? false;
+    $creationdate = $_REQUEST['creationdate'] ?? false;
+    $queryname = $_REQUEST['queryname'] ?? '';
+    $submit = isset($_REQUEST['submit']) && $_REQUEST['submit'] == '1';
 
     savequery($queryid, $queryname, false, $submit, 0, $sortby, $sortorder, $creationdate);
 } elseif ($action == 'saveas') {
-    $queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] + 0 : 0;
-    $sortby = isset($_REQUEST['sortby']) ? $_REQUEST['sortby'] : false;
-    $sortorder = isset($_REQUEST['sortorder']) ? $_REQUEST['sortorder'] : false;
-    $creationdate = isset($_REQUEST['creationdate']) ? $_REQUEST['creationdate'] : false;
-    $queryname = isset($_REQUEST['queryname']) ? $_REQUEST['queryname'] : '';
-    $submit = isset($_REQUEST['submit']) ? ($_REQUEST['submit'] == '1') : false;
-    $oldqueryid = isset($_REQUEST['oldqueryid']) ? $_REQUEST['oldqueryid'] + 0 : 0;
+    $queryid = (int)($_REQUEST['queryid'] ?? 0);
+    $sortby = $_REQUEST['sortby'] ?? false;
+    $sortorder = $_REQUEST['sortorder'] ?? false;
+    $creationdate = $_REQUEST['creationdate'] ?? false;
+    $queryname = $_REQUEST['queryname'] ?? '';
+    $submit = isset($_REQUEST['submit']) && $_REQUEST['submit'] == '1';
+    $oldqueryid = (int)($_REQUEST['oldqueryid'] ?? 0);
 
     savequery($queryid, $queryname, true, $submit, $oldqueryid, $sortby, $sortorder, $creationdate);
 } elseif ($action == 'delete') {
-    $queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] + 0 : 0;
+    $queryid = (int)($_REQUEST['queryid'] ?? 0);
     deletequery($queryid);
 } else { // default: view
     viewqueries();
