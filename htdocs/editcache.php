@@ -188,8 +188,8 @@ if ($error == false) {
                 $cache_difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : $cache_record['difficulty'];  // Ocprop
                 $cache_terrain = isset($_POST['terrain']) ? $_POST['terrain'] : $cache_record['terrain'];  // Ocprop
                 $cache_country = isset($_POST['country']) ? $_POST['country'] : $cache_record['country'];  // Ocprop
-                $show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] : 0;
-                $listing_modified = isset($_POST['listing_modified']) ? $_POST['listing_modified'] + 0 : 0;
+                $show_all_countries = $_POST['show_all_countries'] ?? 0;
+                $listing_modified = (int)($_POST['listing_modified'] ?? 0);
                 $status = isset($_POST['status']) ? $_POST['status'] : $cache_record['status'];  // Ocprop
                 $status_old = $cache_record['status'];
                 $search_time = isset($_POST['search_time']) ? trim($_POST['search_time']) : $cache_record['search_time'];
@@ -252,8 +252,8 @@ if ($error == false) {
                 $log_pw = isset($_POST['log_pw']) ? mb_substr($_POST['log_pw'], 0, 20) : $cache_record['logpw'];
                 // fix #4356: gc waypoints are frequently copy&pasted with leading spaces
                 $wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : $cache_record['wp_gc'];  // Ocprop
-                $showlists = isset($_POST['showlists']) ? 1 : $cache_record['show_cachelists'] + 0;
-                $protect_old_coords = isset($_POST['protect_old_coords']) ? 1 : $cache_record['protect_old_coords'] + 0;
+                $showlists = isset($_POST['showlists']) ? 1 : (int)$cache_record['show_cachelists'];
+                $protect_old_coords = isset($_POST['protect_old_coords']) ? 1 : (int)$cache_record['protect_old_coords'];
 
                 // name
                 $name_not_ok = false;
@@ -624,9 +624,9 @@ if ($error == false) {
                                     "INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`)
                                      VALUES('&1', '&2')",
                                     $cache_id,
-                                    $cache_attribs[$i] + 0
+                                    (int)$cache_attribs[$i]
                                 );
-                                $attriblist .= "," . ($cache_attribs[$i] + 0);
+                                $attriblist .= "," . ((int)$cache_attribs[$i]);
                             }
                         }
 
@@ -975,7 +975,7 @@ if ($error == false) {
                            ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                            AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
                          WHERE `cache_status`.`id` NOT IN (4, 5, 7)
-                           OR `cache_status`.`id`='" . sql_escape($status_old + 0) . "'
+                           OR `cache_status`.`id`='" . sql_escape((int)$status_old) . "'
                          ORDER BY `cache_status`.`id` ASC"
                     );
                     while ($rStatus = sql_fetch_assoc($rsStatus)) {
