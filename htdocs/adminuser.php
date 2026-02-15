@@ -43,7 +43,7 @@ $tpl->error(ERROR_UNKNOWN);
 function gdprDeletion() {
     global $tpl;
 
-    $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+    $userId = (int)($_REQUEST['userid'] ?? 0);
     $execute = isset($_POST['execute']);
 
     $user = new user($userId);
@@ -62,7 +62,7 @@ function sendCode()
 {
     global $tpl;
 
-    $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+    $userId = (int)($_REQUEST['userid'] ?? 0);
 
     $user = new user($userId);
     if ($user->exist() === false) {
@@ -79,14 +79,14 @@ function formAction()
 {
     global $tpl, $translate;
 
-    $commit = isset($_REQUEST['chkcommit']) ? $_REQUEST['chkcommit'] + 0 : 0;
-    $delete = isset($_REQUEST['chkdelete']) ? $_REQUEST['chkdelete'] + 0 : 0;
-    $deleteGdpr = isset($_REQUEST['chkdeletegdpr']) ? $_REQUEST['chkdeletegdpr'] + 0 : 0;
-    $disable = isset($_REQUEST['chkdisable']) ? $_REQUEST['chkdisable'] + 0 : 0;
-    $emailProblem = isset($_REQUEST['chkemail']) ? $_REQUEST['chkemail'] + 0 : 0;
+    $commit = (int)($_REQUEST['chkcommit'] ?? 0);
+    $delete = (int)($_REQUEST['chkdelete'] ?? 0);
+    $deleteGdpr = (int)($_REQUEST['chkdeletegdpr'] ?? 0);
+    $disable = (int)($_REQUEST['chkdisable'] ?? 0);
+    $emailProblem = (int)($_REQUEST['chkemail'] ?? 0);
     $dataLicense = isset($_REQUEST['chkdl']) ? true : false;
-    $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
-    $disduelicense = isset($_REQUEST['chkdisduelicense']) ? $_REQUEST['chkdisduelicense'] + 0 : 0;
+    $userId = (int)($_REQUEST['userid'] ?? 0);
+    $disduelicense = (int)($_REQUEST['chkdisduelicense'] ?? 0);
 
     $user = new user($userId);
     if ($user->exist() === false) {
