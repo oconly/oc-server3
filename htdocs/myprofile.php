@@ -81,15 +81,15 @@ function change()
     }
 
     if (isset($_REQUEST['notifyRadius'])) {
-        $tpl->assign('notifyRadius', $_REQUEST['notifyRadius'] + 0);
-        if (!$user->setNotifyRadius($_REQUEST['notifyRadius'] + 0)) {
+        $tpl->assign('notifyRadius', (int)$_REQUEST['notifyRadius']);
+        if (!$user->setNotifyRadius((int)$_REQUEST['notifyRadius'])) {
             $tpl->assign('notifyRadiusError', true);
             $bError = true;
         }
     }
 
     if (isset($_REQUEST['notifyOconly'])) {
-        $tpl->assign('notifyOconly', $_REQUEST['notifyOconly'] + 0);
+        $tpl->assign('notifyOconly', (int)$_REQUEST['notifyOconly']);
         $user->setNotifyOconly($_REQUEST['notifyOconly'] != 0);
     } elseif (isset($_REQUEST['save'])) {
         $user->setNotifyOconly(false);
