@@ -9,10 +9,10 @@ require __DIR__ . '/lib2/web.inc.php';
 
 $login->verify();
 
-$uuid = isset($_REQUEST['uuid']) ? $_REQUEST['uuid'] : '';
-$debug = isset($_REQUEST['debug']) ? $_REQUEST['debug'] + 0 : 0;
-$showspoiler = isset($_REQUEST['showspoiler']) ? $_REQUEST['showspoiler'] + 0 : 0;
-$default_object_type = isset($_REQUEST['type']) && ($_REQUEST['type'] == 1 || $_REQUEST['type'] == 2) ? $_REQUEST['type'] + 0 : 1;
+$uuid = $_REQUEST['uuid'] ?? '';
+$debug = (int)($_REQUEST['debug'] ?? 0);
+$showspoiler = (int)($_REQUEST['showspoiler'] ?? 0);
+$default_object_type = isset($_REQUEST['type']) && ($_REQUEST['type'] == 1 || $_REQUEST['type'] == 2) ? (int)$_REQUEST['type'] : 1;
 
 if (($opt['debug'] & DEBUG_DEVELOPER) != DEBUG_DEVELOPER) {
     $debug = false;
