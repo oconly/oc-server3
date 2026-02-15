@@ -64,6 +64,7 @@ require __DIR__ . '/templates2/' . $opt['template']['style'] . '/search.tpl.inc.
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     if (!$login->logged_in()) {
+        header('HTTP/1.1 403 Forbidden');
         die('deactivated');
     }
 }
