@@ -13,7 +13,7 @@ if ($login->userid  == 0) {
     $tpl->redirect_login();
 }
 
-$cacheId = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+$cacheId = (int)($_REQUEST['cacheid'] ?? 0);
 if (!$cacheId) {
     $tpl->redirect('index.php');
 }
