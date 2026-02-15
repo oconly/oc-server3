@@ -298,7 +298,7 @@ if ($error == false) {
                     // TinyMCE
                     $headers = tpl_get_var('htmlheaders') . "\n";
                     $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
-                    $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ($desc_record['cache_id'] + 0) . '&lang=' . strtolower($locale) . '"></script>' . "\n";
+                    $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ((int)$desc_record['cache_id']) . '&lang=' . strtolower($locale) . '"></script>' . "\n";
                 }
                 $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
                 tpl_set_var('htmlheaders', $headers);
@@ -309,8 +309,8 @@ if ($error == false) {
     }
 }
 
-tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+tpl_set_var('scrollposx', (int)($_REQUEST['scrollposx'] ?? 0));
+tpl_set_var('scrollposy', (int)($_REQUEST['scrollposy'] ?? 0));
 
 //make the template and send it out
 tpl_BuildTemplate();
