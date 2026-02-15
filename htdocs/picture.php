@@ -82,7 +82,7 @@ if ($action == 'add') { // Ocprop
     $allpics = sql_fetch_assoc_table($rsPics);
     if (isset($_REQUEST['position'])) {
         // picture position numbers always are >= 1
-        $position = max(1, $_REQUEST['position'] + 0);
+        $position = max(1, (int)$_REQUEST['position']);
     } else {
         $position = PHP_INT_MAX;
     }
