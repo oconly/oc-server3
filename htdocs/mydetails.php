@@ -51,8 +51,8 @@ function change()
 
         while ($record = sql_fetch_array($rs)) {
             $id = $record['id'];
-            $vis = isset($_REQUEST['chk' . $id]) ? $_REQUEST['chk' . $id] + 0 : 0;
-            $value = isset($_REQUEST['inp' . $id]) ? $_REQUEST['inp' . $id] : '';
+            $vis = (int)($_REQUEST['chk' . $id] ?? 0);
+            $value = $_REQUEST['inp' . $id] ?? '';
             if ($vis != 1) {
                 $vis = 0;
             }
@@ -113,8 +113,8 @@ function changetext()
     } else {
         $tpl->name = 'mydescription';
         assignFromDB($login->userid, true);
-        $tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-        $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+        $tpl->assign('scrollposx', (int)($_REQUEST['scrollposx'] ?? 0));
+        $tpl->assign('scrollposy', (int)($_REQUEST['scrollposy'] ?? 0));
         $tpl->acceptsAndPurifiesHtmlInput();
         $tpl->display();
     }
@@ -159,7 +159,7 @@ function assignFromDB($userid, $include_editor)
            AND `tt`.`lang`='&2'
          WHERE `optionset`=1
          ORDER BY `p`.`internal_use` DESC, `p`.`option_order`",
-        $userid + 0,
+        (int)$userid,
         $opt['template']['locale']
     );
     $tpl->assign_rs('useroptions', $rs);
@@ -173,7 +173,7 @@ function assignFromDB($userid, $include_editor)
             sql_value(
                 "SELECT `description` FROM `user` WHERE `user_id`='&1'",
                 '',
-                $userid + 0
+                (int)$userid
             )
         );
     }
@@ -181,10 +181,10 @@ function assignFromDB($userid, $include_editor)
     // Use the same descMode values here like in log and cacheDesc editor:
     if ($include_editor) {
         if (isset($_REQUEST['descMode'])) {
-            $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, $_REQUEST['descMode'] + 0));
+            $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, (int)($_REQUEST['descMode'] ?? 0)));
         } else {
             $descMode = EditorConstants::HTML_MODE;
-            if (sql_value("SELECT `desc_htmledit` FROM `user` WHERE `user_id`='&1'", 0, $userid + 0)) {
+            if (sql_value("SELECT `desc_htmledit` FROM `user` WHERE `user_id`='&1'", 0, (int)$userid)) {
                 $descMode = EditorConstants::EDITOR_MODE;
             }
         }
