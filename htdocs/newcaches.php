@@ -14,12 +14,12 @@ $tpl->name = 'newcaches';
 $tpl->menuitem = MNU_START_NEWCACHES;
 $tpl->change_country_inpage = true;
 
-$startAt = isset($_REQUEST['startat']) ? floor($_REQUEST['startat'] + 0) : 0;
-$country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] : (isset($_REQUEST['country']) ? $_REQUEST['country'] : '');
+$startAt = floor($_REQUEST['startat'] ?? 0);
+$country = $_REQUEST['usercountry'] ?? ($_REQUEST['country'] ?? '');
 if (!preg_match('/^[a-z]{2}$/i', $country)) {
     $country = '';
 }
-$cacheType = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] + 0 : 0;
+$cacheType = (int)($_REQUEST['cachetype'] ?? 0);
 $bEvents = ($cacheType == 6);
 
 $perpage = 100;
@@ -95,7 +95,7 @@ if (!$tpl->is_cached()) {
 
     $tpl->assign('newCaches', $newCaches);
 
-    $startAt = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
+    $startAt = (int)($_REQUEST['startat'] ?? 0);
     $cacheype_par = ($cacheType ? "&cachetype=$cacheType" : '');
 
     $countQuery = $connection->createQueryBuilder()
