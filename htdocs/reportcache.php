@@ -13,7 +13,7 @@ if ($login->userid == 0) {
     $tpl->redirect_login();
 }
 
-$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+$cacheid = (int)($_REQUEST['cacheid'] ?? 0);
 $cache = new cache($cacheid);
 if ($cache->exist() == false) {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);
@@ -23,8 +23,8 @@ if ($cache->allowView() == false) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
-$reportreason = isset($_REQUEST['reason']) ? $_REQUEST['reason'] + 0 : 0;
-$reportnote = isset($_REQUEST['note']) ? $_REQUEST['note'] : '';
+$reportreason = (int)($_REQUEST['reason'] ?? 0);
+$reportnote = $_REQUEST['note'] ?? '';
 
 $maxreason = sql_value('SELECT MAX(`id`) FROM `cache_report_reasons`', 0);
 
