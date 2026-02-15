@@ -11,15 +11,15 @@ $tpl->menuitem = MNU_START_REGISTER;
 $countriesList = new countriesList();
 
 // Read register information
-$show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] + 0 : 0;
+$show_all_countries = (int)($_POST['show_all_countries'] ?? 0);
 $username = isset($_POST['username']) ? trim($_POST['username']) : '';
 $last_name = isset($_POST['last_name']) ? trim($_POST['last_name']) : '';
 $first_name = isset($_POST['first_name']) ? trim($_POST['first_name']) : '';
-$password = isset($_POST['password1']) ? $_POST['password1'] : '';
-$password2 = isset($_POST['password2']) ? $_POST['password2'] : '';
+$password = $_POST['password1'] ?? '';
+$password2 = $_POST['password2'] ?? '';
 $email = isset($_POST['email']) ? mb_trim($_POST['email']) : '';
-$country = isset($_POST['country']) ? $_POST['country'] : 'XX';
-$tos = isset($_POST['TOS']) ? ($_POST['TOS'] == 'ON') : false;
+$country = $_POST['country'] ?? 'XX';
+$tos = isset($_POST['TOS']) && $_POST['TOS'] == 'ON';
 
 if (isset($_POST['show_all_countries_submit'])) {
     $show_all_countries = 1;
