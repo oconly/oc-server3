@@ -18,7 +18,7 @@ if ($login->userid == 0) {
 $user = new user($login->userid);
 
 $list_name = isset($_REQUEST['list_name']) ? trim($_REQUEST['list_name']) : '';
-$list_visibility = isset($_REQUEST['list_visibility']) ? $_REQUEST['list_visibility'] + 0 : 0;
+$list_visibility = (int)($_REQUEST['list_visibility'] ?? 0);
 $list_password = isset($_REQUEST['list_password']) ? $_REQUEST['list_password'] : '';
 $watch = isset($_REQUEST['watch']);
 $desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
@@ -42,7 +42,7 @@ if (isset($_REQUEST['addCache'])){
 }
 
 if (isset($_REQUEST['descMode'])) {
-    $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, $_REQUEST['descMode'] + 0));
+    $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, (int)($_REQUEST['descMode'] ?? 0)));
 } else {
     $descMode = EditorConstants::EDITOR_MODE;
 }
@@ -89,7 +89,7 @@ if (isset($_REQUEST['create'])) {
 
 // open an 'edit list' form
 if (isset($_REQUEST['edit'])) {
-    $list = new cachelist($_REQUEST['edit'] + 0);
+    $list = new cachelist((int)$_REQUEST['edit']);
     if ($list->exist() && $list->getUserId() == $login->userid) {
         $edit_list = true;
         $list_name = $list->getName();
@@ -105,7 +105,7 @@ if (isset($_REQUEST['edit'])) {
 if ($switchDescMode) {
     if (isset($_REQUEST['listid'])) {
         // switching editor mode while editing existing list
-        $list = new cachelist($_REQUEST['listid'] + 0);
+        $list = new cachelist((int)$_REQUEST['listid']);
         if ($list->exist() && $list->getUserId() == $login->userid) {
             $edit_list = true;
             $tpl->assign('show_editor', true);
@@ -119,7 +119,7 @@ if ($switchDescMode) {
 
 // save data entered in the 'edit list' form
 if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
-    $list = new cachelist($_REQUEST['listid'] + 0);
+    $list = new cachelist((int)$_REQUEST['listid']);
     if ($list->exist() && $list->getUserId() == $login->userid) {
         $name_error = $list->setNameAndVisibility($list_name, $list_visibility);
         if ($name_error) {
@@ -150,14 +150,14 @@ if (isset($_REQUEST['delete'])) {
     sql(
         "DELETE FROM `cache_lists` WHERE `user_id`='&1' AND `id`='&2'",
         $login->userid,
-        $_REQUEST['delete'] + 0
+        (int)$_REQUEST['delete']
     );
     // All dependent deletion and cleanup is done via trigger.
 }
 
 // unbookmark a list
 if (isset($_REQUEST['unbookmark'])) {
-    $list = new cachelist($_REQUEST['unbookmark'] + 0);
+    $list = new cachelist((int)$_REQUEST['unbookmark']);
     if ($list->exist()) {
         $list->unbookmark();
     }
@@ -166,7 +166,7 @@ if (isset($_REQUEST['unbookmark'])) {
 // redirect to list search output after editing a list from the search output page
 if ($fromsearch && !$switchDescMode && !$name_error && isset($_REQUEST['listid'])) {
     $iwp = ($invalid_waypoints ? '&invalidwp=' . urlencode($invalid_waypoints) : '');
-    $tpl->redirect('cachelist.php?id=' . ($_REQUEST['listid'] + 0) . $iwp);
+    $tpl->redirect('cachelist.php?id=' . ((int)$_REQUEST['listid']) . $iwp);
 }
 
 // prepare editor and editing
@@ -201,7 +201,7 @@ $tpl->assign('desctext', $desctext);
 $tpl->assign('descMode', $descMode);
 $tpl->assign('list_caches', $list_caches);
 
-$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+$tpl->assign('scrollposx', (int)($_REQUEST['scrollposx'] ?? 0));
+$tpl->assign('scrollposy', (int)($_REQUEST['scrollposy'] ?? 0));
 
 $tpl->display();
