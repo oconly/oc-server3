@@ -7,8 +7,8 @@
 
 require __DIR__ . '/lib2/web.inc.php';
 
-$id = isset($_REQUEST['id']) ? $_REQUEST['id'] + 0 : 0;
-$password = isset($_REQUEST['key']) ? $_REQUEST['key'] : '';
+$id = (int)($_REQUEST['id'] ?? 0);
+$password = $_REQUEST['key'] ?? '';
 $watch = isset($_REQUEST['watch']);
 $doNotWatch = isset($_REQUEST['dontwatch']);
 $bookmark = isset($_REQUEST['bookmark']);
