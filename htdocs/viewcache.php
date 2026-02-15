@@ -375,7 +375,7 @@ if (isset($_REQUEST['log'])) {
         default:  // This is currently used only for the print view function
             // with parameters 5 or 10.
             if ($_REQUEST['log'] >= 0 && $_REQUEST['log'] <= 100) {
-                $rscount = $_REQUEST['log'] + 0;
+                $rscount = (int)$_REQUEST['log'];
             }
     }
 }
