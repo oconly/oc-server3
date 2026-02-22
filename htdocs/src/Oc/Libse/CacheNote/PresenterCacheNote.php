@@ -20,7 +20,6 @@ class PresenterCacheNote
     const image = 'resource2/ocstyle/images/misc/wp_note.png';
 
     private $request;
-    private $translator;
     private $coordinate;
     private $userId;
     private $noteId;
