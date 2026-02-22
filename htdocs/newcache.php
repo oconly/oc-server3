@@ -154,8 +154,8 @@ if (!$error) {
         tpl_set_var('htmlheaders', $headers);
 
         //effort
-        $search_time = isset($_POST['search_time']) ? $_POST['search_time'] : '0';
-        $way_length = isset($_POST['way_length']) ? $_POST['way_length'] : '0';
+        $search_time = $_POST['search_time'] ?? 0;
+        $way_length = $_POST['way_length'] ?? 0;
 
         $search_time = mb_ereg_replace(',', '.', $search_time);
         $way_length = mb_ereg_replace(',', '.', $way_length);
