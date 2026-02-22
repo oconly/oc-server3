@@ -23,8 +23,7 @@ $login->verify();
  *
  * @return array
  */
-function getChildWaypoints($cacheid)
-: array {
+function getChildWaypoints($cacheid): array {
     $wphandler = new HandlerChildWp();
     $waypoints = $wphandler->getChildWps($cacheid);
     $count = count($waypoints);
