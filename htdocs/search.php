@@ -62,18 +62,21 @@ require __DIR__ . '/lib2/logic/data-license.inc.php';
 require __DIR__ . '/lib2/search/search.inc.php';
 require __DIR__ . '/templates2/' . $opt['template']['style'] . '/search.tpl.inc.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    if (!$login->logged_in()) {
-        header('HTTP/1.1 403 Forbidden');
-        die('deactivated');
-    }
-}
 //=========================================================
 //  1. initialize searching and template variables
 //=========================================================
 
 $tpl->name = 'search';
 $tpl->menuitem = MNU_CACHES_SEARCH;
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    if (!$login->logged_in()) {
+        header('HTTP/1.1 403 Forbidden');
+        $tpl->error(ERROR_LOGIN_REQUIRED_SEARCH);
+        $tpl->display();
+        exit;
+    }
+}
 
 // distance constants
 define('DEFAULT_DISTANCE_UNIT', 'km');
@@ -458,12 +461,12 @@ if ($queryid != 0) {
         $options['orderRatingFirst'] = true;
     }
 
-    $options['country'] = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
-    $options['language'] = isset($_REQUEST['language']) ? $_REQUEST['language'] : '';
-    $options['adm2'] = isset($_REQUEST['adm2']) ? $_REQUEST['adm2'] : '';
-    $options['cachetype'] = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] : '';
+    $options['country'] = $_REQUEST['country'] ?? '';
+    $options['language'] = $_REQUEST['language'] ?? '';
+    $options['adm2'] = $_REQUEST['adm2'] ?? '';
+    $options['cachetype'] = $_REQUEST['cachetype'] ?? '';
 
-    $options['cachesize'] = isset($_REQUEST['cachesize']) ? $_REQUEST['cachesize'] : '';
+    $options['cachesize'] = $_REQUEST['cachesize'] ?? '';
     $options['difficultymin'] = isset($_REQUEST['difficultymin']) ? (int) $_REQUEST['difficultymin'] : 0;
     $options['difficultymax'] = isset($_REQUEST['difficultymax']) ? (int) $_REQUEST['difficultymax'] : 0;
     $options['terrainmin'] = isset($_REQUEST['terrainmin']) ? (int) $_REQUEST['terrainmin'] : 0;

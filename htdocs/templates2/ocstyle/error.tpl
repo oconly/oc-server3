@@ -30,6 +30,8 @@
             ({$id}) {t}Sorry, the requested operation cannot be performed.{/t}
         {elseif $id==ERROR_LOGIN_REQUIRED}
             ({$id}) {t}Please login to continue:{/t}&nbsp; <a href="login.php">{t}Login{/t}
+        {elseif $id==ERROR_LOGIN_REQUIRED_SEARCH}
+            ({$id}) {t}Please login to continue{/t}.
         {elseif $id==ERROR_USER_NOT_EXISTS}
             ({$id}) {t}Sorry, the requested user does not exist.{/t}
         {elseif $id==ERROR_USER_NOT_ACTIVE}
