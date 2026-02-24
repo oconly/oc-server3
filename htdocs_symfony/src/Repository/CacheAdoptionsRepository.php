@@ -17,10 +17,8 @@ class CacheAdoptionsRepository
 {
     private const TABLE = 'cache_adoptions';
 
-    /** @var Connection */
     private Connection $connection;
 
-    /** @var UserRepository */
     private UserRepository $userRepository;
 
     public function __construct(Connection $connection, UserRepository $userRepository)
@@ -32,11 +30,9 @@ class CacheAdoptionsRepository
     /**
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws \Exception
+     * @throws Exception
      */
-    public function fetchAll()
-    : array
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
                 ->select('*')
@@ -61,11 +57,9 @@ class CacheAdoptionsRepository
     /**
      * @throws RecordNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
-     * @throws \Exception
      */
-    public function fetchOneBy(array $where = [])
-    : GeoCacheAdoptionsEntity {
+    public function fetchOneBy(array $where = []): GeoCacheAdoptionsEntity
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
                 ->select('*')
                 ->from(self::TABLE)
@@ -89,14 +83,11 @@ class CacheAdoptionsRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return array
-     * @throws \Exception
+     * @throws RecordNotFoundException
      * @throws Exception
      */
-    public function fetchBy(array $where = [])
-    : array {
+    public function fetchBy(array $where = []): array
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
                 ->select('*')
                 ->from(self::TABLE);
@@ -126,10 +117,10 @@ class CacheAdoptionsRepository
 
     /**
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function create(GeoCacheAdoptionsEntity $entity)
-    : GeoCacheAdoptionsEntity {
+    public function create(GeoCacheAdoptionsEntity $entity): GeoCacheAdoptionsEntity
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -148,10 +139,10 @@ class CacheAdoptionsRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function update(GeoCacheAdoptionsEntity $entity)
-    : GeoCacheAdoptionsEntity {
+    public function update(GeoCacheAdoptionsEntity $entity): GeoCacheAdoptionsEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -169,10 +160,10 @@ class CacheAdoptionsRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function remove(GeoCacheAdoptionsEntity $entity)
-    : GeoCacheAdoptionsEntity {
+    public function remove(GeoCacheAdoptionsEntity $entity): GeoCacheAdoptionsEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -187,13 +178,8 @@ class CacheAdoptionsRepository
         return $entity;
     }
 
-    /**
-     * @param GeoCacheAdoptionsEntity $entity
-     *
-     * @return array
-     */
-    public function getDatabaseArrayFromEntity(GeoCacheAdoptionsEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(GeoCacheAdoptionsEntity $entity): array
+    {
         return [
                 'id' => $entity->id,
                 'cache_id' => $entity->cacheId,
@@ -206,16 +192,11 @@ class CacheAdoptionsRepository
     }
 
     /**
-     * @param array $data
-     *
-     * @return GeoCacheAdoptionsEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
-    public function getEntityFromDatabaseArray(array $data)
-    : GeoCacheAdoptionsEntity {
+    public function getEntityFromDatabaseArray(array $data): GeoCacheAdoptionsEntity
+    {
         $entity = new GeoCacheAdoptionsEntity();
         $entity->id = (int)$data['id'];
         $entity->cacheId = (int)$data['cache_id'];

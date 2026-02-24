@@ -36,7 +36,7 @@ class MailerRepository
             string $subject,
             string $textMessage,
             string $htmlMessage,
-            ?string $replyEmail = null,
+            string $replyEmail = null,
             int $priority = Email::PRIORITY_NORMAL
     ): void {
         $emailTemplate = (new Email())

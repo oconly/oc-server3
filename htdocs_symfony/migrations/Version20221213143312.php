@@ -21,11 +21,11 @@ final class Version20221213143312 extends AbstractMigration
     {
         // remove constraint. Otherwise altering table is not possible.
         $this->addSql(
-                'ALTER TABLE cache_type DROP KEY name;'
+                'ALTER TABLE cache_type DROP KEY IF EXISTS name;'
         );
 
         $this->addSql(
-                'ALTER TABLE cache_type ADD COLUMN svg_name varchar(11);'
+                'ALTER TABLE cache_type ADD COLUMN IF NOT EXISTS svg_name varchar(11);'
         );
 
         $this->addSql('
