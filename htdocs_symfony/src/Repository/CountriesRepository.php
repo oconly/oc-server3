@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\CountriesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -13,14 +13,10 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- *
- */
 class CountriesRepository
 {
-    const TABLE = 'countries';
+    private const TABLE = 'countries';
 
-    /** @var Connection */
     private Connection $connection;
 
     public function __construct(Connection $connection)
@@ -29,18 +25,15 @@ class CountriesRepository
     }
 
     /**
-     * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchAll()
-    : array
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->execute();
+                ->select('*')
+                ->from(self::TABLE)
+                ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -58,19 +51,15 @@ class CountriesRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return CountriesEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function fetchOneBy(array $where = [])
-    : CountriesEntity {
+    public function fetchOneBy(array $where = []): CountriesEntity
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->setMaxResults(1);
+                ->select('*')
+                ->from(self::TABLE)
+                ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,7 +67,7 @@ class CountriesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -90,18 +79,14 @@ class CountriesRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function fetchBy(array $where = [])
-    : array {
+    public function fetchBy(array $where = []): array
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE);
+                ->select('*')
+                ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -109,7 +94,7 @@ class CountriesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -127,14 +112,11 @@ class CountriesRepository
     }
 
     /**
-     * @param CountriesEntity $entity
-     *
-     * @return CountriesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function create(CountriesEntity $entity)
-    : CountriesEntity {
+    public function create(CountriesEntity $entity): CountriesEntity
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -142,24 +124,21 @@ class CountriesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-            self::TABLE,
-            $databaseArray
+                self::TABLE,
+                $databaseArray
         );
 
-        $entity->short = (int) $this->connection->lastInsertId();
+        $entity->short = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @param CountriesEntity $entity
-     *
-     * @return CountriesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
-    public function update(CountriesEntity $entity)
-    : CountriesEntity {
+    public function update(CountriesEntity $entity): CountriesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -167,31 +146,28 @@ class CountriesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['short' => $entity->short]
+                self::TABLE,
+                $databaseArray,
+                ['short' => $entity->short]
         );
 
         return $entity;
     }
 
     /**
-     * @param CountriesEntity $entity
-     *
-     * @return CountriesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws RecordNotPersistedException
      * @throws InvalidArgumentException
      */
-    public function remove(CountriesEntity $entity)
-    : CountriesEntity {
+    public function remove(CountriesEntity $entity): CountriesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $this->connection->delete(
-            self::TABLE,
-            ['short' => $entity->short]
+                self::TABLE,
+                ['short' => $entity->short]
         );
 
         $entity->short = null;
@@ -202,15 +178,11 @@ class CountriesRepository
     /**
      * fetch all countries from DB, sort them ascending
      *
-     * @param string $locale
-     *
-     * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function fetchCountryList(string $locale)
-    : array {
+    public function fetchCountryList(string $locale): array
+    {
         $fetchedCountries = $this->fetchAll();
         $countryList = [];
 
@@ -227,47 +199,37 @@ class CountriesRepository
         return ($countryList);
     }
 
-    /**
-     * @param CountriesEntity $entity
-     *
-     * @return array
-     */
-    public function getDatabaseArrayFromEntity(CountriesEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(CountriesEntity $entity): array
+    {
         return [
-            'short' => $entity->short,
-            'name' => $entity->name,
-            'trans_id' => $entity->transId,
-            'de' => $entity->de,
-            'en' => $entity->en,
-            'list_default_de' => $entity->listDefaultDe,
-            'sort_de' => $entity->sortDe,
-            'list_default_en' => $entity->listDefaultEn,
-            'sort_en' => $entity->sortEn,
-            'adm_display2' => $entity->admDisplay2,
-            'adm_display3' => $entity->admDisplay3,
+                'short' => $entity->short,
+                'name' => $entity->name,
+                'trans_id' => $entity->transId,
+                'de' => $entity->de,
+                'en' => $entity->en,
+                'list_default_de' => $entity->listDefaultDe,
+                'sort_de' => $entity->sortDe,
+                'list_default_en' => $entity->listDefaultEn,
+                'sort_en' => $entity->sortEn,
+                'adm_display2' => $entity->admDisplay2,
+                'adm_display3' => $entity->admDisplay3,
         ];
     }
 
-    /**
-     * @param array $data
-     *
-     * @return CountriesEntity
-     */
-    public function getEntityFromDatabaseArray(array $data)
-    : CountriesEntity {
+    public function getEntityFromDatabaseArray(array $data): CountriesEntity
+    {
         $entity = new CountriesEntity();
-        $entity->short = (string) $data['short'];
-        $entity->name = (string) $data['name'];
-        $entity->transId = (int) $data['trans_id'];
-        $entity->de = (string) $data['de'];
-        $entity->en = (string) $data['en'];
-        $entity->listDefaultDe = (int) $data['list_default_de'];
-        $entity->sortDe = (string) $data['sort_de'];
-        $entity->listDefaultEn = (int) $data['list_default_en'];
-        $entity->sortEn = (string) $data['sort_en'];
-        $entity->admDisplay2 = (int) $data['adm_display2'];
-        $entity->admDisplay3 = (int) $data['adm_display3'];
+        $entity->short = (string)$data['short'];
+        $entity->name = (string)$data['name'];
+        $entity->transId = (int)$data['trans_id'];
+        $entity->de = (string)$data['de'];
+        $entity->en = (string)$data['en'];
+        $entity->listDefaultDe = (int)$data['list_default_de'];
+        $entity->sortDe = (string)$data['sort_de'];
+        $entity->listDefaultEn = (int)$data['list_default_en'];
+        $entity->sortEn = (string)$data['sort_en'];
+        $entity->admDisplay2 = (int)$data['adm_display2'];
+        $entity->admDisplay3 = (int)$data['adm_display3'];
 
         return $entity;
     }

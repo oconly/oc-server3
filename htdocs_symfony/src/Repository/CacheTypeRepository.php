@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\GeoCacheTypeEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -13,14 +13,10 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- *
- */
 class CacheTypeRepository
 {
-    const TABLE = 'cache_type';
+    private const TABLE = 'cache_type';
 
-    /** @var Connection */
     private Connection $connection;
 
     public function __construct(Connection $connection)
@@ -29,18 +25,15 @@ class CacheTypeRepository
     }
 
     /**
-     * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function fetchAll()
-    : array
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->execute();
+                ->select('*')
+                ->from(self::TABLE)
+                ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -58,19 +51,15 @@ class CacheTypeRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return GeoCacheTypeEntity
      * @throws RecordNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchOneBy(array $where = [])
-    : GeoCacheTypeEntity {
+    public function fetchOneBy(array $where = []): GeoCacheTypeEntity
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->setMaxResults(1);
+                ->select('*')
+                ->from(self::TABLE)
+                ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,7 +67,7 @@ class CacheTypeRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -90,18 +79,14 @@ class CacheTypeRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function fetchBy(array $where = [])
-    : array {
+    public function fetchBy(array $where = []): array
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE);
+                ->select('*')
+                ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -109,7 +94,7 @@ class CacheTypeRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -127,14 +112,11 @@ class CacheTypeRepository
     }
 
     /**
-     * @param GeoCacheTypeEntity $entity
-     *
-     * @return GeoCacheTypeEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function create(GeoCacheTypeEntity $entity)
-    : GeoCacheTypeEntity {
+    public function create(GeoCacheTypeEntity $entity): GeoCacheTypeEntity
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -142,24 +124,21 @@ class CacheTypeRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-            self::TABLE,
-            $databaseArray
+                self::TABLE,
+                $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->id = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheTypeEntity $entity
-     *
-     * @return GeoCacheTypeEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
-    public function update(GeoCacheTypeEntity $entity)
-    : GeoCacheTypeEntity {
+    public function update(GeoCacheTypeEntity $entity): GeoCacheTypeEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -167,79 +146,68 @@ class CacheTypeRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['id' => $entity->id]
+                self::TABLE,
+                $databaseArray,
+                ['id' => $entity->id]
         );
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheTypeEntity $entity
-     *
-     * @return GeoCacheTypeEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws InvalidArgumentException
      */
-    public function remove(GeoCacheTypeEntity $entity)
-    : GeoCacheTypeEntity {
+    public function remove(GeoCacheTypeEntity $entity): GeoCacheTypeEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $this->connection->delete(
-            self::TABLE,
-            ['id' => $entity->id]
+                self::TABLE,
+                ['id' => $entity->id]
         );
 
-        $entity->id = null;
+        $entity->id = 0;
 
         return $entity;
     }
 
-    /**
-     * @param GeoCacheTypeEntity $entity
-     *
-     * @return array
-     */
-    public function getDatabaseArrayFromEntity(GeoCacheTypeEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(GeoCacheTypeEntity $entity): array
+    {
         return [
-            'id' => $entity->id,
-            'name' => $entity->name,
-            'trans_id' => $entity->transId,
-            'ordinal' => $entity->ordinal,
-            'short' => $entity->short,
-            'de' => $entity->de,
-            'en' => $entity->en,
-            'icon_large' => $entity->iconLarge,
-            'short2' => $entity->short2,
-            'short2_trans_id' => $entity->short2TransId,
-            'kml_name' => $entity->kmlName,
+                'id' => $entity->id,
+                'name' => $entity->name,
+                'trans_id' => $entity->transId,
+                'ordinal' => $entity->ordinal,
+                'short' => $entity->short,
+                'de' => $entity->de,
+                'en' => $entity->en,
+                'icon_large' => $entity->iconLarge,
+                'short2' => $entity->short2,
+                'short2_trans_id' => $entity->short2TransId,
+                'kml_name' => $entity->kmlName,
+                'svg_name' => $entity->svgName,
         ];
     }
 
-    /**
-     * @param array $data
-     *
-     * @return GeoCacheTypeEntity
-     */
-    public function getEntityFromDatabaseArray(array $data)
-    : GeoCacheTypeEntity {
+    public function getEntityFromDatabaseArray(array $data): GeoCacheTypeEntity
+    {
         $entity = new GeoCacheTypeEntity();
-        $entity->id = (int) $data['id'];
-        $entity->name = (string) $data['name'];
-        $entity->transId = (int) $data['trans_id'];
-        $entity->ordinal = (int) $data['ordinal'];
-        $entity->short = (string) $data['short'];
-        $entity->de = (string) $data['de'];
-        $entity->en = (string) $data['en'];
-        $entity->iconLarge = (string) $data['icon_large'];
-        $entity->short2 = (string) $data['short2'];
-        $entity->short2TransId = (int) $data['short2_trans_id'];
-        $entity->kmlName = (string) $data['kml_name'];
+        $entity->id = (int)$data['id'];
+        $entity->name = (string)$data['name'];
+        $entity->transId = (int)$data['trans_id'];
+        $entity->ordinal = (int)$data['ordinal'];
+        $entity->short = (string)$data['short'];
+        $entity->de = (string)$data['de'];
+        $entity->en = (string)$data['en'];
+        $entity->iconLarge = (string)$data['icon_large'];
+        $entity->short2 = (string)$data['short2'];
+        $entity->short2TransId = (int)$data['short2_trans_id'];
+        $entity->kmlName = (string)$data['kml_name'];
+        $entity->svgName = (string)$data['svg_name'];
 
         return $entity;
     }
