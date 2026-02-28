@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
@@ -25,9 +25,9 @@ class UserController extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/user", name="user_index")
      * @Security("is_granted('ROLE_TEAM')")
      */
+    #[Route("/user", name: "user_index")]
     public function index(Request $request): Response
     {
         $fetchedUsers = '';
@@ -48,9 +48,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/profile/{userID}", name="user_by_id")
      * @throws RecordNotFoundException
      */
+    #[Route("/user/profile/{userID}", name: "user_by_id")]
     public function search_by_user_id(int $userID): Response
     {
         $fetchedUser = $this->userRepository->search_by_user_id($userID);

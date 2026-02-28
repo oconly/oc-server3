@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -32,9 +32,7 @@ class SecurityController extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @Route("/login", name="security_login")
-     */
+    #[Route("/login", name: "security_login")]
     public function login(): Response
     {
         // get the login error if there is one
@@ -48,9 +46,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/logout", name="security_logout", methods={"GET"})
-     */
+    #[Route("/logout", name: "security_logout", methods: ["GET"])]
     public function logout()
     {
     }
@@ -61,8 +57,8 @@ class SecurityController extends AbstractController
      * @throws RecordsNotFoundException
      * @throws TransportExceptionInterface
      * @throws \Doctrine\DBAL\Exception
-     * @Route("/register", name="security_register")
      */
+    #[Route("/register", name: "security_register")]
     public function registerNewUser(
             MailerController $mailerController,
             Request $request,
@@ -121,9 +117,8 @@ class SecurityController extends AbstractController
 
     /**
      * Activation of a new user account via URL (e.g. provided by activation email)
-     *
-     * @Route("/automaticAccountActivation/{activationCode}&{email}", name="security_automatic_account_activation")
      */
+    #[Route("/automaticAccountActivation/{activationCode}&{email}", name: "security_automatic_account_activation")]
     public function automaticActivateAccount(string $activationCode, string $email): Response
     {
         $form = $this->createForm(UserActivationForm::class);
@@ -138,9 +133,8 @@ class SecurityController extends AbstractController
 
     /**
      * Activation of a new user account via website (activation code and email have to be entered manually)
-     *
-     * @Route("/accountActivation/", name="security_account_activation")
      */
+    #[Route("/accountActivation/", name: "security_account_activation")]
     public function activateAccountViaWebsite(Request $request): Response
     {
         $form = $this->createForm(UserActivationForm::class);

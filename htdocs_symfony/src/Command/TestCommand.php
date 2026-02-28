@@ -14,20 +14,10 @@ use Symfony\Bundle\SecurityBundle\Security;
 class TestCommand extends Command
 {
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected static $defaultName = 'test';
 
 //    private RoleHierarchyInterface $roleHierarchy;
 
-    /**
-     * The console command description.
-     *
-     * @var Security
-     */
     private Security $security;
 
     public function __construct(RoleHierarchyInterface $roleHierarchy, Security $security)

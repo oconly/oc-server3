@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * @Security("is_granted('ROLE_TEAM')")
@@ -42,9 +42,9 @@ class RolesControllerBackend extends AbstractController
     /**
      * @throws Exception
      * @throws RecordsNotFoundException
-     * @Route("/roles", name="roles_index")
      * @Security("is_granted('ROLE_TEAM')")
      */
+    #[Route("/roles", name: "roles_index")]
     public function rolesController_index(Request $request): Response
     {
         $allRoles = $this->securityRolesRepository->fetchAll();
@@ -58,11 +58,11 @@ class RolesControllerBackend extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @Route("/roles/teamlist", name="roles_teamlist")
      * @Security("is_granted('ROLE_TEAM')")
      *
      * Get all users (and their roles) who are at least the given ROLE_
      */
+    #[Route("/roles/teamlist", name: "roles_teamlist")]
     public function getTeamOverview(): Response
     {
         $teamMembersAndRoles = $this->userRolesRepository->getTeamMembersAndRoles('ROLE_TEAM');
@@ -84,9 +84,9 @@ class RolesControllerBackend extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @Route("/roles/search", name="roles_search")
      * @Security("is_granted('ROLE_TEAM')")
      */
+    #[Route("/roles/search", name: "roles_search")]
     public function teamRolesAssignmentUserSearch(Request $request): Response
     {
         $form = $this->createForm(RolesSearchUser::class);
@@ -114,9 +114,9 @@ class RolesControllerBackend extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @Route("/roles/removeRole/{userId}&{role}", name="roles_remove_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
+    #[Route("/roles/removeRole/{userId}&{role}", name: "roles_remove_role")]
     public function teamRolesRemoveRole(int $userId, string $role): Response
     {
         $form = $this->createForm(RolesSearchUser::class);
@@ -143,9 +143,9 @@ class RolesControllerBackend extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @Route("/roles/promoteRole/{userId}&{role}", name="roles_promote_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
+    #[Route("/roles/promoteRole/{userId}&{role}", name: "roles_promote_role")]
     public function teamRolesPromoteRole(int $userId, string $role): Response
     {
         $form = $this->createForm(RolesSearchUser::class);

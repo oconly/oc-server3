@@ -8,14 +8,14 @@ use Composer\InstalledVersions;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class StatusController extends AbstractController
 {
     /**
-     * @Route("/status", name="status_index")
      * @Security("is_granted('ROLE_DEVELOPER_CORE')")
      */
+    #[Route("/status", name: "status_index")]
     public function index(): Response
     {
         $composerInstalledPackages = InstalledVersions::getInstalledPackages();
