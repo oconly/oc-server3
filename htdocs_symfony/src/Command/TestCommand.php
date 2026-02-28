@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Command;
 
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,10 +14,20 @@ use Symfony\Bundle\SecurityBundle\Security;
 class TestCommand extends Command
 {
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
     protected static $defaultName = 'test';
 
-    private RoleHierarchyInterface $roleHierarchy;
+//    private RoleHierarchyInterface $roleHierarchy;
 
+    /**
+     * The console command description.
+     *
+     * @var Security
+     */
     private Security $security;
 
     public function __construct(RoleHierarchyInterface $roleHierarchy, Security $security)
@@ -28,8 +39,11 @@ class TestCommand extends Command
 
     protected function configure(): void
     {
+        # TODO: needed to use setName() when upgrading to Symfony 7.4
+        $this->setName('IHaveNoIdeaWhatToWriteHere');
     }
 
+    #[NoReturn]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         dd($this->security->isGranted('ROLE'));

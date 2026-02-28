@@ -10,7 +10,7 @@ use Oc\Repository\CachesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class CachesController extends AbstractController
 {
@@ -23,8 +23,8 @@ class CachesController extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/caches", name="caches_index")
      */
+    #[Route("/caches", name: "caches_index")]
     public function cachesController_index(Request $request): Response
     {
         $fetchedCaches = '';
@@ -62,9 +62,7 @@ class CachesController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/cache/{wpID}", name="cache_by_wp_oc_gc")
-     */
+    #[Route("/cache/{wpID}", name: "cache_by_wp_oc_gc")]
     public function search_by_cache_wp(string $wpID): Response
     {
         $fetchedCache = $this->cachesRepository->search_by_cache_wp($wpID);

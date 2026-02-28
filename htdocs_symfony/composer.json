@@ -11,9 +11,9 @@
         "doctrine/annotations": "^1.13.3",
         "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
-        "doctrine/orm": "^2.7",
-        "kevinpapst/adminlte-bundle": "^3.0",
-        "knplabs/knp-menu-bundle": "^3.0",
+        "doctrine/orm": "^2.20",
+        "kevinpapst/adminlte-bundle": "^3.6.1",
+        "knplabs/knp-menu-bundle": "^3.7",
         "phpdocumentor/reflection-docblock": "^5.3",
         "symfony/asset": "7.4.*",
         "symfony/console": "7.4.*",
@@ -29,7 +29,7 @@
         "symfony/monolog-bundle": "^4.0.1",
         "symfony/notifier": "7.4.*",
         "symfony/process": "7.4.*",
-        "symfony/property-access": "6.4.*",
+        "symfony/property-access": "7.4.*",
         "symfony/property-info": "7.4.*",
         "symfony/security-bundle": "7.4.*",
         "symfony/serializer": "7.4.*",
@@ -52,7 +52,7 @@
         "symfony/stopwatch": "^7.4",
         "symfony/var-dumper": "^7.4",
         "symfony/web-profiler-bundle": "^7.4",
-        "symplify/config-transformer": "^11.1"
+        "symplify/config-transformer": "^12.4"
     },
     "config": {
         "optimize-autoloader": true,
