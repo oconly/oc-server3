@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
 
+#[ORM\Entity]
 class SupportListingInfosEntity extends AbstractEntity
 {
     public int $id = 0;

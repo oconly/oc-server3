@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+#[ORM\Entity]
 class UserEntity extends AbstractEntity implements UserInterface, LegacyPasswordAuthenticatedUserInterface
 {
     public int $userId = 0;

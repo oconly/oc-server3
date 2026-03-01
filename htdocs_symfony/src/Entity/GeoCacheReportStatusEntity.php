@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
 
+#[ORM\Entity]
 class GeoCacheReportStatusEntity extends AbstractEntity
 {
     public int $id = 0;
