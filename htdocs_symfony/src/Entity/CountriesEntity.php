@@ -6,8 +6,9 @@ namespace Oc\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\CountriesRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CountriesRepository::class)]
 class CountriesEntity extends AbstractEntity
 {
     public string $short = '';

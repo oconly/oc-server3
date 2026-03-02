@@ -7,8 +7,9 @@ namespace Oc\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\PicturesRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: PicturesRepository::class)]
 class PicturesEntity extends AbstractEntity
 {
     public int $id = 0;

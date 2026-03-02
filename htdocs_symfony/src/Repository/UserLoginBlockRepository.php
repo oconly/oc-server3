@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
@@ -13,7 +14,7 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class UserLoginBlockRepository
+class UserLoginBlockRepository extends ServiceEntityRepository
 {
     private const TABLE = 'user_login_block';
 

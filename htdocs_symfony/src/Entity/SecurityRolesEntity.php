@@ -6,8 +6,9 @@ namespace Oc\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\SecurityRolesRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: SecurityRolesRepository::class)]
 class SecurityRolesEntity extends AbstractEntity
 {
     public int $id = 0;

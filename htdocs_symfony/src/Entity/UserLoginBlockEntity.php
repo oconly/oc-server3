@@ -6,8 +6,9 @@ namespace Oc\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\UserLoginBlockRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: UserLoginBlockRepository::class)]
 class UserLoginBlockEntity extends AbstractEntity
 {
     public int $id = 0;

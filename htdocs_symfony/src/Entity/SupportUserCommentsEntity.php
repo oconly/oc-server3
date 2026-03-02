@@ -6,8 +6,9 @@ namespace Oc\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\SupportUserCommentsRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: SupportUserCommentsRepository::class)]
 class SupportUserCommentsEntity extends AbstractEntity
 {
     public int $id = 0;

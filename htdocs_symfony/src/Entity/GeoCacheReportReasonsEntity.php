@@ -6,8 +6,9 @@ namespace Oc\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\CacheReportReasonsRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CacheReportReasonsRepository::class)]
 class GeoCacheReportReasonsEntity extends AbstractEntity
 {
     public int $id = 0;

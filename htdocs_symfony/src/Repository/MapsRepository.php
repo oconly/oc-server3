@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class MapsRepository
+class MapsRepository extends ServiceEntityRepository
 {
     private CachesRepository $cachesRepository;
 

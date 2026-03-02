@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheReportReasonsEntity;
@@ -12,7 +13,7 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class CacheReportReasonsRepository
+class CacheReportReasonsRepository extends ServiceEntityRepository
 {
     private const TABLE = 'cache_report_reasons';
 

@@ -6,8 +6,9 @@ namespace Oc\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\SecurityRoleHierarchyRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: SecurityRoleHierarchyRepository::class)]
 class SecurityRoleHierarchyEntity extends AbstractEntity
 {
     public int $roleId = 0;

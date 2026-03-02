@@ -7,8 +7,9 @@ namespace Oc\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\CacheAdoptionsRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: CacheAdoptionsRepository::class)]
 class GeoCacheAdoptionsEntity extends AbstractEntity
 {
     public int $id = 0;

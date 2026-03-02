@@ -7,8 +7,9 @@ namespace Oc\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Oc\Repository\AbstractEntity;
+use Oc\Repository\SupportListingInfosRepository;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: SupportListingInfosRepository::class)]
 class SupportListingInfosEntity extends AbstractEntity
 {
     public int $id = 0;

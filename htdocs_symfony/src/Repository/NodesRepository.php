@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
@@ -13,7 +14,7 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class NodesRepository
+class NodesRepository extends ServiceEntityRepository
 {
     private const TABLE = 'nodes';
 
