@@ -645,7 +645,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     uid?: bool|array{ // Uid configuration
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *         default_uuid_version?: 7|6|4|1|Param, // Default: 7
  *         name_based_uuid_version?: 5|3|Param, // Default: 5
  *         name_based_uuid_namespace?: scalar|Param|null,
@@ -728,7 +728,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         enabled?: bool|Param, // Default: false
  *     },
  *     html?: bool|array{
- *         enabled?: bool|Param, // Default: false
+ *         enabled?: bool|Param, // Default: true
  *     },
  *     markdown?: bool|array{
  *         enabled?: bool|Param, // Default: false
@@ -1507,60 +1507,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     script_attributes?: array<string, scalar|Param|null>,
  *     link_attributes?: array<string, scalar|Param|null>,
  * }
- * @psalm-type AdminLteConfig = array{
- *     options?: array{
- *         default_avatar?: scalar|Param|null, // Default: "bundles/adminlte/images/default_avatar.png"
- *         skin?: scalar|Param|null, // see skin listing for viable options // Default: "skin-blue"
- *         form_theme?: scalar|Param|null, // the form theme, must be one of: default, horizontal or null // Default: "default"
- *         fixed_layout?: bool|Param, // Default: false
- *         boxed_layout?: bool|Param, // these settings relate directly to the "Layout Options" // Default: false
- *         collapsed_sidebar?: bool|Param, // described in the documentation // Default: false
- *         mini_sidebar?: bool|Param, // Default: false
- *         max_navbar_notifications?: int|Param, // Max number of notifications displayed in the notification bar // Default: 10
- *         max_navbar_tasks?: int|Param, // Max number of tasks displayed in the notification bar // Default: 10
- *         max_navbar_messages?: int|Param, // Max number of messages displayed in the notification bar // Default: 10
- *     },
- *     control_sidebar?: list<array{ // Default: []
- *         icon?: scalar|Param|null,
- *         controller?: scalar|Param|null,
- *         template?: scalar|Param|null,
- *     }>,
- *     theme?: array{
- *         widget?: array{
- *             collapsible_title?: scalar|Param|null, // Default: "Collapse"
- *             removable_title?: scalar|Param|null, // Default: "Remove"
- *             type?: scalar|Param|null, // Default: "primary"
- *             bordered?: bool|Param, // Default: true
- *             collapsible?: bool|Param, // Default: false
- *             removable?: bool|Param, // Default: false
- *             solid?: bool|Param, // Default: false
- *             use_footer?: bool|Param, // Default: true
- *         },
- *         button?: array{
- *             type?: scalar|Param|null, // default button type // Default: "primary"
- *             size?: scalar|Param|null, // default button size // Default: false
- *         },
- *     },
- *     knp_menu?: array{
- *         enable?: bool|Param, // Default: false
- *         main_menu?: scalar|Param|null, // your builder alias // Default: "adminlte_main"
- *         breadcrumb_menu?: scalar|Param|null, // Your builder alias or false to disable breadcrumbs // Default: false
- *     },
- *     routes?: array{
- *         adminlte_welcome?: scalar|Param|null, // name of the homepage route // Default: "home"
- *         adminlte_login?: scalar|Param|null, // name of the form login route // Default: "login"
- *         adminlte_login_check?: scalar|Param|null, // name of the form login_check route // Default: "login_check"
- *         adminlte_registration?: scalar|Param|null, // name of the user registration form route // Default: null
- *         adminlte_password_reset?: scalar|Param|null, // name of the forgot-password form route // Default: null
- *         adminlte_message?: scalar|Param|null, // name of the route to one message // Default: "message"
- *         adminlte_messages?: scalar|Param|null, // name of the route to all messages // Default: "messages"
- *         adminlte_notification?: scalar|Param|null, // name of the route to one notification // Default: "notification"
- *         adminlte_notifications?: scalar|Param|null, // name of the route to all notification // Default: "notifications"
- *         adminlte_task?: scalar|Param|null, // name of the route to one task // Default: "task"
- *         adminlte_tasks?: scalar|Param|null, // name of the route to all tasks // Default: "tasks"
- *         adminlte_profile?: scalar|Param|null, // name of the route to the users profile // Default: "profile"
- *     },
- * }
  * @psalm-type KnpMenuConfig = array{
  *     providers?: array{
  *         builder_alias?: bool|Param, // Default: true
@@ -1570,6 +1516,18 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     templating?: bool|Param, // Default: false
  *     default_renderer?: scalar|Param|null, // Default: "twig"
+ * }
+ * @psalm-type TwigComponentConfig = array{
+ *     defaults?: array<string, string|array{ // Default: ["__deprecated__use_old_naming_behavior"]
+ *         template_directory?: scalar|Param|null, // Default: "components"
+ *         name_prefix?: scalar|Param|null, // Default: ""
+ *     }>,
+ *     anonymous_template_directory?: scalar|Param|null, // Defaults to `components`
+ *     profiler?: bool|array{ // Enables the profiler for Twig Component
+ *         enabled?: bool|Param, // Default: "%kernel.debug%"
+ *         collect_components?: bool|Param, // Collect components instances // Default: true
+ *     },
+ *     controllers_json?: scalar|Param|null, // Deprecated: The "twig_component.controllers_json" config option is deprecated, and will be removed in 3.0. // Default: null
  * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
@@ -1585,8 +1543,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     monolog?: MonologConfig,
  *     debug?: DebugConfig,
  *     webpack_encore?: WebpackEncoreConfig,
- *     admin_lte?: AdminLteConfig,
  *     knp_menu?: KnpMenuConfig,
+ *     twig_component?: TwigComponentConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1602,8 +1560,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         debug?: DebugConfig,
  *         maker?: MakerConfig,
  *         webpack_encore?: WebpackEncoreConfig,
- *         admin_lte?: AdminLteConfig,
  *         knp_menu?: KnpMenuConfig,
+ *         twig_component?: TwigComponentConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1619,8 +1577,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         monolog?: MonologConfig,
  *         debug?: DebugConfig,
  *         webpack_encore?: WebpackEncoreConfig,
- *         admin_lte?: AdminLteConfig,
  *         knp_menu?: KnpMenuConfig,
+ *         twig_component?: TwigComponentConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

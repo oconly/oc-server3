@@ -21,8 +21,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'is_bundle' => false,
                     'type' => 'attribute',
                     'dir' => '%kernel.project_dir%/src/Entity',
-                    'prefix' => 'App\Entity',
-                    'alias' => 'App'
+                    'prefix' => 'Oc\Entity',
+                    'alias' => 'Oc'
                 ]
             ]
         ]

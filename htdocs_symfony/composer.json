@@ -11,7 +11,7 @@
         "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^3.6.2",
-        "kevinpapst/adminlte-bundle": "^3.6.1",
+        "easycorp/easyadmin-bundle": "^5.0",
         "knplabs/knp-menu-bundle": "^3.7",
         "phpdocumentor/reflection-docblock": "^6.0.0",
         "symfony/asset": "7.4.*",

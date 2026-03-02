@@ -9,8 +9,12 @@ return static function (RoutingConfigurator $routingConfigurator): void {
         ->namePrefix('app_');
 
     $routingConfigurator->import('../../src/Controller/Backend', 'attribute')
-        ->namePrefix('backend_')
-        ->prefix('/backend');
+            ->namePrefix('backend_')
+            ->prefix('/backend');
+
+//    $routingConfigurator->import('../../src/Controller/Admin', 'attribute')
+//            ->namePrefix('admin_')
+//            ->prefix('/admin');
 
     $routingConfigurator->import('../../src/Kernel.php', 'attribute');
 };
