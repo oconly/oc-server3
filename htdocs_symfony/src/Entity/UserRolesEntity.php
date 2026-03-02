@@ -11,10 +11,14 @@ use Oc\Repository\UserRolesRepository;
 #[ORM\Entity(repositoryClass: UserRolesRepository::class)]
 class UserRolesEntity extends AbstractEntity
 {
+    #[ORM\Id]
+    #[ORM\Column]
     public int $id = 0;
 
+    #[ORM\Column]
     public int $userId;
 
+    #[ORM\Column]
     public int $roleId;
 
     public function __construct(int $userId = 0, int $roleId = 0)
@@ -26,5 +30,34 @@ class UserRolesEntity extends AbstractEntity
     public function isNew(): bool
     {
         return $this->id === 0;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): static
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getRoleId(): ?int
+    {
+        return $this->roleId;
+    }
+
+    public function setRoleId(int $roleId): static
+    {
+        $this->roleId = $roleId;
+
+        return $this;
     }
 }
