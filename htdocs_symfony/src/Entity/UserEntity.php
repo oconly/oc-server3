@@ -307,7 +307,7 @@ class UserEntity extends AbstractEntity implements UserInterface, LegacyPassword
         return $this;
     }
 
-    public function isGdprDeletion(): ?bool
+    public function getGdprDeletion(): ?bool
     {
         return $this->gdprDeletion;
     }

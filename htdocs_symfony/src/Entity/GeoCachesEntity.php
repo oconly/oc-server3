@@ -121,7 +121,7 @@ class GeoCachesEntity extends AbstractEntity
     public string $flagsLastModified;
 
     #[ORM\Column]
-    public string $gdprDeletion;
+    public bool $gdprDeletion = false;
 
     public UserEntity $user;
 
@@ -599,12 +599,12 @@ class GeoCachesEntity extends AbstractEntity
         return $this;
     }
 
-    public function getGdprDeletion(): ?string
+    public function getGdprDeletion(): ?bool
     {
         return $this->gdprDeletion;
     }
 
-    public function setGdprDeletion(string $gdprDeletion): static
+    public function setGdprDeletion(bool $gdprDeletion): static
     {
         $this->gdprDeletion = $gdprDeletion;
 
