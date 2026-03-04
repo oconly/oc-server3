@@ -346,7 +346,7 @@ class CachesRepository extends ServiceEntityRepository
         $entity->needsMaintenance = (int)$data['needs_maintenance'];
         $entity->listingOutdated = (int)$data['listing_outdated'];
         $entity->flagsLastModified = $data['flags_last_modified'];
-        $entity->gdprDeletion = $data['gdpr_deletion'];
+        $entity->gdprDeletion = (bool)$data['gdpr_deletion'];
         $entity->cacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $entity->size]);
         $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);
         $entity->cacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $entity->type]);
