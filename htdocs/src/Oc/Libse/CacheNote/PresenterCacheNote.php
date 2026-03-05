@@ -26,6 +26,9 @@ class PresenterCacheNote
     private $cacheId;
     private $note;
     private $cacheNoteHandler;
+    private $latitude = 0;
+    private $longitude = 0;
+    private $directCoordinate;
 
     public function __construct($request = false, $translator = false)
     {
@@ -43,7 +46,9 @@ class PresenterCacheNote
         if ($cacheNote) {
             $this->noteId = $cacheNote['id'];
             $this->note = $cacheNote['note'];
-            $this->coordinate->init($cacheNote['latitude'], $cacheNote['longitude']);
+            $this->latitude = $cacheNote['latitude'];
+            $this->longitude = $cacheNote['longitude'];
+            $this->coordinate->init($this->latitude, $this->longitude);
         }
     }
 
@@ -56,6 +61,8 @@ class PresenterCacheNote
         $template->assign(self::tpl_cache_id, $this->cacheId);
         $template->assign(self::tpl_note, $this->getNote());
         $template->assign(self::tpl_incl_coord, $this->coordinate->hasCoordinate());
+        $template->assign('coord_latitude', $this->latitude);
+        $template->assign('coord_longitude', $this->longitude);
         $this->coordinate->prepare($template);
     }
 
@@ -65,10 +72,22 @@ class PresenterCacheNote
         $this->request->validate(self::req_note, new AlwaysValidValidator());
 
         if ($this->includeCoordinate()) {
-            $this->coordinate->validate();
-        // Removed false-return for invalid coordinate, so that at least the note will be saved.
-            // validate() produces some formal valid coordinate.
-            // -- following 25 May 2015
+            $lat = $this->request->getForValidation('latitude');
+            $lon = $this->request->getForValidation('longitude');
+            if ($lat !== null && $lat !== '' && $lon !== null && $lon !== '') {
+                $lat = (float) $lat;
+                $lon = (float) $lon;
+                try {
+                    $this->directCoordinate = new CoordinateCoordinate($lat, $lon);
+                    $this->latitude = $lat;
+                    $this->longitude = $lon;
+                    $this->coordinate->init($lat, $lon);
+                } catch (\InvalidArgumentException $e) {
+                    $this->coordinate->validate();
+                }
+            } else {
+                $this->coordinate->validate();
+            }
         } else {
             $this->coordinate->init(0, 0);
         }
@@ -98,6 +117,9 @@ class PresenterCacheNote
     private function getCoordinate()
     {
         if ($this->includeCoordinate()) {
+            if ($this->directCoordinate) {
+                return $this->directCoordinate;
+            }
             return $this->coordinate->getCoordinate();
         }
 
