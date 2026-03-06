@@ -1,6 +1,12 @@
 {***************************************************************************
 * You can find the license in the docs directory
 ***************************************************************************}
+<div id="coord_single" style="display:none">
+  <input type="text" id="coord_unified" size="35" placeholder="N00 00.000 E000 00.000" {if $disabled}disabled=""{/if} />
+  <br />
+  <span id="coord_feedback"></span>
+</div>
+<div id="coord_detail">
 <table class="table">
   <tr>
     <td>
@@ -40,3 +46,10 @@
   {/if}
 
 </table>
+</div>
+<input type="hidden" name="latitude" id="coord_lat" value="{$coord_latitude|default:''}" />
+<input type="hidden" name="longitude" id="coord_lon" value="{$coord_longitude|default:''}" />
+<a href="#" id="coord_toggle" style="display:none; font-size:11px"
+   data-label-6="{t escape=js}6 fields{/t}"
+   data-label-1="{t escape=js}1 field{/t}"
+   data-label-parse-error="{t escape=js}Could not parse coordinates{/t}"></a>

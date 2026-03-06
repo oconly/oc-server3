@@ -349,6 +349,7 @@ if ($login->userid != 0) {
 }
 
 $tpl->assign('enableCacheNote', $login->userid != 0);
+$tpl->add_header_javascript('resource2/ocstyle/js/coord_input.js');
 
 /* Logentries */
 
