@@ -172,7 +172,7 @@ if (!$error) {
         }
 
         $st_hours = floor((float)$search_time);
-        $st_minutes = sprintf('%02.0F', ($search_time - $st_hours) * 60);
+        $st_minutes = sprintf('%02.0F', ((float)$search_time - $st_hours) * 60);
 
         tpl_set_var('search_time', $st_hours . ':' . $st_minutes);
         tpl_set_var('way_length', $way_length);
