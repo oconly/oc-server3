@@ -108,6 +108,7 @@ class MenuGenerator
             $this->addMenuItem($menu, 'menuRoles', $this->translator->trans('DEV Roles'), 'backend_roles_index', 'icon', 'fas fa-user-shield');
         }
 
+        $this->addMenuItem($menu, 'menuLogin', $this->translator->trans('Login'), 'app_security_login', 'icon', 'fas fa-door-open');
         $this->addMenuItem($menu, 'menuLogout', $this->translator->trans('Logout'), 'app_security_logout', 'icon', 'fas fa-door-open');
 
         return $menu;
