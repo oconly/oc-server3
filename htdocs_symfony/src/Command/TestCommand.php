@@ -8,6 +8,7 @@ use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -20,7 +21,7 @@ class TestCommand extends Command
 
     private Security $security;
 
-    public function __construct(RoleHierarchyInterface $roleHierarchy, Security $security)
+    public function __construct(#[Autowire(lazy: true)] RoleHierarchyInterface $roleHierarchy, Security $security)
     {
         parent::__construct();
         $this->roleHierarchy = $roleHierarchy;
