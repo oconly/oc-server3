@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Oc\Menu\MenuGenerator;
 use Oc\Security\RoleHierarchyFactory;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
@@ -31,4 +32,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set('security.role_hierarchy', RoleHierarchyInterface::class)
         ->factory([service(RoleHierarchyFactory::class), 'create']);
+
+    $services->set('app.menu_builder', MenuGenerator::class)
+            ->args([
+                    service('knp_menu.factory')
+            ])
+            ->tag('knp_menu.menu_builder', [
+                    'method' => 'createSideMenu',
+                    'alias'  => 'main'
+            ]);
 };

@@ -956,7 +956,7 @@ class SupportControllerBackend extends AbstractController
      * Button/Dialog zum Einlesen der GPX-Datei
      * inklusive Rückinfo zu Anzahl eingelesener Caches
      */
-    #[Route("/GPXimport/", name: "support_gpx_import", methods: ['POST'])]
+    #[Route("/GPXimport/", name: "support_gpx_import", methods: ['GET', 'POST'])]
     public function GPX_import(Request $request): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
