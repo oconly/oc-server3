@@ -12,7 +12,7 @@ class TranslationService implements TranslatorInterface
     /**
      * @var Translator
      */
-    private $translator;
+    private Translator $translator;
 
     public function __construct()
     {

@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 /**
- * @Route(service="Oc\Import\Logs\Controller\ImportLogsController")
+ * @Route("Oc\Import\Logs\Controller\ImportLogsController", name="importlogs_index")
  */
 class ImportLogsController extends AbstractController
 {
