@@ -7,8 +7,8 @@ use Oc\AbstractController;
 use Oc\Page\Exception\PageNotFoundException;
 use Oc\Page\Exception\PageTranslationNotFoundException;
 use Oc\Page\PageProvider;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PageController extends AbstractController

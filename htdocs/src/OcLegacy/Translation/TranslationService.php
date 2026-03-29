@@ -44,7 +44,8 @@ class TranslationService implements TranslatorInterface
      */
     public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
     {
-        return $this->translator->transChoice($id, $number, $parameters, $domain, $locale);
+//        return $this->translator->transChoice($id, $number, $parameters, $domain, $locale);
+        return $this->translator->trans($id, array_merge(['%count%' => $number], $parameters), $domain, $locale);
     }
 
     /**
@@ -58,7 +59,7 @@ class TranslationService implements TranslatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getLocale() : string
     {
         return $this->translator->getLocale();
     }
