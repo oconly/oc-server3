@@ -6,6 +6,5 @@ export default {
         "selector-max-compound-selectors": 4,
         "value-no-vendor-prefix": null,
         "scss/load-no-partial-leading-underscore": true,
-        "scss/at-import-no-partial-leading-underscore": null,
     },
 };

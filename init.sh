@@ -31,7 +31,7 @@ printf '\n***\n*** htdocs: doctrine migration \n***\n'
 chmod 755 ./htdocs/bin/console
 chmod -R 777 ./htdocs/var
 ./htdocs/bin/console doctrine:migrations:migrate -n
-printf '\nXXX\nhtdocs_symfony: doctrine migration \n***\n'
+printf '\n***\nhtdocs_symfony: doctrine migration \n***\n'
 ./htdocs_symfony/bin/console doctrine:migrations:migrate -n
 
 printf '\n***\n*** update OKAPI \n***\n'

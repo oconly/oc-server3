@@ -1,3 +1,5 @@
+const path = require('path');
+
 /**
  *
  * @type {Encore}
@@ -40,7 +42,23 @@ Encore
 })
 
 // enables Loaders
-.enableSassLoader()
+.enableSassLoader((options) => {
+    options.api = 'modern'; // TODO: set to 'modern-compiler' as soon as sass-loader is updated to version 16
+    options.sassOptions = {
+        loadPaths: [
+            path.resolve(__dirname, 'node_modules')
+        ],
+        // Blendet Warnungen aus Bibliotheken (node_modules) aus
+        quietDeps: true,
+        // Schaltet die spezifischen neuen Meldungen von Dart Sass 2.x stumm
+        silenceDeprecations: [
+            // 'global-builtin', // Behebt die Meldung zu mix()
+            // 'import',         // Behebt Meldungen zum veralteten @import
+            // 'color-functions', // Behebt Meldungen zu lighten/darken
+            // 'mixed-decls'      // Behebt Meldungen zu CSS-Deklarationen
+        ],
+    };
+})
 .enablePostCssLoader()
 
 // https://symfony.com/doc/current/frontend/encore/copy-files.html#referencing-image-files-from-a-template
