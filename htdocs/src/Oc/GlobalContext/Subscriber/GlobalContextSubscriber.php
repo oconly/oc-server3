@@ -4,7 +4,7 @@ namespace Oc\GlobalContext\Subscriber;
 
 use Oc\GlobalContext\GlobalContextFactory;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class GlobalContextSubscriber implements EventSubscriberInterface
@@ -12,7 +12,7 @@ class GlobalContextSubscriber implements EventSubscriberInterface
     /**
      * @var GlobalContextFactory
      */
-    private $contextFactory;
+    private GlobalContextFactory $contextFactory;
 
     public function __construct(GlobalContextFactory $contextFactory)
     {
@@ -31,7 +31,7 @@ class GlobalContextSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;

@@ -2,14 +2,15 @@
 
 namespace Oc\GeoCache\Controller;
 
+use InvalidArgumentException;
 use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheEntity;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheService;
 use Oc\GeoCache\Util;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class GeoCacheFileController extends AbstractController
 {
@@ -38,7 +39,7 @@ class GeoCacheFileController extends AbstractController
         $geoCache = $this->geoCacheService->fetchByWaypoint($waypoint);
 
         if (!$geoCache instanceof GeoCacheEntity) {
-            throw new \InvalidArgumentException('the waypoint is not valid!');
+            throw new InvalidArgumentException('the waypoint is not valid!');
         }
 
         $response = new Response(
@@ -65,7 +66,7 @@ class GeoCacheFileController extends AbstractController
         $geoCache = $this->geoCacheService->fetchByWaypoint($waypoint);
 
         if (!$geoCache instanceof GeoCacheEntity && $geoCache->type !== GeoCacheType::EVENT) {
-            throw new \InvalidArgumentException('the waypoint is not valid or not an event!');
+            throw new InvalidArgumentException('the waypoint is not valid or not an event!');
         }
 
         $icsString = $this->geoCacheUtil->generateIcsStringFromGeoCache($geoCache);

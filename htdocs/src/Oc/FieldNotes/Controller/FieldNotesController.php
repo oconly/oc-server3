@@ -7,10 +7,10 @@ use Oc\FieldNotes\Form\UploadFormDataFactory;
 use Oc\FieldNotes\Form\UploadType;
 use Oc\FieldNotes\Import\ImportService;
 use Oc\FieldNotes\Persistence\FieldNoteService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**

@@ -3,13 +3,13 @@
 namespace Oc\Changelog\Controller;
 
 use League\CommonMark\CommonMarkConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 /**
- * @Route(service="Oc\Changelog\Controller\ChangelogController")
+ * @Route("Oc\Changelog\Controller\ChangelogController", name="changelog_index")
  */
 class ChangelogController extends AbstractController
 {
@@ -35,7 +35,7 @@ class ChangelogController extends AbstractController
     public function indexAction(): Response
     {
         $changelog = $this->markConverter
-            ->convertToHtml(file_get_contents(__DIR__ . '/../../../../../ChangeLog-3.1.md'));
+            ->convert(file_get_contents(__DIR__ . '/../../../../../ChangeLog-3.1.md'))->getContent();
 
         $response = new Response();
         $response->setContent(
