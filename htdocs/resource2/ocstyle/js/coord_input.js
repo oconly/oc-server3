@@ -309,9 +309,20 @@ function init() {
         }
     }
 
+    /** Sync hidden decimal fields from 6-field inputs (used when in 6-field mode). */
+    function on6FieldInput() {
+        var ll = latLonFrom6Fields();
+        hiddenLat.value = ll.latitude;
+        hiddenLon.value = ll.longitude;
+    }
+
     // Wire events
     unified.addEventListener('input', onUnifiedInput);
     toggle.addEventListener('click', toggleMode);
+    [latHemEl, latDegEl, latMinEl, lonHemEl, lonDegEl, lonMinEl].forEach(function(el) {
+        el.addEventListener('input', on6FieldInput);
+        el.addEventListener('change', on6FieldInput);
+    });
 
     // Initial state: show unified, hide 6-field, reveal toggle
     singleSec.style.display = '';
