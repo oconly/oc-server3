@@ -39,7 +39,7 @@ Encore
 
 // enables Loaders
 .enableSassLoader((options) => {
-    options.api = 'modern'; // TODO: set to 'modern-compiler' as soon as sass-loader is updated to version 16
+    options.api = 'modern-compiler';
     options.sassOptions = {
         loadPaths: [
             path.resolve(__dirname, 'node_modules')
