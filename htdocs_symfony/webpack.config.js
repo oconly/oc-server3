@@ -1,13 +1,11 @@
+const path = require('path');
+
 /**
  *
  * @type {Encore}
  */
 const Encore = require('@symfony/webpack-encore');
 
-/**
- *
- * @type {{Compiler: Compiler} | StylelintWebpackPlugin}
- */
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -40,7 +38,23 @@ Encore
 })
 
 // enables Loaders
-.enableSassLoader()
+.enableSassLoader((options) => {
+    options.api = 'modern-compiler';
+    options.sassOptions = {
+        loadPaths: [
+            path.resolve(__dirname, 'node_modules')
+        ],
+        // Blendet Warnungen aus Bibliotheken (node_modules) aus
+        quietDeps: true,
+        // Schaltet die spezifischen neuen Meldungen von Dart Sass 2.x stumm
+        silenceDeprecations: [
+            // 'global-builtin', // Behebt die Meldung zu mix()
+            // 'import',         // Behebt Meldungen zum veralteten @import
+            // 'color-functions', // Behebt Meldungen zu lighten/darken
+            // 'mixed-decls'      // Behebt Meldungen zu CSS-Deklarationen
+        ],
+    };
+})
 .enablePostCssLoader()
 
 // https://symfony.com/doc/current/frontend/encore/copy-files.html#referencing-image-files-from-a-template
@@ -68,10 +82,27 @@ Encore
 
 .autoProvidejQuery()
 
-.addPlugin(
-    new StylelintPlugin({
-        fix: true
-    }))
+.addPlugin(new StylelintPlugin({
+    // Behebt einfache Fehler (wie Einrückungen) automatisch beim Speichern
+    fix: true,
+
+    // Hilft Stylelint 17, die neue Konfigurationsdatei sicher zu finden
+    configFile: path.resolve(__dirname, '.stylelintrc.mjs'),
+
+    // WICHTIG: Erzwingt den SCSS-Parser (verhindert "Unknown word" Fehler)
+    customSyntax: 'postcss-scss',
+
+    // Sucht nur im assets-Pfad nach Stylesheets (beschleunigt den Build)
+    context: 'assets',
+    files: '**/*.scss',
+
+    // Pfade ausschliessen
+    exclude: ['node_modules', 'vendor', 'public'],
+
+    // Zeigt Fehler im Browser-Overlay von Symfony an
+    emitError: true,
+    failOnError: Encore.isProduction(),
+}))
 ;
 
 module.exports = Encore.getWebpackConfig();

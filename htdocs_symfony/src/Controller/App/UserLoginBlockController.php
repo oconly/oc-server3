@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserLoginBlockController extends AbstractController
@@ -32,9 +32,9 @@ class UserLoginBlockController extends AbstractController
     }
 
     /**
-     * @Route("/ulb", name="user_login_block")
      * @throws Exception
      */
+    #[Route("/ulb", name: "user_login_block")]
     public function showUserLoginBlockMessageOrRedirect(): Response
     {
         $form = $this->createForm(UserLoginBlockConfirm::class);
@@ -64,9 +64,9 @@ class UserLoginBlockController extends AbstractController
     }
 
     /**
-     * @Route("/cRM", name="confirm_read_block_message")
      * @throws Exception
      */
+    #[Route("/cRM", name: "confirm_read_block_message")]
     public function confirmReadBlockMessage(Request $request): Response
     {
         $form = $this->createForm(UserLoginBlockConfirm::class);

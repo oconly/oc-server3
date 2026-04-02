@@ -1,0 +1,10 @@
+/** @type {import('stylelint').Config} */
+export default {
+    extends: ["stylelint-config-sass-guidelines"],
+    defaultSeverity: "warning",
+    rules: {
+        "selector-max-compound-selectors": 4,
+        "value-no-vendor-prefix": null,
+        "scss/load-no-partial-leading-underscore": true,
+    },
+};

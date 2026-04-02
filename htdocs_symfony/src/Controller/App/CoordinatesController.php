@@ -10,7 +10,7 @@ use Oc\Repository\CoordinatesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class CoordinatesController extends AbstractController
 {
@@ -21,9 +21,7 @@ class CoordinatesController extends AbstractController
         $this->coordinatesRepository = $coordinatesRepository;
     }
 
-    /**
-     * @Route("/coordinates", name="coordinates_index")
-     */
+    #[Route("/coordinates", name: "coordinates_index")]
     public function coordinatesController_index(Request $request): Response
     {
         $fetchedCoordinates = '';
@@ -41,9 +39,7 @@ class CoordinatesController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/coordinate/{lat}+{lon}", name="coordinate_by_lat-lon")
-     */
+    #[Route("/coordinate/{lat}+{lon}", name: "coordinate_by_lat-lon")]
     public function convertCoordinates(string $lat, string $lon): Response
     {
         return $this->render(
@@ -52,9 +48,7 @@ class CoordinatesController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/coordinatesFormatIdentify", name="coordinates_format_identify")
-     */
+    #[Route("/coordinatesFormatIdentify", name: "coordinates_format_identify")]
     public function coordinatesDetector(Request $request): Response
     {
         $matchedFormats = '';

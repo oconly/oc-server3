@@ -42,7 +42,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_.. and above!
@@ -131,9 +131,7 @@ class SupportControllerBackend extends AbstractController
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @Route("/support", name="support_index")
-     */
+    #[Route("/support", name: "support_index")]
     public function index(): Response
     {
         return $this->render('backend/support/index.html.twig');
@@ -142,8 +140,8 @@ class SupportControllerBackend extends AbstractController
     /**
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
-     * @Route("/supportSearch", name="support_search")
      */
+    #[Route("/supportSearch", name: "support_search")]
     public function searchCachesAndUser(Request $request): Response
     {
         $fetchedCaches = '';
@@ -174,9 +172,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @Route("/reportedCaches", name="support_reported_caches")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/reportedCaches", name: "support_reported_caches")]
     public function listReportedCaches(): Response
     {
         $fetchedReports = $this->getReportedCaches();
@@ -192,9 +190,9 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
-     * @Route("/bonusCaches", name="support_bonus_caches")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/bonusCaches", name: "support_bonus_caches")]
     public function listBonusCaches(): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -214,9 +212,9 @@ class SupportControllerBackend extends AbstractController
     /**
      * @throws Exception
      * @throws RecordNotFoundException
-     * @Route("/bonusCachesAssignmentChoice/{wpID}", name="support_bonus_caches_assignment_choice")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/bonusCachesAssignmentChoice/{wpID}", name: "support_bonus_caches_assignment_choice")]
     public function bonusCachesAssignmentChoice(string $wpID): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -238,9 +236,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name="support_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name: "support_bonus_caches_assignment")]
     public function bonusCachesAssignment(string $wpID, int $userID, string $toBonusCache): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -263,9 +261,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @Route("/bonusCachesDirectAssignment", name="support_directly_assign_bonus_cache")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/bonusCachesDirectAssignment", name: "support_directly_assign_bonus_cache")]
     public function bonusCachesDirectAssignment(Request $request): Response
     {
         $formDirectBonusAssignment = $this->createForm(SupportBonusCachesAssignment::class);
@@ -291,9 +289,9 @@ class SupportControllerBackend extends AbstractController
      * @throws InvalidArgumentException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name="support_remove_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name: "support_remove_bonus_caches_assignment")]
     public function removeBonusCachesAssignment(string $wpID, bool $removeToBonus, bool $removeBonus): Response
     {
         $fetchedBonusCache = $this->supportBonuscachesRepository->fetchOneBy(['wp_oc' => $wpID]);
@@ -318,8 +316,8 @@ class SupportControllerBackend extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/dbQueries", name="support_db_queries")
      */
+    #[Route("/dbQueries", name: "support_db_queries")]
     public function listDbQueries(Request $request): Response
     {
         $fetchedInformation = [];
@@ -362,10 +360,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws Exception
-     * @Route("/cacheHistory/{wpID}", name="support_cache_history")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/cacheHistory/{wpID}", name: "support_cache_history")]
     public function list_cache_history(string $wpID): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -398,9 +395,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @Route("/repCaches/{repID}", name="support_reported_cache")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/repCaches/{repID}", name: "support_reported_cache")]
     public function list_reported_cache_details(int $repID): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -427,9 +424,9 @@ class SupportControllerBackend extends AbstractController
      * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
-     * @Route("/occ/{wpID}&{userID}", name="support_occ")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/occ/{wpID}&{userID}", name: "support_occ")]
     public function occPage(string $wpID, int $userID): Response
     {
         $formCommentUser = $this->createForm(SupportCommentField::class);
@@ -494,9 +491,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @Route("/occSaveText", name="support_occ_save_text")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/occSaveText", name: "support_occ_save_text")]
     public function occ_saveTextArea(Request $request): Response
     {
         $form = $this->createForm(SupportCommentField::class)->handleRequest($request);
@@ -527,9 +524,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @Route("/repCachesSaveText", name="support_reported_cache_save_text")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/repCachesSaveText", name: "support_reported_cache_save_text")]
     public function repCaches_saveTextArea(Request $request): Response
     {
         $form = $this->createForm(SupportCommentField::class)->handleRequest($request);
@@ -552,9 +549,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name="support_reported_cache_supportuser_assignment")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name: "support_reported_cache_supportuser_assignment")]
     public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route): Response
     {
         $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
@@ -569,9 +566,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @route("/repCachesAssignSupportuser/{repID}&{route}", name="support_reported_cache_set_status")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/repCachesAssignSupportuser/{repID}&{route}", name: "support_reported_cache_set_status")]
     public function repCaches_setReportStatus(int $repID, string $route): Response
     {
         $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
@@ -585,9 +582,9 @@ class SupportControllerBackend extends AbstractController
     /**
      * @throws Exception
      * @throws RecordNotFoundException
-     * @Route("/uad/{userID}", name="support_user_account_details")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/uad/{userID}", name: "support_user_account_details")]
     public function list_user_account_details(int $userID): Response
     {
         $fetchedUserDetails = $this->userRepository->fetchOneById($userID);
@@ -611,11 +608,11 @@ class SupportControllerBackend extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      *
-     * @Route("/vandalism/{wpID}&{userID}", name="support_vandalism")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      *
      * Vandalismusscript 1:1 adaptiert von htdocs/restorecaches.php
      */
+    #[Route("/vandalism/{wpID}&{userID}", name: "support_vandalism")]
     public function vandalism(string $wpID, int $userID): Response
     {
         $data = $this->supportVandalismRepository->getArchiveData($this->cachesRepository->getIdByWP($wpID), $wpID);
@@ -632,9 +629,9 @@ class SupportControllerBackend extends AbstractController
     /**
      * @throws Exception
      *
-     * @Route("/vandalismRestore", name="support_vandalism_restore")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/vandalismRestore", name: "support_vandalism_restore")]
     public function vandalismRestore(Request $request): Response
     {
         $restoredData = $this->supportVandalismRepository->restoreListings($request->request->all());
@@ -706,9 +703,9 @@ class SupportControllerBackend extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/dbQueries1/{days}", name="support_db_queries_1")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/dbQueries1/{days}", name: "support_db_queries_1")]
     public function executeSQL_caches_old_reg_date(int $days = 31) // List caches from users whose registration date is not older than x days.
     : Response
     {
@@ -733,9 +730,9 @@ class SupportControllerBackend extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/dbQueries2/{days}", name="support_db_queries_2")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/dbQueries2/{days}", name: "support_db_queries_2")]
     public function executeSQL_old_reg_date(int $days) // List user whose registration date is no older than x days.
     : Response
     {
@@ -758,9 +755,9 @@ class SupportControllerBackend extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/dbQueries4", name="support_db_queries_4")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/dbQueries4", name: "support_db_queries_4")]
     public function executeSQL_caches_old_login_date(
     ) // List (non-archived, non-locked) caches from users whose last login date is older than one year, and the caches have DNFs or notes.
     : Response
@@ -800,9 +797,9 @@ class SupportControllerBackend extends AbstractController
 
     /**
      * @throws RecordsNotFoundException
-     * @Route("/dbQueries5", name="support_db_queries_5")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/dbQueries5", name: "support_db_queries_5")]
     public function executeSQL_support_commented_user() // List users where a support user left a comment.
     : Response
     {
@@ -818,9 +815,9 @@ class SupportControllerBackend extends AbstractController
 
     /**
      * @throws Exception
-     * @Route("/dbQueries6", name="support_db_queries_6")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
+    #[Route("/dbQueries6", name: "support_db_queries_6")]
     public function executeSQL_Dornroeschen_caches() // List caches that currently meet Dornröschen requirements.
     : Response
     {
@@ -882,9 +879,9 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
-     * @route("/supportUADactions/{userID}", name="support_executeUAD_actions")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
+    #[Route("/supportUADactions/{userID}", name: "support_executeUAD_actions")]
     public function executeUAD_actions(Request $request, int $userID): Response
     {
         $form = $this->createForm(SupportUserAccountDetails::class)->handleRequest($request);
@@ -954,12 +951,12 @@ class SupportControllerBackend extends AbstractController
      * @throws RecordNotPersistedException
      * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @route("/GPXimport/", name="support_gpx_import"), methods={"POST"}
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      *
      * Button/Dialog zum Einlesen der GPX-Datei
      * inklusive Rückinfo zu Anzahl eingelesener Caches
      */
+    #[Route("/GPXimport/", name: "support_gpx_import", methods: ['GET', 'POST'])]
     public function GPX_import(Request $request): Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);

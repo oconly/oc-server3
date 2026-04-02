@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCachesEntity;
@@ -13,7 +14,7 @@ use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class CachesRepository
+class CachesRepository extends ServiceEntityRepository
 {
     private const TABLE = 'caches';
 
@@ -283,6 +284,7 @@ class CachesRepository
                 'needs_maintenance' => $entity->needsMaintenance,
                 'listing_outdated' => $entity->listingOutdated,
                 'flags_last_modified' => $entity->flagsLastModified,
+                'gdpr_deletion' => $entity->gdprDeletion,
                 'cache_size' => $entity->cacheSize,
                 'cache_status' => $entity->cacheStatus,
                 'cache_type' => $entity->cacheType,
@@ -344,6 +346,7 @@ class CachesRepository
         $entity->needsMaintenance = (int)$data['needs_maintenance'];
         $entity->listingOutdated = (int)$data['listing_outdated'];
         $entity->flagsLastModified = $data['flags_last_modified'];
+        $entity->gdprDeletion = (bool)$data['gdpr_deletion'];
         $entity->cacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $entity->size]);
         $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);
         $entity->cacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $entity->type]);

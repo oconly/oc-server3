@@ -1,9 +1,8 @@
 //Libaries
-@import 'lib/variables';
+@use 'lib/variables';
 
-@import '~bootstrap';
+@use 'bootstrap/scss/bootstrap' as bs;
 
 body {
   font-size: 1.5rem;
 }
-

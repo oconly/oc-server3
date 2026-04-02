@@ -2,34 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Oc\Components\Subscriber;
+namespace Oc\Menu;
 
-use KevinPapst\AdminLTEBundle\Event\KnpMenuEvent;
+use Knp\Menu\Attribute\AsMenuBuilder;
+use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Navigation menu for frontend and backend
- */
-class MenuSubscriber implements EventSubscriberInterface
+// https://symfony.com/bundles/KnpMenuBundle/current/menu_builder_service.html
+class MenuGenerator
 {
+    private FactoryInterface $factory;
+
     private Security $security;
 
     private TranslatorInterface $translator;
 
-    public function __construct(Security $security, TranslatorInterface $translator)
+    /**
+     * Add any other dependency you need...
+     */
+    public function __construct(FactoryInterface $factory, Security $security, TranslatorInterface $translator)
     {
+        $this->factory = $factory;
         $this->security = $security;
         $this->translator = $translator;
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-                KnpMenuEvent::class => ['onSetupMenu', 100],
-        ];
     }
 
     private function addMenuItem(
@@ -39,20 +36,17 @@ class MenuSubscriber implements EventSubscriberInterface
             string $route,
             string $labelName,
             string $labelValue
-    ) {
+    ): void {
         $menu->addChild($child, [
                 'label' => $label,
                 'route' => $route,
             // 'childOptions' => $event->getChildOptions(), // wozu braucht's das?
-        ])->setLabelAttribute($labelName, $labelValue);
+        ])->setLabelAttribute($labelName, $labelValue); // TODO: wird für css/html benutzt
     }
 
-    public function onSetupMenu(KnpMenuEvent $event)
-    {
-        $menu = $event->getMenu();
-
-        // TODO: Routen und Icons bei den meisten Menüeinträgen noch anpassen.
-        // https://symfony.com/bundles/KnpMenuBundle/current/index.html
+    #[AsMenuBuilder(name: 'sideMenu')] // The name is what is used to retrieve the menu
+    public function createSideMenu(array $options): ItemInterface {
+        $menu = $this->factory->createItem('root');
 
         $this->addMenuItem($menu, 'menuSearch', $this->translator->trans('Search'), 'app_caches_index', 'icon', 'fas fa-search-location');
         $this->addMenuItem($menu['menuSearch'], 'menuSearchCaches', $this->translator->trans('Search caches'), 'app_caches_index', 'icon', 'fas fa-search-location');
@@ -114,6 +108,9 @@ class MenuSubscriber implements EventSubscriberInterface
             $this->addMenuItem($menu, 'menuRoles', $this->translator->trans('DEV Roles'), 'backend_roles_index', 'icon', 'fas fa-user-shield');
         }
 
+        $this->addMenuItem($menu, 'menuLogin', $this->translator->trans('Login'), 'app_security_login', 'icon', 'fas fa-door-open');
         $this->addMenuItem($menu, 'menuLogout', $this->translator->trans('Logout'), 'app_security_logout', 'icon', 'fas fa-door-open');
+
+        return $menu;
     }
 }

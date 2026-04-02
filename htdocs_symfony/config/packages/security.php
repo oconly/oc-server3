@@ -10,7 +10,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function(ContainerConfigurator $containerConfigurator)
 : void {
     $containerConfigurator->extension('security', [
-        'enable_authenticator_manager' => true,
         'providers' => [
             'users' => [
                 'id' => UserProvider::class,

@@ -11,7 +11,7 @@ use Oc\Repository\MapsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class MapsController extends AbstractController
 {
@@ -22,9 +22,7 @@ class MapsController extends AbstractController
         $this->mapsRepository = $mapsRepository;
     }
 
-    /**
-     * @Route("/maps", name="maps_index")
-     */
+    #[Route("/maps", name: "maps_index")]
     public function mapsController_index(Request $request): Response
     {
         return $this->redirectToRoute('app_map_show');
@@ -34,8 +32,8 @@ class MapsController extends AbstractController
      * @throws RecordsNotFoundException
      * @throws Exception
      * @throws RecordNotFoundException
-     * @Route("/mapS/{lat}+{lon}", name="map_show")
      */
+    #[Route("/mapS/{lat}+{lon}", name: "map_show")]
     public function showMap(string $lat = '', string $lon = '', bool $centerView = false): Response
     {
         $centerPoint = $this->mapsRepository->determineMapCenterPoint($lat, $lon, $centerView);
