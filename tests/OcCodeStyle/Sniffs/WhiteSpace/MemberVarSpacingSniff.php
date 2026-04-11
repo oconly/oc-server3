@@ -1,19 +1,12 @@
 <?php
-/**
- * Verifies that class members are spaced correctly.
- *
- * PHP version 5
- *
- * @category  PHP
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2014 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @link      http://pear.php.net/package/PHP_CodeSniffer
- */
-if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === false) {
-    throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractVariableSniff not found');
-}
+
+declare(strict_types=1);
+
+namespace OcTest\OcCodeStyle\Sniffs\WhiteSpace;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Verifies that class members are spaced correctly.
@@ -26,27 +19,27 @@ if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === fa
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
+class MemberVarSpacingSniff extends AbstractVariableSniff
 {
     /**
      * Processes the function tokens within the class.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      */
-    protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr): void
+    protected function processMemberVar(File $phpcsFile, $stackPtr): void
     {
         $tokens = $phpcsFile->getTokens();
 
-        $ignore   = PHP_CodeSniffer_Tokens::$methodPrefixes;
+        $ignore   = Tokens::$methodPrefixes;
         $ignore[] = T_VAR;
         $ignore[] = T_WHITESPACE;
 
         $start = $stackPtr;
         $prev  = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
-        if (isset(PHP_CodeSniffer_Tokens::$commentTokens[$tokens[$prev]['code']]) === true) {
+        if (isset(Tokens::$commentTokens[$tokens[$prev]['code']]) === true) {
             // Assume the comment belongs to the member var if it is on a line by itself.
-            $prevContent = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($prev - 1), null, true);
+            $prevContent = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($prev - 1), null, true);
             if ($tokens[$prevContent]['line'] !== $tokens[$prev]['line']) {
                 // Check the spacing, but then skip it.
                 $foundLines = ($tokens[$stackPtr]['line'] - $tokens[$prev]['line'] - 1);
@@ -73,12 +66,12 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
             }//end if
         }//end if
 
-        // There needs to be 0 blank line before the var, if there are not comments, otherwise 1 blank line
+        // There needs to be 0 blank line before the var, if there are no comments, otherwise 1 blank line
         $expectedLines = 0;
         if ($start === $stackPtr) {
             // No comment found.
-            $first = $phpcsFile->findFirstOnLine(PHP_CodeSniffer_Tokens::$emptyTokens, $start, true);
-            if ($first === false) {
+            $first = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 1), 0, true);
+            if ($first === false || $phpcsFile->getTokens()[$first]['line'] !== $phpcsFile->getTokens()[$start]['line']) {
                 $first = $start;
             }
         } elseif ($tokens[$start]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
@@ -97,11 +90,11 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
                 $first--;
             }
         } else {
-            $first = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($start - 1), null, true);
-            $first = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$commentTokens, ($first + 1));
+            $first = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($start - 1), null, true);
+            $first = $phpcsFile->findNext(Tokens::$commentTokens, ($first + 1));
         }
 
-        $prev       = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($first - 1), null, true);
+        $prev       = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($first - 1), null, true);
         $foundLines = ($tokens[$first]['line'] - $tokens[$prev]['line'] - 1);
         if ($foundLines === $expectedLines) {
             return;
@@ -148,10 +141,10 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
     /**
      * Processes normal variables.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      */
-    protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr): void
+    protected function processVariable(File $phpcsFile, $stackPtr): void
     {
         /*
             We don't care about normal variables.
@@ -163,10 +156,10 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
     /**
      * Processes variables in double quoted strings.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
+     * @param File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      */
-    protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr): void
+    protected function processVariableInString(File $phpcsFile, $stackPtr): void
     {
         /*
             We don't care about normal variables.
