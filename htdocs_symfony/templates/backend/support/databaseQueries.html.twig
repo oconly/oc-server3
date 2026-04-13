@@ -225,7 +225,7 @@
                         <td>{{ item.commentCreated | date('d.m.Y H:i:s') }}</td>
                         <td>{{ item.commentLastModified | date('d.m.Y H:i:s') }}</td>
                         <td>
-                            <a href="{{ path('backend_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}"><i class="fas fa-check"></i></a>
+                            <a href="{{ path('backend_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}">&#x2705;</a>
                         </td>
                     </tr>
                 {% endfor %}
