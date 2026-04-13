@@ -24,22 +24,18 @@
                         <ul>
                             <li><b>{{ 'User ID' | trans }}:</b> {{ user_by_id.userId }}</li>
                             <li><b>{{ 'Email' | trans }}:</b> {{ user_by_id.email }}</li>
-                            <li><b>{{ 'Email validity' | trans }}:</b> {% if user_by_id.emailProblems %}<i class="fas fa-times"></i>
-                                {% else %}<i class="fas fa-check"></i>
+                            <li><b>{{ 'Email validity' | trans }}:</b> {% if user_by_id.emailProblems %}&#x274C;
+                                {% else %}&#x2705;
                                 {% endif %}</li>
                             <li><b>{{ 'Account created' | trans }}:</b> {{ user_by_id.dateCreated | date('d.m.Y H:i:s') }}</li>
                             <li><b>{{ 'Last change' | trans }}:</b> {{ user_by_id.lastModified | date('d.m.Y H:i:s') }}</li>
-                            <li><b>{{ 'User active' | trans }}:</b> {% if user_by_id.isActive %}<i class="fas fa-check"></i>{% else %}<i
-                                        class="fas fa-times"></i>{% endif %}</li>
+                            <li><b>{{ 'User active' | trans }}:</b> {% if user_by_id.isActive %}&#x2705;{% else %}&#x274C;{% endif %}</li>
                             <li><b>{{ 'Activation code' | trans }}
                                     :</b> {% if user_by_id.activationCode %}{{ user_by_id.activationCode }}{% else %}
-                                    <i class="fas fa-times"></i>{% endif %}</li>
-                            <li><b>{{ 'First name' | trans }}:</b> {% if user_by_id.firstname %}{{ user_by_id.firstname }}{% else %}<i
-                                        class="fas fa-times"></i>{% endif %}</li>
-                            <li><b>{{ 'Last name' | trans }}:</b> {% if user_by_id.lastname %}{{ user_by_id.lastname }}{% else %}<i
-                                        class="fas fa-times"></i>{% endif %}</li>
-                            <li><b>{{ 'GDPR deleted' | trans }}:</b> {% if user_by_id.gdprDeletion %}<i class="fas fa-check"></i>{% else %}<i
-                                        class="fas fa-times"></i>{% endif %}</li>
+                                    &#x274C;{% endif %}</li>
+                            <li><b>{{ 'First name' | trans }}:</b> {% if user_by_id.firstname %}{{ user_by_id.firstname }}{% else %}&#x274C;{% endif %}</li>
+                            <li><b>{{ 'Last name' | trans }}:</b> {% if user_by_id.lastname %}{{ user_by_id.lastname }}{% else %}&#x274C;{% endif %}</li>
+                            <li><b>{{ 'GDPR deleted' | trans }}:</b> {% if user_by_id.gdprDeletion %}&#x2705;{% else %}&#x274C;{% endif %}</li>
                         </ul>
                     {% endif %}
                 {% else %}

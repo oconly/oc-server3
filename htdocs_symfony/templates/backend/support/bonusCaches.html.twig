@@ -47,9 +47,8 @@
                     {% for bonusCache in bonusCaches_by_id %}
                         <tr>
                             <td>{{ bonusCache.wpOc }}</td>
-                            <td>{% if bonusCache.isBonusCache %}<i class="fas fa-check"></i>{% else %}<i class="fas fa-times"></i>{% endif %}</td>
-                            <td>{% if bonusCache.belongsToBonusCache %}{{ bonusCache.belongsToBonusCache }}{% else %}<i
-                                        class="fas fa-times"></i>{% endif %}</td>
+                            <td>{% if bonusCache.isBonusCache %}&#x2705;{% else %}&#x274C;{% endif %}</td>
+                            <td>{% if bonusCache.belongsToBonusCache %}{{ bonusCache.belongsToBonusCache }}{% else %}&#x274C;{% endif %}</td>
                             <td>
                                 {% if bonusCache.isBonusCache %}
                                 <a class="btn btn-primary"

@@ -87,17 +87,17 @@
                         <tr>
                             <th>{{ 'Has logpassword' | trans }}?</th>
                             <td>{% if cache.logpw == 1 %}
-                                    <i class="fas fa-key"><i class="fas fa-check"></i></i>
+                                    &#x1F5DD;
                                 {% else %}
-                                    <i class="fas fa-times"></i>
+                                    &#x274C;
                                 {% endif %}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Published' | trans }}?</th>
                             <td>{% if cache.is_publishdate == 1 %}
-                                    <i class="fas fa-check"></i>
+                                    &#x2705;
                                 {% else %}
-                                    <i class="fas fa-times"></i>
+                                    &#x274C;
                                 {% endif %}</td>
                         </tr>
                         <tr>
@@ -171,7 +171,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Show on map' | trans }}</th>
-                            <td><a href="{{ path('app_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a>
+                            <td><a href="{{ path('app_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}">&#x1F5FA;</a>
                             </td>
                         </tr>
                         </thead>

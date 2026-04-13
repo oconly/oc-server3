@@ -63,14 +63,14 @@
                                 <td>{{ fetchedListingInfo.nodeListingCoordinatesLon }}</td>
                                 <td>{{ fetchedListingInfo.nodeListingCoordinatesLat }}</td>
                                 <td>{% if fetchedListingInfo.nodeListingAvailable == 1 %}
-                                        <i class="fas fa-check"></i>
+                                        &#x2705;
                                     {% else %}
-                                        <i class="fas fa-times"></i>
+                                        &#x274C;
                                     {% endif %}</td>
                                 <td>{% if fetchedListingInfo.nodeListingArchived == 1 %}
-                                        <i class="fas fa-check"></i>
+                                        &#x2705;
                                     {% else %}
-                                        <i class="fas fa-times"></i>
+                                        &#x274C;
                                     {% endif %}</td>
                                 <td>{{ fetchedListingInfo.lastModified | date('d.m.Y') }}</td>
                             </tr>

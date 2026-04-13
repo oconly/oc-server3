@@ -19,10 +19,10 @@
                         <li>{{ 'User' | trans }}: {{ occ_user_data.username }}</li>
                         <li>{{ 'Last login' | trans }}: {{ occ_user_data.lastLogin | date('d.m.Y') }}</li>
                         <li>{{ 'Email validity' | trans }}:
-                            {% if occ_user_data.emailProblems %}<i class="fas fa-times"></i>
-                            {% else %}<i class="fas fa-check"></i>
+                            {% if occ_user_data.emailProblems %}&#x274C;
+                            {% else %}&#x2705;
                             {% endif %}</li>
-                        <li>{{ 'Send message' | trans }}: <i class="fas fa-envelope"></i> <span class="badge badge-danger">"Send Message" muss noch warten, bis die Funktion eingebaut wurde..</span>
+                        <li>{{ 'Send message' | trans }}: &#x1F582; <span class="badge badge-danger">"Send Message" muss noch warten, bis die Funktion eingebaut wurde..</span>
                         </li>
                     </ul>
                 </td>
@@ -79,11 +79,10 @@
                     <td>Node: OC
                         <ul>
                             <li>{{ 'Cache' | trans }}: {{ occ_cache_data.wpOc }} / {{ occ_cache_data.name }}</li>
-                            <li>{{ 'Watch Listing' | trans }}: <i class="fas fa-eye"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span>
-                            <li>{{ 'Assign listing for check' | trans }}: <i class="fas fa-exclamation-triangle"></i> <span
-                                        class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span>
-                            <li>{{ 'Report listing' | trans }}: <i class="fas fa-exclamation-circle"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span>
-                            </li>
+                            <li>{{ 'Watch Listing' | trans }}: &#x1F441; <span class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span></li>
+                            <li>{{ 'Assign listing for check' | trans }}: &#x2757; <span
+                                        class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span></li></li>
+                            <li>{{ 'Report listing' | trans }}: &#x2757; <span class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span></li>
                         </ul>
                     </td>
                 </tr>
