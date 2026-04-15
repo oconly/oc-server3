@@ -11,6 +11,7 @@
             <h1>Donate by bank transfer:</h1>
             <p>Bank: Volksbank Heiden<br />
             Account owner: Opencaching Deutschland e.V.<br />
+            Owner address: 46562 Voerde (Niederrhein), Germany<br />
             IBAN: DE07 4286 1608 0094 4853 00<br />
             BIC (SWIFT): GENODEM1HEI</p>
 
