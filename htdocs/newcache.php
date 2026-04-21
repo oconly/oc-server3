@@ -41,7 +41,7 @@ $tpl->name = 'newcache';
 // load template-specific language variables
 $lang = strtolower($locale);
 $style = $opt['template']['style'];
-require_once __DIR__ . '/lang/' . $lang . '/' . $style . '/newcache.inc.php';
+require_once __DIR__ . '/lang/de/' . $style . '/newcache.inc.php';
 
 // allow HTML input (XSS protection header)
 header('X-XSS-Protection: 0');
