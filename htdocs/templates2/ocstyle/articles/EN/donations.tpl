@@ -2,19 +2,33 @@
 * You can find the license in the docs directory
 ***************************************************************************}
     <div class="content2-pagetitle">
-        <img src="resource2/{$opt.template.style}/images/misc/32x32-checked.png" style="margin-right: 10px;" width="32" height="32" alt="" />How you can help us
+        <img src="resource2/{$opt.template.style}/images/misc/32x32-checked.png" style="margin-right: 10px;" width="32" height="32" alt="" />Keep OpenCaching.de Alive Together
     </div>
     <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-            <p>Thanks for viewing our donations page! Besides of engaged volunteers in the Opencaching.de team, we also depend on your financial support to operate and extend this completely free website. By your donation you will mainly help us to pay for webhosting.</p>
+        <p>Thank you for visiting the donation page of OpenCaching.de. Our association operates this platform entirely on a volunteer basis. Our goal is to maintain a free, ad-free, and independent offering for the caching community.</p>
 
-            <h1>Donate by bank transfer:</h1>
-            <p>Bank: Volksbank Heiden<br />
+        <p>Since we generate no revenue from advertising or paid features, all ongoing costs – from servers to administration – are funded exclusively through donations and membership fees. Your support is therefore not only welcome but essential for the continued existence of the site.</p>
+
+        <h2>How you can support us:</h2>
+        <ul>
+            <li><b>Donate:</b> You can support us with a one-time donation or via recurring transfer.</li>
+            <li><b><a href="/articles.php?page=verein">Become a member</a>:</b> Become a new active or supporting member of the association and actively support the future of OpenCaching.</li>
+        </ul>
+
+        <p>Use of your donation: All donations go primarily to the operation of the websites and to a small extent to the administration of the association.</li></p>
+
+        <h2>Donate by bank transfer:</h2>
+        <p>Bank: Volksbank Heiden<br />
             Account owner: Opencaching Deutschland e.V.<br />
+            Owner address: 46562 Voerde (Niederrhein), Germany<br />
             IBAN: DE07 4286 1608 0094 4853 00<br />
             BIC (SWIFT): GENODEM1HEI</p>
 
-            <h1>Donate by PayPal:</h1>
+        <p>Scan this QR code with your banking app to fill in the<br>transfer details automatically:</p>
+        <div style="display: inline-block; text-align: center;">
+            <img src="resource2/misc/donation/oc-epc-qr-code.png" alt="EPC QR Code for bank transfer" style="width: 180px; height: 180px;" />
+            <br /><small>EPC QR Code</small>
+        </div>
 
-            <p>Donations via PayPal are currently not possible.</p>
     </div>
