@@ -25,4 +25,10 @@
             IBAN: DE07 4286 1608 0094 4853 00<br />
             BIC (SWIFT): GENODEM1HEI</p>
 
+        <p>Scan this QR code with your banking app to fill in the<br>transfer details automatically:</p>
+        <div style="display: inline-block; text-align: center;">
+            <img src="resource2/misc/donation/oc-epc-qr-code.png" alt="EPC QR Code for bank transfer" style="width: 180px; height: 180px;" />
+            <br /><small>EPC QR Code</small>
+        </div>
+
     </div>
