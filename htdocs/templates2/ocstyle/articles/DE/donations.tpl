@@ -6,7 +6,7 @@
     </div>
     <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-        <p>Vielen Dank, dass du dich dafür interessierst, wie du OpenCaching.de unterstützen kannst. Unser Verein betreibt diese Plattform rein ehrenamtlich. Unser Ziel ist es, ein werbefreies, kostenloses und unabhängiges Angebot für die Caching-Community zu erhalten.</p>
+        <p>Vielen Dank, dass du dich dafür interessierst, wie du OpenCaching unterstützen kannst. Unser Verein betreibt diese Plattform rein ehrenamtlich. Unser Ziel ist es, ein werbefreies, kostenloses und unabhängiges Angebot für die Caching-Community zu erhalten.</p>
 
         <p>Da wir keine Einnahmen aus Werbung oder bezahlten Funktionen generieren, finanzieren sich alle laufenden Kosten – von den Servern bis zur Verwaltung – ausschließlich durch Spenden und Mitgliedsbeiträge. Deine Unterstützung ist daher nicht nur willkommen, sondern essenziell für das Weiterbestehen der Seite.</p>
 

@@ -6,7 +6,7 @@
     </div>
     <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-        <p>Merci de votre intérêt pour la manière dont vous pouvez soutenir OpenCaching.de. Notre association exploite cette plateforme entièrement sur une base bénévole. Notre objectif est de maintenir une offre gratuite, sans publicité et indépendante pour la communauté du geocaching.</p>
+        <p>Merci de votre intérêt pour la manière dont vous pouvez soutenir OpenCaching. Notre association exploite cette plateforme entièrement sur une base bénévole. Notre objectif est de maintenir une offre gratuite, sans publicité et indépendante pour la communauté du geocaching.</p>
 
         <p>Comme nous ne générons aucun revenu provenant de publicités ou de fonctions payantes, tous les coûts courants — des serveurs à l'administration — sont financés exclusivement par les dons et les cotisations de membres. Votre soutien est donc non seulement bienvenu, mais essentiel pour la survie du site.</p>
 
@@ -27,7 +27,7 @@
 
         <p>Scannez ce code QR avec votre application bancaire pour<br>remplir automatiquement les détails du virement :</p>
         <div style="display: inline-block; text-align: center;">
-            <img src="resource2/misc/donation/oc-epc-qr-code.png" alt="EPC QR Code for bank transfer" style="width: 150px; height: 150px;" />
+            <img src="resource2/misc/donation/oc-epc-qr-code.png" alt="Code QR EPC pour virement bancaire" style="width: 150px; height: 150px;" />
             <br /><small>EPC QR Code</small>
         </div>
 
