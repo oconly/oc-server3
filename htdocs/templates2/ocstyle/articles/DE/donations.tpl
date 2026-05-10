@@ -27,7 +27,7 @@
 
         <p>Scanne diesen QR-Code mit deiner Banking-App, um die<br>&Uuml;berweisungsdaten automatisch auszuf&uuml;llen:</p>
         <div style="display: inline-block; text-align: center;">
-            <img src="resource2/misc/donation/oc-epc-qr-code.png" alt="EPC-QR-Code für Überweisung" style="width: 150px; height: 150px;" />
+            <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="EPC-QR-Code für Überweisung" style="width: 215px; height: 215px;" />
             <br /><small>EPC-QR-Code</small>
         </div>
 

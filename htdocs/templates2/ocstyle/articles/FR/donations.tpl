@@ -27,7 +27,7 @@
 
         <p>Scannez ce code QR avec votre application bancaire pour<br>remplir automatiquement les détails du virement :</p>
         <div style="display: inline-block; text-align: center;">
-            <img src="resource2/misc/donation/oc-epc-qr-code.png" alt="Code QR EPC pour virement bancaire" style="width: 150px; height: 150px;" />
+            <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="Code QR EPC pour virement bancaire" style="width: 215px; height: 215px;" />
             <br /><small>EPC QR Code</small>
         </div>
 
