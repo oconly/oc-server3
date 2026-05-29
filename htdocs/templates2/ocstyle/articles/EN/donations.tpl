@@ -19,11 +19,11 @@
         <p>Use of your donation: All donations go primarily to the operation of the websites and to a small extent to the administration of the association.</li></p>
 
         <h2>Donate by bank transfer:</h2>
-        <p>Bank: Volksbank Heiden<br />
-            Account owner: Opencaching Deutschland e.V.<br />
+        <p>Bank: Deutsche Skatbank<br />
+            Account owner: Opencaching Deutschland<br />
             Owner address: 46562 Voerde (Niederrhein), Germany<br />
-            IBAN: DE07 4286 1608 0094 4853 00<br />
-            BIC (SWIFT): GENODEM1HEI</p>
+            IBAN: DE91 8306 5408 0007 0075 31<br />
+            BIC (SWIFT): GEN0DEF1SLR</p>
 
         <p>Scan this QR code with your banking app to fill in the<br>transfer details automatically:</p>
         <div style="display: inline-block; text-align: center;">

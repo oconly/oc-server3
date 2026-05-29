@@ -19,11 +19,11 @@
         <p>Verwendung deiner Spende: Alle Spenden fließen hauptsächlich in den Betrieb der Webseiten und in geringem Umfang in die Verwaltung des Vereins.</li></p>
 
         <h2>Per &Uuml;berweisung spenden:</h2>
-        <p>Bank: Volksbank Heiden<br />
-            Kontoinhaber: Opencaching Deutschland e.V.<br />
+        <p>Bank: Deutsche Skatbank<br />
+            Kontoinhaber: Opencaching Deutschland<br />
             Inhaberadresse: 46562 Voerde (Niederrhein), Deutschland<br />
-            IBAN: DE07 4286 1608 0094 4853 00<br />
-            BIC (SWIFT): GENODEM1HEI</p>
+            IBAN: DE91 8306 5408 0007 0075 31<br />
+            BIC (SWIFT): GEN0DEF1SLR</p>
 
         <p>Scanne diesen QR-Code mit deiner Banking-App, um die<br>&Uuml;berweisungsdaten automatisch auszuf&uuml;llen:</p>
         <div style="display: inline-block; text-align: center;">

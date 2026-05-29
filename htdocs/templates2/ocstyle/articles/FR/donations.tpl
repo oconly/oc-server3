@@ -19,11 +19,11 @@
         <p>Utilisation de votre don : Tous les dons sont principalement utilisés pour l'exploitation des sites web et dans une moindre mesure à l'administration de l'association.</li></p>
 
         <h2>Faire un don par virement bancaire :</h2>
-        <p>Banque : Volksbank Heiden<br />
-            Titulaire du compte : Opencaching Deutschland e.V.<br />
+        <p>Banque : Deutsche Skatbank<br />
+            Titulaire du compte : Opencaching Deutschland<br />
             Adresse du titulaire : 46562 Voerde (Niederrhein), Germany<br />
-            IBAN: DE07 4286 1608 0094 4853 00<br />
-            BIC (SWIFT): GENODEM1HEI</p>
+            IBAN: DE91 8306 5408 0007 0075 31<br />
+            BIC (SWIFT): GEN0DEF1SLR</p>
 
         <p>Scannez ce code QR avec votre application bancaire pour<br>remplir automatiquement les détails du virement :</p>
         <div style="display: inline-block; text-align: center;">
