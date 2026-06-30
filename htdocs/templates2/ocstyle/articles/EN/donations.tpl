@@ -18,17 +18,35 @@
 
         <p>Use of your donation: All donations go primarily to the operation of the websites and to a small extent to the administration of the association.</li></p>
 
-        <h2>Donate by bank transfer:</h2>
-        <p>Bank: Deutsche Skatbank<br />
-            Account owner: Opencaching Deutschland<br />
-            Owner address: 46562 Voerde (Niederrhein), Germany<br />
-            IBAN: DE91 8306 5408 0007 0075 31<br />
-            BIC (SWIFT): GEN0DEF1SLR</p>
+        <table>
+            <tr>
+                <td>
+                    <h2>Donate by bank transfer:</h2>
+                    <p>Bank: Deutsche Skatbank<br />
+                        Account owner: Opencaching Deutschland<br />
+                        Owner address: 46562 Voerde (Niederrhein), Germany<br />
+                        IBAN: DE91 8306 5408 0007 0075 31<br />
+                        BIC (SWIFT): GEN0DEF1SLR</p>
 
-        <p>Scan this QR code with your banking app to fill in the<br>transfer details automatically:</p>
-        <div style="display: inline-block; text-align: center;">
-            <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="EPC QR Code for bank transfer" style="width: 215px; height: 215px;" />
-            <br /><small>EPC QR Code</small>
-        </div>
+                    <p>Or scan this QR code with your banking app to fill in the<br>transfer details automatically:</p>
+                    <div style="display: inline-block; text-align: center;">
+                        <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="EPC QR Code for bank transfer" style="width: 215px; height: 215px;" />
+                        <br /><small>EPC QR Code</small>
+                    </div>
+                </td>
+                <td>
+                    <h2>Donate by Wero:</h2>
+                    <p>Account owner: Opencaching Deutschland<br />
+                        Email: verein@opencaching.de<br />
+                        Donate now by Wero: <a href="https://share.weropay.eu/p/1/c/M5TWKJJcFx" target="_blank">Wero</a><br /><br /><br />
+                    </p>
 
+                    <p>Or scan this QR code with your Wero app to fill in the<br>transfer details automatically:</p>
+                    <div style="display: inline-block; text-align: center;">
+                        <img src="resource2/misc/donation/oc-wero-qr-code.png" alt="Wero-QR-Code with transfer data" style="width: 215px; height: 215px;" />
+                        <br /><small>Wero QR-Code</small>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>

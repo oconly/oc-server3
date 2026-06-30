@@ -18,17 +18,35 @@
 
         <p>Verwendung deiner Spende: Alle Spenden fließen hauptsächlich in den Betrieb der Webseiten und in geringem Umfang in die Verwaltung des Vereins.</li></p>
 
-        <h2>Per &Uuml;berweisung spenden:</h2>
-        <p>Bank: Deutsche Skatbank<br />
-            Kontoinhaber: Opencaching Deutschland<br />
-            Inhaberadresse: 46562 Voerde (Niederrhein), Deutschland<br />
-            IBAN: DE91 8306 5408 0007 0075 31<br />
-            BIC (SWIFT): GEN0DEF1SLR</p>
+        <table>
+            <tr>
+                <td>
+                    <h2>Per &Uuml;berweisung spenden:</h2>
+                    <p>Bank: Deutsche Skatbank<br />
+                        Kontoinhaber: Opencaching Deutschland<br />
+                        Inhaberadresse: 46562 Voerde (Niederrhein), Deutschland<br />
+                        IBAN: DE91 8306 5408 0007 0075 31<br />
+                        BIC (SWIFT): GEN0DEF1SLR</p>
 
-        <p>Scanne diesen QR-Code mit deiner Banking-App, um die<br>&Uuml;berweisungsdaten automatisch auszuf&uuml;llen:</p>
-        <div style="display: inline-block; text-align: center;">
-            <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="EPC-QR-Code für Überweisung" style="width: 215px; height: 215px;" />
-            <br /><small>EPC-QR-Code</small>
-        </div>
+                    <p>Oder scanne diesen QR-Code mit deiner Banking-App, um die<br>&Uuml;berweisungsdaten automatisch auszuf&uuml;llen:</p>
+                    <div style="display: inline-block; text-align: center;">
+                        <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="EPC-QR-Code für Überweisung" style="width: 215px; height: 215px;" />
+                        <br /><small>EPC-QR-Code</small>
+                    </div>
+                </td>
+                <td>
+                    <h2>Per Wero spenden:</h2>
+                    <p>Kontoinhaber: Opencaching Deutschland<br />
+                        Email: verein@opencaching.de<br />
+                        Jetzt mit Wero überweisen: <a href="https://share.weropay.eu/p/1/c/M5TWKJJcFx" target="_blank">Wero</a><br /><br /><br />
+                    </p>
 
+                    <p>Oder scanne diesen QR-Code mit deiner Wero-App, um die<br>&Uuml;berweisungsdaten automatisch auszuf&uuml;llen:</p>
+                    <div style="display: inline-block; text-align: center;">
+                        <img src="resource2/misc/donation/oc-wero-qr-code.png" alt="Wero-QR-Code für Überweisung" style="width: 215px; height: 215px;" />
+                        <br /><small>Wero QR-Code</small>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
