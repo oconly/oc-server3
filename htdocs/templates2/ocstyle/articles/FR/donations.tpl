@@ -38,10 +38,10 @@
                     <h2>Faire un don par Wero :</h2>
                     <p>Titulaire du compte : Opencaching Deutschland<br />
                         E-mail : verein@opencaching.de<br />
-                        Transférez dès maintenant avec Wero : <a href="https://share.weropay.eu/p/1/c/M5TWKJJcFx" target="_blank">Wero</a><br /><br /><br />
+                        Transférer dès maintenant avec Wero : <a href="https://share.weropay.eu/p/1/c/M5TWKJJcFx" target="_blank">Wero</a><br /><br /><br />
                     </p>
 
-                    <p>Ou scannez ce code QR avec votre application Wero pour<br>remplir automatiquement les détails du virement :</p>
+                    <p>Ou scanner ce code QR avec votre application Wero pour<br>remplir automatiquement les détails du virement :</p>
                     <div style="display: inline-block; text-align: center;">
                         <img src="resource2/misc/donation/oc-wero-qr-code.png" alt="Code QR Wero pour le transfert" style="width: 215px; height: 215px;" />
                         <br /><small>Wero QR-Code</small>
