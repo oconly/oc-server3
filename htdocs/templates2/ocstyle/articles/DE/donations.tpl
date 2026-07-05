@@ -16,7 +16,13 @@
             <li><b><a href="/articles.php?page=verein">Mitglied werden</a>:</b> Werde neues Aktiv- oder Fördermitglied im Verein und unterstütze uns aktiv bei der Zukunft von Opencaching.</li>
         </ul>
 
-        <p>Verwendung deiner Spende: Alle Spenden fließen hauptsächlich in den Betrieb der Webseiten und in geringem Umfang in die Verwaltung des Vereins.</li></p>
+        {if $donation_active}
+        <h2>Spendenfortschritt {$donation_year}</h2>
+        <p>Um einen stabilen und langfristigen Betrieb von OpenCaching.de sicherzustellen, werden für das Jahr {$donation_year} Spenden über {$donation_target} &euro; benötigt.</p>
+        <p>Der aktuelle Stand per {$donation_last_updated}:</p>
+
+        {include file="articles/donation_progress.tpl"}
+        {/if}
 
         <table>
             <tr>
@@ -49,4 +55,7 @@
                 </td>
             </tr>
         </table>
+
+        <h2>Verwendung deiner Spende</h2>
+        <p>Alle Spenden fließen hauptsächlich in den Betrieb der Webseiten und in geringem Umfang in die Verwaltung des Vereins.</p>
     </div>

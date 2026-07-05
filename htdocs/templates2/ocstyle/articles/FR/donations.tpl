@@ -16,7 +16,13 @@
             <li><b><a href="/articles.php?page=verein">Devenir membre</a> :</b> Rejoignez l'association en tant que membre actif ou membre de soutien, et participez activement l'avenir d'Opencaching.</li>
         </ul>
 
-        <p>Utilisation de votre don : Tous les dons sont principalement utilisés pour l'exploitation des sites web et dans une moindre mesure à l'administration de l'association.</li></p>
+        {if $donation_active}
+        <h2>Progression des dons {$donation_year}</h2>
+        <p>Pour assurer le fonctionnement stable et à long terme d'Opencaching.de, des dons de {$donation_target} &euro; sont nécessaires pour {$donation_year}.</p>
+        <p>État actuel au {$donation_last_updated} :</p>
+
+        {include file="articles/donation_progress.tpl"}
+        {/if}
 
         <table>
             <tr>
@@ -49,4 +55,7 @@
                 </td>
             </tr>
         </table>
+
+        <h2>Utilisation de votre don</h2>
+        <p>Tous les dons sont principalement utilisés pour l'exploitation des sites web et dans une moindre mesure pour l'administration de l'association.</p>
     </div>

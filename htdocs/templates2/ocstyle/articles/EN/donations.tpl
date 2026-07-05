@@ -16,7 +16,13 @@
             <li><b><a href="/articles.php?page=verein">Become a member</a>:</b> Become a new active or supporting member of the association and actively support the future of Opencaching.</li>
         </ul>
 
-        <p>Use of your donation: All donations go primarily to the operation of the websites and to a small extent to the administration of the association.</li></p>
+        {if $donation_active}
+        <h2>Donation Progress {$donation_year}</h2>
+        <p>To ensure the stable and long-term operation of Opencaching.de, donations of {$donation_target} &euro; are needed for {$donation_year}.</p>
+        <p>Current status as of {$donation_last_updated}:</p>
+
+        {include file="articles/donation_progress.tpl"}
+        {/if}
 
         <table>
             <tr>
@@ -49,4 +55,7 @@
                 </td>
             </tr>
         </table>
+
+        <h2>Use of your donation</h2>
+        <p>All donations go primarily to the operation of the websites and to a small extent to the administration of the association.</p>
     </div>
