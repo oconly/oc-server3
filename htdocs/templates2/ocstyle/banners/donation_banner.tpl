@@ -112,23 +112,30 @@
         #oc-donation-banner .oc-banner__cta { align-self: center; }
     }
 </style>
+{/literal}
 
-<div id="oc-donation-banner" role="banner" aria-label="Spendenaufruf opencaching.de">
+<div id="oc-donation-banner" role="banner" aria-label="{if $opt.template.locale=='DE'}Spendenaufruf opencaching.de{else}Donation appeal opencaching.de{/if}">
     <div class="oc-banner__inner">
         <img class="oc-banner__icon"
              src="/resource2/misc/donation/globi_box_smal.png"
              alt="" aria-hidden="true" />
         <div class="oc-banner__copy">
-            <p class="oc-banner__headline">opencaching.de &ndash; von der Community, f&uuml;r die Community.</p>
-            <p class="oc-banner__subtext">Unsere Plattform geh&ouml;rt keinem Konzern. Sie geh&ouml;rt euch. Bitte unterst&uuml;tzt sie.</p>
+            {if $opt.template.locale=='DE'}
+                <p class="oc-banner__headline">opencaching.de &ndash; von der Community, f&uuml;r die Community.</p>
+                <p class="oc-banner__subtext">Unsere Plattform geh&ouml;rt keinem Konzern. Sie geh&ouml;rt euch. Bitte unterst&uuml;tzt sie.</p>
+            {else}
+                <p class="oc-banner__headline">opencaching.de &ndash; by the community, for the community.</p>
+                <p class="oc-banner__subtext">Our platform belongs to no corporation. It belongs to you. Please support it.</p>
+            {/if}
         </div>
         <a class="oc-banner__cta" href="/articles.php?page=donations"
-           aria-label="Jetzt spenden &mdash; opencaching.de unterst&uuml;tzen">Jetzt spenden</a>
+           aria-label="{if $opt.template.locale=='DE'}Jetzt spenden &mdash; opencaching.de unterst&uuml;tzen{else}Donate now &mdash; support opencaching.de{/if}">{if $opt.template.locale=='DE'}Jetzt spenden{else}Donate now{/if}</a>
     </div>
     <button class="oc-banner__close" id="oc-donation-banner__close" type="button"
-            aria-label="Banner schlie&szlig;en">&#x2715;</button>
+            aria-label="{if $opt.template.locale=='DE'}Banner schlie&szlig;en{else}Close banner{/if}">&#x2715;</button>
 </div>
 
+{literal}
 <script>
 (function () {
     var DISMISS_DAYS = 7;
