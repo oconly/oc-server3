@@ -36,8 +36,8 @@
                 1. Vorsitzender
             </td>
             <td style="text-align: center;">
-                <img src="{$opt.page.teampic_url}teiling88.png"/><br>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a>
+                <img src="{$opt.page.teampic_url}dummy.jpg"/><br>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=136923">Tungmar</a>
                 <br/>
                 2. Vorsitzender,<br>
                 Entwicklungsleiter

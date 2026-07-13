@@ -346,6 +346,11 @@ function set_php_locale(): void
     setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
     if (defined('LC_MESSAGES')) {
         setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
+        // Force gettext to reload the catalog for the new locale.
+        // PHP's gettext caches the catalog per (domain, locale) pair in the worker process.
+        // Without rebinding, a worker that previously served a different language keeps
+        // the old catalog, causing gettext() to return the wrong translation.
+        bindtextdomain('messages', __DIR__ . '/../var/cache2/translate');
     }
 
     // no localisation!
