@@ -2,7 +2,7 @@
 * You can find the license in the docs directory
 *
 *  Donation banner – displayed at the top of the page when enabled.
-*  Dismissable for 7 days via localStorage.
+*  Dismissable for some days via localStorage.
 ***************************************************************************}
 {literal}
 <style>
@@ -114,7 +114,7 @@
 </style>
 {/literal}
 
-<div id="oc-donation-banner" role="banner" aria-label="{if $opt.template.locale=='DE'}Spendenaufruf opencaching.de{else}Donation appeal opencaching.de{/if}">
+<div id="oc-donation-banner" role="banner" style="display:none" aria-label="{if $opt.template.locale=='DE'}Spendenaufruf opencaching.de{else}Donation appeal opencaching.de{/if}">
     <div class="oc-banner__inner">
         <img class="oc-banner__icon"
              src="/resource2/misc/donation/globi_box_smal.png"
@@ -138,7 +138,7 @@
 {literal}
 <script>
 (function () {
-    var DISMISS_DAYS = 7;
+    var DISMISS_DAYS = 5;
     var STORAGE_KEY = 'oc_donation_banner_dismissed';
     var banner = document.getElementById('oc-donation-banner');
 
@@ -150,7 +150,9 @@
         try {
             var raw = localStorage.getItem(STORAGE_KEY);
             if (!raw) return false;
-            return Date.now() < new Date(raw).getTime() + DISMISS_DAYS * 86400000;
+            var parts = raw.split('-');
+            var expires = new Date(parts[0], parts[1] - 1, parseInt(parts[2]) + DISMISS_DAYS);
+            return new Date().toLocaleDateString('sv') < expires.toLocaleDateString('sv');
         } catch (e) {
             return false;
         }
@@ -158,7 +160,7 @@
 
     function dismiss() {
         try {
-            localStorage.setItem(STORAGE_KEY, new Date().toISOString());
+            localStorage.setItem(STORAGE_KEY, new Date().toLocaleDateString('sv'));
         } catch (e) {}
 
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -177,6 +179,7 @@
     if (isDismissed()) {
         banner.classList.add('oc-banner--hidden');
     } else {
+        banner.style.display = '';
         document.body.classList.add('oc-has-banner');
         document.getElementById('oc-donation-banner__close').addEventListener('click', dismiss);
     }
