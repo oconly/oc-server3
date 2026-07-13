@@ -8,7 +8,7 @@
  */
 class Donation
 {
-    private const REMOTE_URL = 'https://cloud.opencaching.de/public.php/dav/files/AYFtLENFfLRq6qL/';
+    private const REMOTE_URL = 'https://cloud.opencaching.de/public.php/dav/files/Y6oTFgPSWptYCWm/';
     private const CACHE_FILE = __DIR__ . '/../var/cache2/donation-progress.json';
     private const CACHE_LIFETIME = 3600; // 1 hour
 
