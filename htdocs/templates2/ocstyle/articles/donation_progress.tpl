@@ -15,7 +15,6 @@
     </div>
     <div style="width: 100%; max-width: 565px; display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 20px;">
         <span>0 &euro;</span>
-        <span style="font-style: italic;">{$donation_last_updated}</span>
         <span>{$donation_target} &euro;</span>
     </div>
 {/if}

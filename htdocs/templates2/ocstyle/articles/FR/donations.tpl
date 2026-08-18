@@ -19,7 +19,7 @@
         {if $donation_active}
         <h2>Progression des dons {$donation_year}</h2>
         <p>Pour assurer le fonctionnement stable et à long terme d'Opencaching.de, des dons de {$donation_target} &euro; sont nécessaires pour {$donation_year}.</p>
-        <p>État actuel au {$donation_last_updated} :</p>
+        <p>État actuel au {$donation_last_updated|date_format:$opt.format.datelong} :</p>
 
         {include file="articles/donation_progress.tpl"}
         {/if}

@@ -19,7 +19,7 @@
         {if $donation_active}
         <h2>Spendenfortschritt {$donation_year}</h2>
         <p>Um einen stabilen und langfristigen Betrieb von OpenCaching.de sicherzustellen, werden für das Jahr {$donation_year} Spenden über {$donation_target} &euro; benötigt.</p>
-        <p>Der aktuelle Stand per {$donation_last_updated}:</p>
+        <p>Der aktuelle Stand per {$donation_last_updated|date_format:$opt.format.datelong}:</p>
 
         {include file="articles/donation_progress.tpl"}
         {/if}

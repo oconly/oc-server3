@@ -120,11 +120,6 @@ class Donation
 
     private static function saveToCache(array $data): void
     {
-        $dir = dirname(self::CACHE_FILE);
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-
         file_put_contents(self::CACHE_FILE, json_encode($data), LOCK_EX);
     }
 }
